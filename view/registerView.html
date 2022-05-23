@@ -1,0 +1,44 @@
+{{> header}}
+{{> navbar}}
+<div class='w3-content' style='max-width:2000px;margin-top:46px'>
+
+  <!-- The Band Section -->
+  <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
+    <h2 class='w3-wide'>Usuarios Registrados</h2>
+
+    <form method="post" action="#">
+      <label for="nombre">Nombre</label>
+      <input type="text" name="nombre" id="nombre" required>
+      <br>
+      <br>
+      <label for="apellido">Apellido</label>
+      <input type="text" name="apellido" id="apellido" required>
+      <br>
+      <br>
+      <label for="dni">DNI</label>
+      <input type="text" name="dni" id="dni" required>
+      <br>
+      <br>
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" required>
+      <br>
+      <br>
+      <p>Seleccionar el tipo de usuario:</p>
+      <div>
+        <div>
+          <input type="radio" name="tipo" id="tipo" value="1" required>
+          <label for="tipo">Administrador</label>
+        </div>
+        <div>
+          <input type="radio" name="tipo" id="tipo" value="2" required>
+          <label for="tipo">Cliente</label>
+        </div>
+      </div>
+      <br>
+      <br>
+      <input type="submit" value="Crear usuario">
+    </form>
+  </div>
+
+</div>
+{{> foooter}}

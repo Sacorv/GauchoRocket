@@ -4,9 +4,9 @@
 
   <!-- The Band Section -->
   <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
-    <h2 class='w3-wide'>Usuarios Registrados</h2>
+    <h2 class='w3-wide'>Crear una cuenta Gaucho Rocket</h2>
 
-    <form method="post" action="#">
+    <form method="post" action="/user/saveUser">
       <label for="nombre">Nombre</label>
       <input type="text" name="nombre" id="nombre" required>
       <br>
@@ -23,20 +23,15 @@
       <input type="text" name="email" id="email" required>
       <br>
       <br>
-      <p>Seleccionar el tipo de usuario:</p>
-      <div>
-        <div>
-          <input type="radio" name="tipo" id="tipo" value="1" required>
-          <label for="tipo">Administrador</label>
-        </div>
-        <div>
-          <input type="radio" name="tipo" id="tipo" value="2" required>
-          <label for="tipo">Cliente</label>
-        </div>
-      </div>
+      <label for="pass">Contraseña</label>
+      <input type="password" name="pass" id="pass" required>
       <br>
       <br>
-      <input type="submit" value="Crear usuario">
+      <label for="repeat-pass">Repetir contraseña</label>
+      <input type="password" name="repeat-pass" id="repeat-pass" required>
+      <br>
+      <br>
+      <input type="submit" value="Registrarme">
     </form>
   </div>
 

@@ -16,25 +16,29 @@ class UserModel {
         //Validacion de la password
         if($this->isValidPass($pass, $repeatPass)){
             $password = md5($pass);
-
-            echo $password;
-            $resultCreate = $this->database->create($firstName, $lastName, $dni, $email, $password);
-
-            if($resultCreate){
-                return "registerSuccessView.html";
-            }else{
-                echo "<div><h3>El email ya se encuentra registrado</h3></div>";
-                echo $resultCreate;
-                return "registerView.html";
-            }
         }else{
             echo "<div><h3>Las contraseñas ingresadas no coinciden</h3></div>";
             return "registerView.html";
         }
-
+        if($this->existsUser($email)){
+            echo "<div><h3>El email ya se encuentra registrado</h3></div>";
+            return "registerView.html";
+        }else {
+            $resultCreate = $this->database->create($firstName, $lastName, $dni, $email, $password);
+            if ($resultCreate) {
+                return "registerSuccessView.html";
+            }
+            return "registerView.html";
+        }
     }
 
-    public function existsUser () {
+    public function existsUser ($email) {
+
+       if( $this->database->validarMail($email) == 1){
+           return true;
+       }else{
+           return false;
+       }
 
     }
 

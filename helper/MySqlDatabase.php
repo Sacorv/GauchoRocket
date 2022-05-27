@@ -38,13 +38,20 @@ class MySqlDatabase {
 
     //HACER: Validar mail contra la DB
     public function create($firstName, $lastName, $dni, $email, $password) {
-        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, contraseña) values(?,?,?,?,?,?)";
+        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password) values(?,?,?,?,?,?)";
         $query = $this->conn->prepare($sql);
         $tipo = 2;
         $query->bind_param("ssisis", $firstName, $lastName, $dni, $email, $tipo, $password);
         $query->execute();
-
         return $query;
+    }
+
+    public function validarMail($mail){
+        $sqlquery = "select * from usuario where email='$mail'";
+        $result = mysqli_query($this->conn, $sqlquery);
+        return mysqli_num_rows($result);
+
+
     }
 
 

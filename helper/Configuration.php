@@ -2,10 +2,10 @@
 include_once('helper/MySqlDatabase.php');
 include_once('helper/Router.php');
 require_once('helper/MustachePrinter.php');
-include_once('controller/SongsController.php');
+include_once('controller/LoginController.php');
 include_once('controller/ToursController.php');
 include_once('controller/DestinosController.php');
-include_once('model/SongModel.php');
+include_once('model/LoginModel.php');
 include_once('model/TourModel.php');
 require_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('controller/UserController.php');
@@ -22,8 +22,8 @@ class Configuration {
 
 //    -----------------------------------------------------------------------------
 
-    public function getSongsController() {
-        return new SongsController($this->getSongModel(), $this->getPrinter());
+    public function getLoginController() {
+        return new LoginController($this->getLoginModel());
     }
 
     public function getToursController() {
@@ -34,8 +34,8 @@ class Configuration {
         return new DestinosController($this->getPrinter());
     }
 
-    private function getSongModel(){
-        return new SongModel($this->getDatabase());
+    private function getLoginModel(){
+        return new LoginModel($this->getDatabase());
     }
 
     private function getTourModel() {
@@ -43,7 +43,7 @@ class Configuration {
     }
 
     private function getDatabase() {
-       return new MySqlDatabase('localhost','root','','gaucho_rocket');
+       return new MySqlDatabase('localhost','root','40460303','gaucho_rocket');
     }
 
     private function getPrinter() {

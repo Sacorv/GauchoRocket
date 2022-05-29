@@ -11,6 +11,50 @@
         id est laborum consectetur
         adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div>
+        <form method="post" action="/vuelos/validarVuelo" enctype="multipart/form-data">
+            <div>
+                <label for="origen">Origen</label>
+                <select  name="origen" id="origen">
+                    <option selected>Seleccione un origen</option>
+                    {{#origen}}
+                    <option value="{{id_origen}}">{{descripcion}}</option>
+                    {{/origen}}
+
+                </select>
+            </div>
+            <div>
+                <label for="destino">Destino</label>
+                <select  name="destino" id="destino">
+                    <option selected>Seleccione un destino</option>
+                    {{#destino}}
+                    <option value="{{id_destino}}">{{descripcion}}</option>
+                    {{/destino}}
+                </select>
+            </div>
+            <div>
+                <label for="tipoViaje">Tipo de Viaje</label>
+                <select  name="tipoViaje" id="tipoViaje">
+                    <option selected>Seleccione un tipo de viaje</option>
+                    {{#tipoViaje}}
+                    <option value="{{id_tipoViaje}}">{{descripcion}}</option>
+                    {{/tipoViaje}}
+                </select>
+            </div>
+
+            <div >
+                <label for="fechaPartida">Ingrese fecha de partida</label>
+                <input type="date" name="fechaPartida" class="form-control" id="fechaPartida">
+            </div>
+            <div >
+                <label for="fechaRegreso">Ingrese fecha de regreso</label>
+                <input type="date" name="fechaRegreso" class="form-control" id="fechaRegreso">
+            </div>
+            <div>
+                <button type="submit">BUSCAR</button>
+            </div>
+        </form>
+    </div>
     <div class='w3-row w3-padding-32'>
         <div class='w3-third'>
             <p>La Luna</p>
@@ -26,4 +70,4 @@
         </div>
     </div>
 </div>
-{{> foooter}}
+{{> footer}}

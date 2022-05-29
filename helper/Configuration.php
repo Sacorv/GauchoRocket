@@ -5,8 +5,11 @@ require_once('helper/MustachePrinter.php');
 include_once('controller/SongsController.php');
 include_once('controller/ToursController.php');
 include_once('controller/DestinosController.php');
+include_once('controller/VuelosController.php');
 include_once('model/SongModel.php');
 include_once('model/TourModel.php');
+include_once ('model/HomeModel.php');
+include_once ('model/VuelosModel.php');
 require_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('controller/UserController.php');
 include_once('model/UserModel.php');
@@ -20,6 +23,19 @@ class Configuration {
         return new UserModel($this->getDatabase());
     }
 
+    public function getVuelosController() {
+        return new VuelosController($this->getVuelosModel(), $this->getPrinter());
+    }
+    private function getVuelosModel() {
+        return new VuelosModel($this->getDatabase());
+    }
+    public function getDestinosController(){
+        return new DestinosController($this->getHomeModel(),$this->getPrinter());
+    }
+    private function getHomeModel() {
+        return new HomeModel($this->getDatabase());
+    }
+
 //    -----------------------------------------------------------------------------
 
     public function getSongsController() {
@@ -28,10 +44,6 @@ class Configuration {
 
     public function getToursController() {
         return new ToursController($this->getTourModel(), $this->getPrinter());
-    }
-
-    public function getDestinosController() {
-        return new DestinosController($this->getPrinter());
     }
 
     private function getSongModel(){
@@ -43,7 +55,7 @@ class Configuration {
     }
 
     private function getDatabase() {
-       return new MySqlDatabase('localhost','root','','gaucho_rocket');
+       return new MySqlDatabase('localhost','root','2203yba','gaucho_rocket');
     }
 
     private function getPrinter() {

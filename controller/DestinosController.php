@@ -1,13 +1,22 @@
 <?php
 
 class DestinosController {
-    private $printer;
 
-    public function __construct($printer) {
+    private MustachePrinter $printer;
+    private HomeModel $homeModel;
+
+    public function __construct($homeModel, $printer) {
         $this->printer = $printer;
+        $this->homeModel=$homeModel;
     }
 
     public function execute() {
-        $this->printer->generateView('destinosView.html');
+
+        $origen= $this->homeModel->getOrigins();
+        $tipoViaje= $this->homeModel->getTipoViaje();
+        $destino= $this->homeModel->getDestinys();
+
+        $data=["origen"=> $origen,  "destino"=>$destino, "tipoViaje"=> $tipoViaje];
+        $this->printer->generateView('destinosView.html',$data);
     }
 }

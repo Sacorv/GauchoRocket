@@ -10,5 +10,6 @@ class Printer {
         include_once('view/navbar.mustache');
         include_once("view/" . $content);
         include_once('view/footer.mustache');
+        
     }
 }

@@ -15,4 +15,9 @@ class LoginModel {
                 return true;
         }
     }
+    public function obtenerNombreDelUsuario ($email){
+        $result= $this->database->query("select nombre from usuario where email='$email'");
+        return $result[0]["nombre"];
+
+    }
 }

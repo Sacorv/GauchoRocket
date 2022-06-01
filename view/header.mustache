@@ -7,15 +7,23 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <header class="w3-container w3-theme w3-padding" id="myHeader">
+    {{#bienvenida}}
+          <div> <h2>Bienvenido/a {{usuario}}</h2> </div>
+           <div> <a href='/LoginController'>Cerrar sesión</a></div>
+      {{/bienvenida}}
+     {{^bienvenida}}
+       <div class="w3-padding-32">
+            <form class="w3-container" action="/Login/" method="POST">
+            <input class="w3-input" type="text" name="usuario">
+            <input class="w3-input" type="password" name="password">
+            <button type="submit">Iniciar sesión</button>
 
-    <div class="w3-padding-32">
-     <form class="w3-container" action="/Login/" method="POST">
-     <input class="w3-input" type="text" name="usuario">
-     <input class="w3-input" type="password" name="password">
-     <button type="submit">Iniciar sesión</button>
-
-     </form>
-      </div>
+            </form>
+             </div>
+     {{/bienvenida}}
+    {{#loginFail}}
+             <div> <h2>Usuario y/o contraseña invalidos </h2> </div>
+          {{/loginFail}}
 
 
 

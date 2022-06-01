@@ -60,7 +60,6 @@ class MySqlDatabase {
         $query->bind_param("ss", $mail , $password);
         $result = $query->execute();
         $query->store_result();
-
        return $query->num_rows;
 
 

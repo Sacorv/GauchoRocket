@@ -58,40 +58,41 @@
           <!-- Swiper-->
           <div class="swiper-container swiper-slider swiper-slider_height-1 swiper-align-left swiper-align-left-custom context-dark bg-gray-darker" data-loop="false" data-autoplay="5500" data-simulate-touch="false" data-slide-effect="fade">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" data-slide-bg="https://livedemo00.template-help.com/wt_51676/images/swiper-slide-1.jpg">
+              <div class="swiper-slide" data-slide-bg="/public/images/nebulosa3.png">
                 <div class="swiper-slide-caption">
                   <div class="container container-bigger swiper-main-section">
                     <div class="row row-fix justify-content-sm-center justify-content-md-start">
                       <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
                         <h3>CIENTOS DE DESTINOS INCREÍBLES</h3>
                         <div class="divider divider-decorate"></div>
-                        <p class="text-spacing-sm">Ofrecemos una variedad de destinos para viajar, que van desde exóticos hasta algunos extremos. Incluyen países y ciudades muy populares</p><a class="button button-default-outline button-nina button-sm" href="#">learn more</a>
+                        <p class="text-spacing-sm">Ofrecemos una variedad de destinos para viajar, que van desde exóticos hasta algunos extremos.</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="swiper-slide" data-slide-bg="https://livedemo00.template-help.com/wt_51676/images/swiper-slide-2.jpg">
+              <div class="swiper-slide" data-slide-bg="/public/images/nebulosa1.png">
                 <div class="swiper-slide-caption">
                   <div class="container container-bigger swiper-main-section">
                     <div class="row row-fix justify-content-sm-center justify-content-md-start">
                       <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
                         <h3>EL VIAJE DE TU SUEÑO</h3>
                         <div class="divider divider-decorate"></div>
-                        <p class="text-spacing-sm">Nuestra agencia de viajes está lista para ofrecerle unas vacaciones emocionantes diseñadas para satisfacer sus propias necesidades y deseos. Ya sea un crucero exótico o un viaje favorito, seguramente tendrá la mejor experiencia.</p><a class="button button-default-outline button-nina button-sm" href="#">learn more</a>
+                        <p class="text-spacing-sm">Nuestra agencia de viajes está lista para ofrecerle unas vacaciones emocionantes diseñadas para satisfacer sus propias necesidades y deseos.</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="swiper-slide" data-slide-bg="https://livedemo00.template-help.com/wt_51676/images/swiper-slide-3.jpg">
+              <div class="swiper-slide" data-slide-bg="/public/images/nebulosa2.png">
                 <div class="swiper-slide-caption">
                   <div class="container container-bigger swiper-main-section">
                     <div class="row row-fix justify-content-sm-center justify-content-md-start">
                       <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
-                        <h3>unique Travel Insights</h3>
+                        <h3>Perspectivas De Viajes Unicas</h3>
                         <div class="divider divider-decorate"></div>
-                        <p class="text-spacing-sm">Our team is ready to provide you with unique weekly travel insights that include photos, videos, and articles about untravelled tourist paths. We know everything about the places you’ve never been to!</p><a class="button button-default-outline button-nina button-sm" href="#">learn more</a>
+                        <p class="text-spacing-sm">
+                          Nuestro equipo está listo para brindarle información única sobre viajes que incluye fotos y sus caracteristicas.</p>
                       </div>
                     </div>
                   </div>
@@ -142,47 +143,52 @@
                           
                         </div>
                       </div>
-                      <div class="col-sm-12 col-lg-6">
-                        <label class="form-label-outside">Depart Date</label>
-                        <div class="form-wrap form-wrap-validation">
-                          <!-- Select -->
-                          <input class="form-input" id="dateForm" name="date" type="text" data-time-picker="date">
-                          <label class="form-label" for="dateForm">Choose the date</label>
-                          <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
-                          <!--  option(value="1") Choose the date-->
-                          <!--  option(value="2") Primary-->
-                          <!--  option(value="3") Middle-->
-                        </div>
-                      </div>
-                      <div class="col-sm-12 col-lg-6">
-                        <label class="form-label-outside">Duration</label>
-                        <div class="form-wrap form-wrap-validation">
-                          <!-- Select 2-->
-                          <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                            <option value="1">Any length</option>
-                            <option value="2">2 days</option>
-                            <option value="3">3 days</option>
-                            <option value="4">4 days</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <label class="form-label-outside">Adults</label>
-                        <div class="form-wrap form-wrap-modern">
-                          <input class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2">
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <label class="form-label-outside">Children</label>
-                        <div class="form-wrap form-wrap-modern">
-                          <input class="form-input input-append" id="form-element-stepper-1" type="number" min="0" max="300" value="0">
-                        </div>
-                      </div>
+                  
                     </div>
                     <div class="form-wrap form-button">
-                      <button class="button button-block button-secondary" type="submit">search flight</button>
+                      <button class="button button-block button-secondary" type="submit" id="searchButton">Buscar</button>
                     </div>
-                  </form>
+                    <div class="mt-2" style="display:none;" id="contenedor-horarios">
+
+                      <div class="col-lg-6">
+                        <label class="form-label-outside">Horarios De Salida</label>
+                        <div class="row-fluid ">
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label-outside">Horarios De Llegada</label>
+                        <div class="row-fluid ">
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                          <div class="form-wrap form-wrap-modern ">
+                            <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                          </div>
+                          
+                            <div class="form-wrap form-wrap-modern ">
+                              <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                            </div>
+                            <div class="form-wrap form-wrap-modern ">
+                              <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                            </div>
+                      
+                    </div>
+                  
+                    </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -195,131 +201,55 @@
           <div class="row row-fix justify-content-xl-end row-30 text-center text-xl-left">
             <div class="col-xl-8">
               <div class="parallax-text-wrap">
-                <h3>Our Best Tours</h3><span class="parallax-text">Hot tours</span>
+                <h3>Los viajes mas solicitados</h3><span class="parallax-text">Hot tours</span>
               </div>
               <hr class="divider divider-decorate">
             </div>
-            <div class="col-xl-3 text-xl-right"><a class="button button-secondary button-nina" href="#">view all tours</a></div>
+            <div class="col-xl-3 text-xl-right"><a class="button button-secondary button-nina" href="#">Mostrar todos los viajes</a></div>
           </div>
           <div class="row row-50">
             <div class="col-md-6 col-xl-4">
               <article class="event-default-wrap">
                 <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-01-570x370.jpg" alt="" width="570" height="370"/>
+                  <figure class="event-default-image"><img src="/public/images/marte.png" alt="" width="570" height="370"/>
                   </figure>
                   <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
                 </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">France, Paris</a></h5><span class="heading-5">from $280</span>
+                <div class="event-default-inner d-block">
+                  <h5 class="text-center"><a class="event-default-title" href="#">Marte</a></h5><span class="heading-5 d-flex justify-content-center mt-5">Desde$280</span>
                 </div>
               </article>
             </div>
             <div class="col-md-6 col-xl-4">
               <article class="event-default-wrap">
                 <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-02-570x370.jpg" alt="" width="570" height="370"/>
+                  <figure class="event-default-image"><img src="/public/images/luna.png" alt="" width="570" height="370"/>
                   </figure>
                   <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
                 </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">USA, Boston</a></h5><span class="heading-5">from $480</span>
+                <div class="event-default-inner d-block">
+                  <h5 class="text-center"><a class="event-default-title " href="#">Luna</a></h5><span class="heading-5 d-flex justify-content-center mt-5">Desde $480</span>
                 </div>
               </article>
             </div>
             <div class="col-md-6 col-xl-4">
               <article class="event-default-wrap">
                 <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-03-570x370.jpg" alt="" width="570" height="370"/>
+                  <figure class="event-default-image"><img src="/public/images/titan.png" alt="" width="570" height="370"/>
                   </figure>
                   <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
                 </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">Italy, Venice</a></h5><span class="heading-5">from $350</span>
+                <div class="event-default-inner d-block">
+                  <h5 class="text-center"><a class="event-default-title" href="#">Titan</a></h5><span class="heading-5 d-flex justify-content-center mt-5">Desde $350</span>
                 </div>
               </article>
             </div>
-            <div class="col-md-6 col-xl-4">
-              <article class="event-default-wrap">
-                <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-04-570x370.jpg" alt="" width="570" height="370"/>
-                  </figure>
-                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
-                </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">Spain, Benidorm</a></h5><span class="heading-5">from $350</span>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-6 col-xl-4">
-              <article class="event-default-wrap">
-                <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-05-570x370.jpg" alt="" width="570" height="370"/>
-                  </figure>
-                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
-                </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">Egypt,  Sharm El Sheikh</a></h5><span class="heading-5">from $520</span>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-6 col-xl-4">
-              <article class="event-default-wrap">
-                <div class="event-default">
-                  <figure class="event-default-image"><img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-06-570x370.jpg" alt="" width="570" height="370"/>
-                  </figure>
-                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
-                </div>
-                <div class="event-default-inner">
-                  <h5><a class="event-default-title" href="#">UK, London</a></h5><span class="heading-5">from $600</span>
-                </div>
-              </article>
-            </div>
+          
           </div>
         </div>
       </section>
 
-      <!-- our advantages-->
-      <section class="section section-lg bg-gray-lighter novi-background bg-cover text-center">
-        <div class="container container-wide">
-          <h3>our services</h3>
-          <div class="divider divider-decorate"></div>
-          <div class="row row-50 justify-content-sm-center text-left">
-            <div class="col-sm-10 col-md-6 col-xl-3">
-              <article class="box-minimal box-minimal-border">
-                <div class="box-minimal-icon novi-icon mdi mdi-airplane"></div>
-                <p class="big box-minimal-title">Air Tickets</p>
-                <hr>
-                <div class="box-minimal-text text-spacing-sm">At our travel agency, you can book air tickets to any world destination. We also provide online ticket booking via our website in just a couple of steps.</div>
-              </article>
-            </div>
-            <div class="col-sm-10 col-md-6 col-xl-3">
-              <article class="box-minimal box-minimal-border">
-                <div class="box-minimal-icon novi-icon mdi mdi-map"></div>
-                <p class="big box-minimal-title">Voyages & Cruises</p>
-                <hr>
-                <div class="box-minimal-text text-spacing-sm">Besides regular tours and excursions, we also offer a variety of cruises & sea voyages for different customers looking for awesome experiences.</div>
-              </article>
-            </div>
-            <div class="col-sm-10 col-md-6 col-xl-3">
-              <article class="box-minimal box-minimal-border">
-                <div class="box-minimal-icon novi-icon mdi mdi-city"></div>
-                <p class="big box-minimal-title">Hotel Bookings</p>
-                <hr>
-                <div class="box-minimal-text text-spacing-sm">We offer a wide selection of hotel ranging from 5-star ones to small properties located worldwide so that you could book a hotel you like.</div>
-              </article>
-            </div>
-            <div class="col-sm-10 col-md-6 col-xl-3">
-              <article class="box-minimal box-minimal-border">
-                <div class="box-minimal-icon novi-icon mdi mdi-beach"></div>
-                <p class="big box-minimal-title">Tailored Summer Tours</p>
-                <hr>
-                <div class="box-minimal-text text-spacing-sm">Our agency provides varied tours including tailored summer tours for clients who are searching for an exclusive and memorable vacation.</div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
+ 
       <!-- Tips & tricks-->
       <section class="section section-lg novi-background bg-cover bg-default text-center">
         <div class="container-wide">

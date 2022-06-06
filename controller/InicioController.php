@@ -18,6 +18,7 @@ class InicioController {
       $destinos=$this->paisModel->getDestinos();
      
       $origenes=$this->paisModel->getOrigenes();
+
       $data=["origenes" => $origenes,"destinos"=>$destinos];
       $this->printer->generateView('inicioView.html',$data);
     }

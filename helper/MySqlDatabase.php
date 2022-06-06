@@ -36,7 +36,7 @@ class MySqlDatabase {
         return mysqli_fetch_all($result , MYSQLI_ASSOC);
     }
 
-    //HACER: Validar mail contra la DB
+
     public function create($firstName, $lastName, $dni, $email, $password) {
         $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password) values(?,?,?,?,?,?)";
         $query = $this->conn->prepare($sql);

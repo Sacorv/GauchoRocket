@@ -25,7 +25,7 @@ class Configuration {
 
 
         public function getLoginController() {
-            return new LoginController($this->getLoginModel(), $this->getPrinter());
+            return new LoginController($this->getLoginModel(), $this->getPrinter(), $this->getPaisModel());
         }
 
 

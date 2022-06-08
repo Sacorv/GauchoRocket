@@ -3,10 +3,12 @@
 class LoginController {
     private $loginModel;
     private $printer;
+    private $paisModel;
 
-    public function __construct( $loginModel , $printer) {
+    public function __construct( $loginModel , $printer, $paisModel) {
         $this->loginModel = $loginModel;
         $this->printer = $printer;
+        $this->paisModel = $paisModel;
     }
 
     public function execute() {

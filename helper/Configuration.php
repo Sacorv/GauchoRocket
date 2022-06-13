@@ -59,7 +59,7 @@ class Configuration {
 
 
     private function getDatabase() {
-       return new MySqlDatabase('localhost','root','','gaucho_rocket');
+       return new MySqlDatabase('localhost','root','2203yba','gaucho_rocket');
     }
 
 
@@ -77,14 +77,21 @@ class Configuration {
 
 
         private function getPrinter(){
-            return new MustachePrinter("view");
+            return new MustachePrinter("view", $this->getLoginHelper());
         }
 
         public function getRouter(){
             return new Router($this, "getInicioController", "execute");
         }
 
-
+       public function getTurnosController(){
+        include_once ('controller/TurnosController.php');
+        return new TurnosController($this->getPrinter());
+       }
+       public function getLoginHelper(){
+            include_once('helper/LoginHelper.php');
+            return new LoginHelper();
+       }
 
 }
 

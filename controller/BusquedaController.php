@@ -12,7 +12,7 @@ class BusquedaController
         $this->printer = $printer;
     }
 
-    public function buscarDestinos(){
+    public function execute(){
         $origen = $_POST['origen'];
         $destino = $_POST['destino'];
 

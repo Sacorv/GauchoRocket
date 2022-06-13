@@ -1,22 +1,24 @@
 
   <header class="section page-header">
-        <!-- RD Navbar-->
+  <!-- RD Navbar-->
         <div class="rd-navbar-wrap rd-navbar-corporate">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-md-stick-up-offset="130px" data-lg-stick-up-offset="100px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true">
    
             <div class="rd-navbar-inner">
-              <!-- RD Navbar Panel-->
+                 <!--  RD Navbar Panel-->
               <div class="rd-navbar-panel">
-                <!-- RD Navbar Toggle-->
+                   <!--  RD Navbar Toggle-->
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <!-- RD Navbar Brand-->
+                  <!--  RD Navbar Brand-->
                 
                 <div class="rd-navbar-brand"><h4>GAUCHO ROCKET <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:50px;"></h4></div>
                 
               </div>
+                {{^esCliente}}
+                    {{^esAdmin}}
               <div class="rd-navbar-aside-center">
                 <div class="rd-navbar-nav-wrap">
-                  <!-- RD Navbar Nav-->
+                <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
                     <li class="active"><a href="inicio">Inicio</a>
                     </li>
@@ -27,19 +29,44 @@
                   </ul>
                 </div>
               </div>
-              {{^bienvenida}}
-                     <div class="contenedor-botones">
-                                        <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href="/user">Registrarse</a></div>
-                                     <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href="/login">Iniciar Sesion</a></div>
-                                   </div>
-                    {{/bienvenida}}
 
-                    {{#bienvenida}}
-                                    <div> <h6  class='w3-wide mb-2'>Bienvenido/a {{usuario}}</h6> </div>
-                                     <div> <a href='/LoginController'>Cerrar sesión</a></div>
-                                {{/bienvenida}}
-         
-            </div>
+                     <div class="contenedor-botones">
+                            <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href='/user'>Registrarse</a></div>
+                            <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina"  href='/login'>Iniciar Sesion</a></div>
+                     </div>
+                    {{/esAdmin}}
+                {{/esCliente}}
+
+                {{#esCliente}}
+                    <div class="rd-navbar-aside-center">
+                        <div class="rd-navbar-nav-wrap">
+                            <ul class="rd-navbar-nav">
+                                <li><h6 class='w3-wide mb-2'> Bienvenido/a {{nombre}}</h6></li>
+                                <li><a href='/inicio'>Inicio</a></li>
+                                <li><a href='/#'>Viajes</a></li>
+                                <li><a href='/#'>Reservas</a></li>
+                                <li><a href='/turnos'>Turnos</a></li>
+                                <li><a href='/#'>Perfil</a></li>
+                                <li><a href='/logout?logout=true'>Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/esCliente}}
+                {{#esAdmin}}
+                    <div class="rd-navbar-aside-center">
+                        <div class="rd-navbar-nav-wrap">
+                            <ul class="rd-navbar-nav">
+                                <li><h6 class='w3-wide mb-2'> Bienvenido/a {{nombre}}</h6></li>
+                                <li><a href='/inicio'>Inicio</a></li>
+                                <li><a href='/#'>Administracion</a></li>
+                                <li><a href='/#'>Reservas</a></li>
+                                <li><a href='/#'>Reportes</a></li>
+                                <li><a href=/logout?logout=true'>Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/esAdmin}}
+           </div>
           </nav>
         </div>
       </header>

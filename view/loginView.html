@@ -4,7 +4,7 @@
 
 <section class="section">
     <div class="swiper-form-wrap">
-        <!-- Swiper-->
+       <!-- Swiper-->
         <div class="swiper-container swiper-slider swiper-slider_height-1 swiper-align-left swiper-align-left-custom context-dark bg-gray-darker" data-loop="false" data-autoplay="5500" data-simulate-touch="false" data-slide-effect="fade">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" data-slide-bg="https://livedemo00.template-help.com/wt_51676/images/swiper-slide-1.jpg">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Swiper controls-->
+             <!--Swiper controls-->
             <div class="swiper-pagination-wrap">
                 <div class="container container-bigger">
                     <div class="row">
@@ -63,30 +63,28 @@
                 <div class="col-lg-6 col-xxl-5">
 
                     <div class="form-request form-request-modern bg-gray-lighter novi-background">
-                        {{^bienvenida}}
+
                         <h4 class='w3-wide mb-2 text-center'>Iniciar sesión en Gaucho Rocket</h4>
                         <!-- RD Mailform-->
 
-                        <form method="post" action="/login/ejecutamosLogin">
-                            <label  class="form-label-outside"  for="nombre">Email</label>
+                        <form method="post" action="/login/validarLogin">
+                            <label class="form-label-outside"  for="nombre">Email</label>
                             <input type="text" name="usuario" id="nombre" class="form-input form-control-last-child " required>
 
                             <label class="form-label-outside" for="pass">Contraseña</label>
-                            <input type="password" class="form-input form-control-last-child"   name="password" id="pass" required>
+                            <input   type="password" class="form-input form-control-last-child" name="password" id="pass" required>
 
                             <button class="button button-block button-secondary" type="submit" value="Registrarme">Iniciar sesión</button>
                         </form>
 
-                        {{#loginFail}}
-                        <div class="text-bg-danger p-3">Usuario y/o contraseña invalidos </div>
-                        {{/loginFail}}
+                        <div  class="text-bg-danger p-3">
+                            {{campoIncorrecto}}
+                        </div>
+                        <div  class="text-bg-danger p-3">
+                            {{campoIncompleto}}
+                        </div>
 
-
-                        {{/bienvenida}}
-
-
-
-                    </div>
+                     </div>
 
                 </div>
 

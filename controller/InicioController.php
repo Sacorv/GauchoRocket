@@ -2,7 +2,7 @@
 
 
 class InicioController {
-    private $printer;
+    private MustachePrinter $printer;
    // private $viajeModel;
    private $paisModel;
 
@@ -13,14 +13,17 @@ class InicioController {
     }
 
     public function execute() {
-        //$vuelos  = $this->viajeModel->getVuelos();
-      //  $data = ["vuelos" => $vuelos];
-      $destinos=$this->paisModel->getDestinos();
-     
-      $origenes=$this->paisModel->getOrigenes();
+       $data=array();
 
-      $data=["origenes" => $origenes,"destinos"=>$destinos];
-      $this->printer->generateView('inicioView.html',$data);
+      $data['destinos']=$this->paisModel->getDestinos();
+     
+      $data['origenes']=$this->paisModel->getOrigenes();
+
+      if(isset($_SESSION["nombre"])){
+          $data["nombre"]=$_SESSION["nombre"];
+      }
+
+      $this->printer->generateView("inicioView.html", $data);
     }
 
 

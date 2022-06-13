@@ -3,14 +3,14 @@
 <div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center'>
 
   <!-- The Band Section -->
-  <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:950px; margin: auto' id='band'>
+  <div class='container' style='margin: auto' id='band'>
     <h2 class='w3-wide' style="margin-bottom: 40px">Destinos Encontrados</h2>
 
-    <table class='w3-table'>
-      <tr style="text-align: center; background-color: #F5B06CFF; width:40%" >
+    <table class='table table-bordered'>
+      <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
         <th>Fecha de Salida</th>
         <th>Origen</th>
-        <th colspan="4">Recorrido</th>
+        <th class="row-fluid" colspan="4">Recorrido</th>
         <th>Tipo de viaje</th>
         <th>Modelo de equipo</th>
         <th>Matrícula del equipo</th>
@@ -21,8 +21,7 @@
         <td>{{fecha_partida}}</td>
         <td>{{origen}}</td>
         {{#escala}}
-          <td>{{destino}}</td>
-          <td>{{fecha_llegada}}</td>
+          <td>{{fecha_llegada}}{{destino}}</td>
         {{/escala}}
         <td >{{categoria_viaje}}</td>
         <td>{{modelo_equipo}}</td>

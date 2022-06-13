@@ -3,18 +3,14 @@
 
 class InicioController {
     private $printer;
-   // private $viajeModel;
    private $paisModel;
 
-    public function __construct($ViajeModel, $printer,$paisModel) {
-        $this->viajeModel = $ViajeModel;
+    public function __construct($printer,$paisModel) {
         $this->printer = $printer;
         $this->paisModel=$paisModel;
     }
 
     public function execute() {
-        //$vuelos  = $this->viajeModel->getVuelos();
-      //  $data = ["vuelos" => $vuelos];
       $destinos=$this->paisModel->getDestinos();
      
       $origenes=$this->paisModel->getOrigenes();

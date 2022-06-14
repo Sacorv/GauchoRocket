@@ -36,11 +36,11 @@ class MySqlDatabase {
         return mysqli_fetch_all($result , MYSQLI_ASSOC);
     }
 
-    public function create($firstName, $lastName, $dni, $email, $password) {
-        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password) values(?,?,?,?,?,?)";
+    public function create($firstName, $lastName, $dni, $email, $password, $id) {
+        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password , id) values(?,?,?,?,?,?, ?)";
         $query = $this->conn->prepare($sql);
         $tipo = 2;
-        $query->bind_param("ssisis", $firstName, $lastName, $dni, $email, $tipo, $password);
+        $query->bind_param("ssisisi", $firstName, $lastName, $dni, $email, $tipo, $password, $id);
         $query->execute();
         return $query;
     }

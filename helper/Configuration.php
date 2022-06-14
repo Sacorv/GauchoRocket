@@ -15,12 +15,14 @@ include_once('controller/InicioController.php');
 include_once('model/PaisModel.php');
 include_once('controller/BusquedaController.php');
 include_once('model/BusquedaModel.php');
+require_once('helper/EmailHelper.php');
+require_once('helper/PHPMailer/PHPMailer.php');
 
 class Configuration {
 
 
         public function getUserController() {
-            return new UserController($this->getUserModel(), $this->getPrinter());
+            return new UserController($this->getUserModel(), $this->getPrinter() , $this->getMailer());
         }
 
 
@@ -59,7 +61,7 @@ class Configuration {
 
 
     private function getDatabase() {
-       return new MySqlDatabase('localhost','root','2203yba','gaucho_rocket');
+       return new MySqlDatabase('localhost','root','40460303','gaucho_rocket');
     }
 
 
@@ -83,6 +85,10 @@ class Configuration {
         public function getRouter(){
             return new Router($this, "getInicioController", "execute");
         }
+        private function getMailer(){
+        return new EmailHelper();
+        }
+
 
        public function getTurnosController(){
         include_once ('controller/TurnosController.php');

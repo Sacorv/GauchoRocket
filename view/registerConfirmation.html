@@ -1,12 +1,16 @@
 {{> header}}
 {{> navbar}}
+
+
+
 <div class='w3-content' style='max-width:2000px;margin-top:46px'>
 
     <!-- The Band Section -->
     <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
-        <h2 class='w3-wide'>Revise su bandeja del correo electronico</h2>
-        <h2 class='w3-wide'>Le hemos enviado un mail al siguiente email : {} para confirmar su cuenta!</h2>
 
+        <h2 class='w3-wide'>Presione el boton para confirmar su registro</h2>
+
+        <button><a href="/user/confirmarCuenta/?id={{id}}">Confirmar Cuenta</a></button>
         <a href="/destinos">Volver al home para iniciar sesion</a>
 
     </div>

@@ -12,7 +12,7 @@ include_once('controller/UserController.php');
 include_once('model/UserModel.php');
 include_once('model/ViajeModel.php');
 include_once('controller/InicioController.php');
-include_once('model/PaisModel.php');
+include_once('model/VueloModel.php');
 include_once('controller/BusquedaController.php');
 include_once('model/BusquedaModel.php');
 
@@ -30,7 +30,7 @@ class Configuration {
 
 
     public function getInicioController() {
-        return new InicioController($this->getViajeModel(), $this->getPrinter(),$this->getPaisModel());
+        return new InicioController($this->getPrinter(),$this->getVueloModel());
     }
 
 
@@ -48,8 +48,8 @@ class Configuration {
     }
 
 
-    public function getPaisModel(){
-        return new PaisModel($this->getDatabase());
+    public function getVueloModel(){
+        return new VueloModel($this->getDatabase());
     }
 
 
@@ -64,25 +64,20 @@ class Configuration {
 
 
 
-        public function getLoginModel()
-        {
-            return new LoginModel($this->getDatabase());
-        }
-
-        private function getViajeModel()
-        {
-            return new ViajeModel($this->getDatabase());
-        }
-
+    public function getLoginModel()
+    {
+        return new LoginModel($this->getDatabase());
+    }
 
 
         private function getPrinter(){
             return new MustachePrinter("view", $this->getLoginHelper());
         }
 
-        public function getRouter(){
-            return new Router($this, "getInicioController", "execute");
-        }
+
+    public function getRouter(){
+        return new Router($this, "getInicioController", "execute");
+    }
 
        public function getTurnosController(){
         include_once ('controller/TurnosController.php');

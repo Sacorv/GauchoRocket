@@ -2,20 +2,25 @@
 
 
 class InicioController {
+
     private MustachePrinter $printer;
-   // private $viajeModel;
+
+
    private $paisModel;
 
-    public function __construct($ViajeModel, $printer,$paisModel) {
-        $this->viajeModel = $ViajeModel;
+    public function __construct($printer,$paisModel) {
         $this->printer = $printer;
         $this->paisModel=$paisModel;
     }
 
     public function execute() {
+
        $data=array();
 
       $data['destinos']=$this->paisModel->getDestinos();
+
+
+
      
       $data['origenes']=$this->paisModel->getOrigenes();
 

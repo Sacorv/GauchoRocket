@@ -1,24 +1,32 @@
 {{> header}}
 {{> navbar}}
-<div class='w3-content' style='max-width:2000px;margin-top:46px'>
+<div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center'>
 
   <!-- The Band Section -->
-  <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
-    <h2 class='w3-wide'>Destinos Encontrados</h2>
+  <div class='container' style='margin: auto' id='band'>
+    <h2 class='w3-wide' style="margin-bottom: 40px">Destinos Encontrados</h2>
 
-    <table class='w3-table'>
-      {{#encontrados}}
-      <tr>
+    <table class='table table-bordered'>
+      <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
         <th>Fecha de Salida</th>
-        <th>Destino</th>
-        <th>Duración de Viaje</th>
-        <th>Tipo de Viaje</th>
+        <th>Origen</th>
+        <th class="row-fluid" colspan="4">Recorrido</th>
+        <th>Tipo de viaje</th>
+        <th>Modelo de equipo</th>
+        <th>Matrícula del equipo</th>
+        <th>Categoría de Equipo</th>
       </tr>
-      <tr>
+      {{#encontrados}}
+      <tr style="text-align: center; width:40%">
         <td>{{fecha_partida}}</td>
-        <td>{{nombre}}</td>
-        <td>{{duracion_hs}}</td>
-        <td>{{descripcion}}</td>
+        <td>{{origen}}</td>
+        {{#escala}}
+          <td>{{fecha_llegada}}{{destino}}</td>
+        {{/escala}}
+        <td >{{categoria_viaje}}</td>
+        <td>{{modelo_equipo}}</td>
+        <td >{{matricula_equipo}}</td>
+        <td >{{categoria_equipo}}</td>
       </tr>
       {{/encontrados}}
 

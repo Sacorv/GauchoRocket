@@ -22,5 +22,4 @@ class BusquedaController
         $this->printer->generateView('destinosEncontradosView.html',$data);
     }
 
-
 }

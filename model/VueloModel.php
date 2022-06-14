@@ -1,5 +1,5 @@
 <?php
-class PaisModel {
+class VueloModel {
     private $database;
 
     public function __construct($database) {

@@ -36,11 +36,11 @@ class MySqlDatabase {
         return mysqli_fetch_all($result , MYSQLI_ASSOC);
     }
 
-    public function create($firstName, $lastName, $dni, $email, $password, $id) {
-        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password , id) values(?,?,?,?,?,?, ?)";
+    public function create($firstName, $lastName, $dni, $email, $password, $idVerificacion) {
+        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password , idVerificacion) values(?,?,?,?,?,?, ?)";
         $query = $this->conn->prepare($sql);
         $tipo = 2;
-        $query->bind_param("ssisisi", $firstName, $lastName, $dni, $email, $tipo, $password, $id);
+        $query->bind_param("ssisisi", $firstName, $lastName, $dni, $email, $tipo, $password, $idVerificacion);
         $query->execute();
         return $query;
     }
@@ -64,6 +64,14 @@ class MySqlDatabase {
 
 
     }
+
+    public function verificarCuenta($id){
+        $query = "UPDATE Usuario set Verificado = 1 where idVerificacion =$id";
+        var_dump($query);
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
 
 
     private function disconnect() {

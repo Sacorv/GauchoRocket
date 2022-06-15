@@ -18,52 +18,61 @@ include_once('model/BusquedaModel.php');
 require_once('helper/EmailHelper.php');
 require_once('helper/PHPMailer/PHPMailer.php');
 
-class Configuration {
+class Configuration
+{
 
 
-        public function getUserController() {
-            return new UserController($this->getUserModel(), $this->getPrinter() , $this->getMailer());
-        }
-
-
-        public function getLoginController() {
-            return new LoginController($this->getLoginModel(), $this->getPrinter());
-        }
-
-
-    public function getInicioController() {
-        return new InicioController($this->getPrinter(),$this->getVueloModel());
+    public function getUserController()
+    {
+        return new UserController($this->getUserModel(), $this->getPrinter(), $this->getMailer());
     }
 
 
-    public function getDestinosController() {
+    public function getLoginController()
+    {
+        return new LoginController($this->getLoginModel(), $this->getPrinter());
+    }
+
+
+    public function getInicioController()
+    {
+        return new InicioController($this->getPrinter(), $this->getVueloModel());
+    }
+
+
+    public function getDestinosController()
+    {
         return new DestinosController($this->getPrinter());
     }
 
-    public function getBusquedaController(){
+    public function getBusquedaController()
+    {
         return new BusquedaController($this->getBusquedaModel(), $this->getPrinter());
     }
 
 
-    private function getUserModel() {
-        return new UserModel($this->getDatabase());
+    private function getUserModel()
+    {
+        return new UserModel($this->getDatabase() , $this->getValidatorHelper());
     }
 
 
-    public function getVueloModel(){
+    public function getVueloModel()
+    {
         return new VueloModel($this->getDatabase());
     }
 
 
-    private function getBusquedaModel(){
+    private function getBusquedaModel()
+    {
         return new BusquedaModel($this->getDatabase());
     }
 
 
-    private function getDatabase() {
-       return new MySqlDatabase('localhost','root','40460303','gaucho_rocket');
+    private function getDatabase()
+    {
+        return new MySqlDatabase('localhost', 'root', '40460303', 'gaucho_rocket');
     }
-
 
 
     public function getLoginModel()
@@ -72,28 +81,38 @@ class Configuration {
     }
 
 
-        private function getPrinter(){
-            return new MustachePrinter("view", $this->getLoginHelper());
-        }
+    private function getPrinter()
+    {
+        return new MustachePrinter("view", $this->getLoginHelper());
+    }
 
 
-        public function getRouter(){
-            return new Router($this, "getInicioController", "execute");
-        }
-        private function getMailer(){
+    public function getRouter()
+    {
+        return new Router($this, "getInicioController", "execute");
+    }
+
+    private function getMailer()
+    {
         return new EmailHelper();
-        }
+    }
 
-
-
-       public function getTurnosController(){
-        include_once ('controller/TurnosController.php');
+    public function getTurnosController()
+    {
+        include_once('controller/TurnosController.php');
         return new TurnosController($this->getPrinter());
-       }
-       public function getLoginHelper(){
-            include_once('helper/LoginHelper.php');
-            return new LoginHelper();
-       }
+    }
 
+    public function getLoginHelper()
+    {
+        include_once('helper/LoginHelper.php');
+        return new LoginHelper();
+    }
+
+    public function getValidatorHelper()
+    {
+        include_once('helper/Validator.php');
+        return new Validator();
+    }
 }
 

@@ -31,7 +31,14 @@ class UserController
 
     public function confirmarCuenta(){
         $id = $_GET['id'];
-        $this->userModel->verificarUser($id);
+        $data= [];
+        if($this->userModel->verificarUser($id)){
+            $data = ['seVerificoLaCuenta' => true];
+            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+        }else{
+            $data = ['seVerificoLaCuenta' => false];
+            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+        }
 
     }
 
@@ -42,16 +49,21 @@ class UserController
         $email = $_POST["email"];
         $pass = $_POST["pass"];
         $repeatPass = $_POST["repeat-pass"];
-        $id = random_int(0 , 999);
+        $idVerificacion = random_int(0 , 999);
 
         $data = ['email' => $email];
+        $data = ['id' => $idVerificacion];
 
-        $_SESSION["dni"] = $dni;
+        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass, $idVerificacion);
 
-         $this->mailer->enviarMail($email , $id);
+        if($resultCreate == []){
+            if($this->mailer->enviarMail($email , $idVerificacion)){
+                return $this->printer->generateView('registerSuccesView.html');
+            }
+        }else{
+            return $this->printer->generateView('registerView.html' , $resultCreate);
+        }
 
-        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass, $id);
-        $this->printer->generateView($resultCreate , $data);
     }
 
 }

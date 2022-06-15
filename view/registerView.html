@@ -84,6 +84,12 @@
               <input type="password" class="form-input form-control-last-child "  name="repeat-pass" id="repeat-pass" required>
 
               <button class="button button-block button-secondary" type="submit" value="Registrarme">Registrarme</button>
+              <div>
+                {{#errores}}
+                {{errores}}
+                {{/errores}}
+
+              </div>
             </form>
           </div>
         </div>

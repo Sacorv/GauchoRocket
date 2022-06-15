@@ -19,10 +19,10 @@ class EmailHelper
 
     }
 
-    function enviarMail ( $mailUsuario , $id ){
+    function enviarMail ( $mailUsuario , $idVerificacion ){
         try {
             //Server settings
-            $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $this->mail->SMTPDebug = 0;                      //Enable verbose debug output
             $this->mail->isSMTP();                                            //Send using SMTP
             $this->mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -43,15 +43,14 @@ class EmailHelper
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
             $this->mail->Subject = 'Confirmación de registro en Gaucho Rocket';
-            $this->mail->Body    = "Usted debe confirmar su registro en el siguiente link : http://localhost/user/register/?id=".$id." 
+            $this->mail->Body    = "Usted debe confirmar su registro en el siguiente link : http://localhost/user/register/?id=".$idVerificacion." 
                                        para poder loguearse correctamente";
 
 
             $this->mail->send();
-            echo 'El mensaje se envio perfecto';
+
             return true;
         } catch (Exception $e) {
-            echo "El mail no se mando : {$this->mail->ErrorInfo}";
             return false;
         }
 

@@ -19,7 +19,13 @@ class BusquedaController
         $result = $this->busquedaModel->buscarDestinos($origen, $destino);
 
         $data = ["encontrados" => $result];
-        $this->printer->generateView('destinosEncontradosView.html',$data);
+        if($destino<=$origen){
+            header("location: /");
+            echo "<h3>No se encontraron vuelos disponibles.</h3>";
+        }
+        else{
+            $this->printer->generateView('destinosEncontradosView.html',$data);
+        }
     }
 
 }

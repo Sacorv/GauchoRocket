@@ -126,11 +126,16 @@ class BusquedaModel{
 
                 $arrayVuelosCompletos[] = $vuelo;
             }
-
-
         }
-
         return $arrayVuelosCompletos;
-        }
+    }
+
+    public function buscarViajes($id){
+        return $this->database->query("SELECT v.id AS id_vuelo, v.id_lugar_origen AS id_origen, v.fecha_partida, l.nombre AS origen, DATE_ADD(v.fecha_partida, INTERVAL v.duracion_total HOUR) AS fecha_llegada 
+                                        FROM viaje v
+                                        JOIN lugar l ON l.id=v.id_lugar_origen
+                                        WHERE v.id_tipo_viaje='$id'");
+    }
+
 
 }

@@ -1,0 +1,31 @@
+{{> header}}
+{{> navbar}}
+<div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center'>
+
+    <!-- The Band Section -->
+    <div class='container' style='margin: auto' id='band'>
+        {{#idSuborbital}}
+            <h2 class='w3-wide' style="margin-bottom: 40px">Viajes Suborbitales Disponibles</h2>
+        {{/idSuborbital}}
+        {{#idTour}}
+        <h2 class='w3-wide' style="margin-bottom: 40px">Tours Espaciales Disponibles</h2>
+        {{/idTour}}
+        <table class='table table-bordered'>
+            <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
+                <th>Fecha de Salida</th>
+                <th>Origen</th>
+                <th>Fecha de llegada</th>
+            </tr>
+            {{#viajes}}
+            <tr style="text-align: center; width:40%">
+                <td>{{fecha_partida}}</td>
+                <td><strong>{{origen}}</strong></td>
+                <td>{{fecha_llegada}}</td>
+            </tr>
+            {{/viajes}}
+
+        </table>
+    </div>
+
+</div>
+{{> footer}}

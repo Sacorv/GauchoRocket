@@ -2448,6 +2448,9 @@ color:#ffa900  ;
 
 
 }
+.solicitarTurno{
+cursor: pointer;
+}
 .card-footer p{
 
 	font-weight: bolder;

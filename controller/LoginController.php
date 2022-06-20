@@ -95,6 +95,7 @@ class LoginController
                 $_SESSION["user"] = $usuarioValido[0];
                 $_SESSION["nombre"] = $usuarioValido[0]["nombre"];
                 $_SESSION["tipo"] = $usuarioValido[0]["tipo"];
+                $_SESSION["id"]=$usuarioValido[0]["id"];
 
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                     $_SESSION["esAdmin"] = true;

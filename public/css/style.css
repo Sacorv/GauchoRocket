@@ -2431,6 +2431,28 @@ section {
 .bg-gray-700 .checkbox a:hover, .bg-gray-700 .checkbox-inline a:hover {
 	color: #ffec17;
 }
+.card-body{
+
+	border:1px solid #ffa900;
+	
+}
+.contenedor-carta p{
+
+font-weight: bolder;
+color:#ffa900  ;
+
+}
+.contenedor-footer p{
+	font-weight: bolder;
+color:#ffa900  ;
+
+
+}
+.card-footer p{
+
+	font-weight: bolder;
+color:#ffa900  ;
+}
 
 .bg-gray-darker .isotope-filters-list-buttons a, .bg-gray-darker .isotope-filters-list-buttons a:focus, .bg-gray-700 .isotope-filters-list-buttons a, .bg-gray-700 .isotope-filters-list-buttons a:focus {
 	color: #29293a;

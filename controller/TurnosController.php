@@ -3,11 +3,11 @@
 class TurnosController
 {
     private MustachePrinter $printer;
+    private UserModel $userModel;
 
-
-    public function __construct($printer) {
+    public function __construct($userModel,$printer) {
         $this->printer = $printer;
-
+        $this->userModel=$userModel;
     }
     public function execute(){
         $data=array();
@@ -25,4 +25,16 @@ class TurnosController
         }
         $this->printer->generateView("turnosView.html",$data);
     }
+    
+    public function realizarChequeo(){
+        
+        $resultado=rand(1,3);
+        $this->userModel->updateCodigoViajero($resultado);
+        header("location:/turnos");
+        
+        exit();
+    }
+
+
+
 }

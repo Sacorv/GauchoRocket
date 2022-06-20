@@ -64,7 +64,14 @@ class MySqlDatabase {
 
 
     }
-
+    
+    public function updateCodigoViajero($id,$codigo_viajero){
+        $query = $this->conn->prepare("update usuario set codigo_viajero = ? where id = ?");
+        $query->bind_param("ii", $codigo_viajero , $id);
+        $query->execute();
+        return $query;
+    }
+ 
 
     private function disconnect() {
         mysqli_close($this->conn);

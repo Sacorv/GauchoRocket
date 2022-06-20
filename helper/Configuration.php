@@ -3,14 +3,11 @@ include_once('helper/MySqlDatabase.php');
 include_once('helper/Router.php');
 require_once('helper/MustachePrinter.php');
 include_once('controller/LoginController.php');
-include_once('controller/ToursController.php');
 include_once('controller/DestinosController.php');
 include_once('model/LoginModel.php');
-include_once('model/TourModel.php');
 require_once('third-party/mustache/src/Mustache/Autoloader.php');
 include_once('controller/UserController.php');
 include_once('model/UserModel.php');
-include_once('model/ViajeModel.php');
 include_once('controller/InicioController.php');
 include_once('model/VueloModel.php');
 include_once('controller/BusquedaController.php');
@@ -81,7 +78,7 @@ class Configuration {
 
        public function getTurnosController(){
         include_once ('controller/TurnosController.php');
-        return new TurnosController($this->getPrinter());
+        return new TurnosController($this->getUserModel(),$this->getPrinter());
        }
        public function getLoginHelper(){
             include_once('helper/LoginHelper.php');

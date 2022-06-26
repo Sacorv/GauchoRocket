@@ -101,8 +101,12 @@ class LoginController
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                     $_SESSION["esAdmin"] = true;
                 }
-                if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2 ) {
-                    $_SESSION["esCliente"] = true;
+                if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
+                    if($_SESSION["verificado"]==1){
+                        $_SESSION["esCliente"] = true;
+                    }else{
+                        $_SESSION["error"]=true;
+                    }
                 }
 
                 header("location: /");

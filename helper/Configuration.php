@@ -30,13 +30,13 @@ class Configuration {
 
 
     public function getInicioController() {
-        return new InicioController($this->getViajeModel(), $this->getPrinter(),$this->getPaisModel());
+        return new InicioController( $this->getPrinter(),$this->getPaisModel());
     }
 
 
-    public function getDestinosController() {
+   /* public function getDestinosController() {
         return new DestinosController($this->getPrinter());
-    }
+    }*/
 
     public function getBusquedaController(){
         return new BusquedaController($this->getBusquedaModel(), $this->getPrinter());
@@ -77,7 +77,7 @@ class Configuration {
 
 
         private function getPrinter(){
-            return new MustachePrinter("view", $this->getLoginHelper());
+            return new MustachePrinter("view");
         }
 
         public function getRouter(){
@@ -88,9 +88,10 @@ class Configuration {
         include_once ('controller/TurnosController.php');
         return new TurnosController($this->getPrinter());
        }
-       public function getLoginHelper(){
-            include_once('helper/LoginHelper.php');
-            return new LoginHelper();
+
+       public function getLogoutController(){
+            include_once('controller/LogoutController.php');
+            return new LogoutController();
        }
 
 }

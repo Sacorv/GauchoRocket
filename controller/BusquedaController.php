@@ -16,6 +16,7 @@ class BusquedaController
         $origen = $_POST['origen'];
         $destino = $_POST['destino'];
 
+
         $result = $this->busquedaModel->buscarDestinos($origen, $destino);
 
         $data = ["encontrados" => $result];

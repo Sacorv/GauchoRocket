@@ -34,14 +34,16 @@ class Configuration
     }
 
 
-    public function getInicioController()
-    {
-        return new InicioController($this->getPrinter(), $this->getVueloModel());
+
+    public function getInicioController() {
+
+        return new InicioController($this->getPrinter(),$this->getVueloModel());
+
     }
 
 
-    public function getDestinosController()
-    {
+    public function getDestinosController() {
+
         return new DestinosController($this->getPrinter());
     }
 
@@ -70,6 +72,7 @@ class Configuration
 
 
 
+
     private function getDatabase()
     {
         return new MySqlDatabase('localhost', 'root', '40460303', 'gaucho_rocket');
@@ -81,11 +84,10 @@ class Configuration
         return new LoginModel($this->getDatabase());
     }
 
+        private function getPrinter(){
+            return new MustachePrinter("view");
+        }
 
-    private function getPrinter()
-    {
-        return new MustachePrinter("view", $this->getLoginHelper());
-    }
 
 
     public function getRouter()
@@ -104,11 +106,11 @@ class Configuration
         return new TurnosController($this->getPrinter());
     }
 
-    public function getLoginHelper()
-    {
-        include_once('helper/LoginHelper.php');
-        return new LoginHelper();
-    }
+       public function getLogoutController(){
+            include_once('controller/LogoutController.php');
+            return new LogoutController();
+       }
+
 
     public function getValidatorHelper()
     {

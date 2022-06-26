@@ -67,7 +67,7 @@ class MySqlDatabase {
 
     public function verificarCuenta($id){
         $query = "UPDATE Usuario set Verificado = 1 where idVerificacion =$id";
-        var_dump($query);
+
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

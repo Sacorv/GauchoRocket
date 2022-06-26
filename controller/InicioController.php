@@ -6,23 +6,19 @@ class InicioController {
     private MustachePrinter $printer;
 
 
-   private $paisModel;
+   private $vueloModel;
 
-    public function __construct($printer,$paisModel) {
+    public function __construct($printer, $vueloModel) {
         $this->printer = $printer;
-        $this->paisModel=$paisModel;
+        $this->vueloModel=$vueloModel;
     }
 
     public function execute() {
+        $data=array();
 
-       $data=array();
+        $data['destinos']=$this->vueloModel->getDestinos();
 
-      $data['destinos']=$this->paisModel->getDestinos();
-
-
-
-     
-      $data['origenes']=$this->paisModel->getOrigenes();
+        $data['origenes']=$this->vueloModel->getOrigenes();
 
       if(isset($_SESSION["nombre"])){
           $data["nombre"]=$_SESSION["nombre"];

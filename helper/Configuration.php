@@ -69,10 +69,11 @@ class Configuration
     }
 
 
+
     private function getDatabase()
     {
         return new MySqlDatabase('localhost', 'root', '40460303', 'gaucho_rocket');
-    }
+}
 
 
     public function getLoginModel()

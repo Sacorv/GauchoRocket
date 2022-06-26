@@ -10,23 +10,15 @@
       <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
         <th>Fecha de Salida</th>
         <th>Origen</th>
-        <th class="row-fluid" colspan="4">Recorrido</th>
-        <th>Tipo de viaje</th>
-        <th>Modelo de equipo</th>
-        <th>Matrícula del equipo</th>
-        <th>Categoría de Equipo</th>
+        <th class="row-fluid" colspan="8">Recorrido</th>
       </tr>
       {{#encontrados}}
       <tr style="text-align: center; width:40%">
         <td>{{fecha_partida}}</td>
-        <td>{{origen}}</td>
+        <td><strong>{{origen}}</strong></td>
         {{#escala}}
-          <td>{{fecha_llegada}}{{destino}}</td>
+          <td>{{fecha_llegada}}<br><strong>{{destino}}</strong></td>
         {{/escala}}
-        <td >{{categoria_viaje}}</td>
-        <td>{{modelo_equipo}}</td>
-        <td >{{matricula_equipo}}</td>
-        <td >{{categoria_equipo}}</td>
       </tr>
       {{/encontrados}}
 

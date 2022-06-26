@@ -4,11 +4,13 @@ class UserController
 {
     private $userModel;
     private $printer;
+    private $mailer;
 
-    public function __construct($userModel, $printer)
+    public function __construct($userModel, $printer, $mailer)
     {
         $this->userModel = $userModel;
         $this->printer = $printer;
+        $this->mailer = $mailer;
     }
 
     public function getUsers() {
@@ -21,6 +23,17 @@ class UserController
         $this->printer->generateView('registerView.html');
     }
 
+    public function register() {
+        $ID = $_GET['id'];
+        $data = ['id' => $ID];
+        $this->printer->generateView('registerConfirmation.html' , $data);
+    }
+
+    public function confirmarCuenta(){
+        $id = $_GET['id'];
+        $this->userModel->verificarUser($id);
+
+    }
 
     public function saveUser() {
         $firstName = $_POST["nombre"];
@@ -29,9 +42,16 @@ class UserController
         $email = $_POST["email"];
         $pass = $_POST["pass"];
         $repeatPass = $_POST["repeat-pass"];
+        $id = random_int(0 , 999);
 
-        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass);
-        $this->printer->generateView($resultCreate);
+        $data = ['email' => $email];
+
+        $_SESSION["dni"] = $dni;
+
+         $this->mailer->enviarMail($email , $id);
+
+        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass, $id);
+        $this->printer->generateView($resultCreate , $data);
     }
 
 }

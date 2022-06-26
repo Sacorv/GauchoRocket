@@ -5,25 +5,99 @@
   <!-- The Band Section -->
   <div class='container' style='margin: auto' id='band'>
     <h2 class='w3-wide' style="margin-bottom: 40px">Destinos Encontrados</h2>
+    {{#encontrados}}
+    <div class="card mt-5 ">
+      <div class="card-header">
+        Gaucho Rocket
 
-    <table class='table table-bordered'>
-      <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
-        <th>Fecha de Salida</th>
-        <th>Origen</th>
-        <th class="row-fluid" colspan="8">Recorrido</th>
-      </tr>
-      {{#encontrados}}
-      <tr style="text-align: center; width:40%">
-        <td>{{fecha_partida}}</td>
-        <td><strong>{{origen}}</strong></td>
-        {{#escala}}
-          <td>{{fecha_llegada}}<br><strong>{{destino}}</strong></td>
-        {{/escala}}
-      </tr>
-      {{/encontrados}}
 
-    </table>
+        
+      </div>
+      <div class="card-body ">
+
+
+
+        <div class="container contenedor-carta d-flex mb-5 ">
+          
+          
+          <div class="col-2 ">
+            <p >Fecha de Salida</p>
+            <p class="mb-5">{{fecha_partida}}</p>
+            <p >Origen</p>
+            <p class="mt-3">{{origen}}</p>
+          
+          
+          </div>
+
+          <div class="col-2">
+           
+          </div>
+          <div class="col-5 ">
+         
+            <p>Fecha Llegada</p>
+         
+            {{#escala}}
+            <div class="row d-flex  flex-nowrap">  
+            
+              <div class="col-6 card">
+          <p class="mt-2" >{{fecha_llegada}}</p>
+
+        </div>
+             <div class="col-6 card">
+                  <p>{{destino}}</p>
+                </div>
+           
+            </div>
+         
+            {{/escala}}
+          </div>
+        </div>
+        <div class="container contenedor-footer d-flex justify-content-between">
+          <div class="col-4">
+            <p>Tipo de viaje</p>
+            <p>{{categoria_viaje}}</p>
+         </div>
+          <div class="col-4">
+            <p>Modelo de equipo</p>
+            <p>{{modelo_equipo}}</p>
+          </div>
+       
+            <div class="col -4">
+              <p>Categoría de Equipo</p>
+              <p>{{categoria_equipo}}</p>
+            </div>
+           
+        
+
+          </div>
+        
+
+
+
+      </div>
+      <div class="card-footer text-muted">
+        <div class="col-2 ">
+   
+        </div>
+        <div class="col-2">
+          <p>Matrícula del equipo</p>
+
+          <p>{{matricula_equipo}}</p>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    {{/encontrados}}
+
+
   </div>
+
+
+
+</div>
 
 </div>
 {{> footer}}

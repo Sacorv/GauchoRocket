@@ -39,7 +39,17 @@ class UserModel {
 
     }
 
-    public function deleteUser () {
+     public function updateCodigoViajero($codigo){
+        $id=$_SESSION["id"];
+        if(isset($id)){
+            return $this->database->updateCodigoViajero($id,$codigo);
+
+        }else{
+
+            return "Error al actualizar el codigo de Viajero";
+        }
+
+
 
     }
 

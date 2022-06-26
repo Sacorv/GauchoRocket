@@ -1,6 +1,36 @@
 {{> header}}
 {{> navbar}}
+
 <body>
-   <div><h1>Realice su chequeo medico</h1></div>
+  <div>
+    <h3 class="text-center pb-5 mt-5">Realice su chequeo medico</h3>
+  </div>
+  <form action="turnos/realizarChequeo" method="post">
+    <div class="container d-flex justify-content-between pb-3">
+      <div class="hospitales">
+        <img src="../public/images/hospital.jpg" alt="">
+        <h5 class="text-center mt-3 pb-4">Centro Medico Buenos Aires</h5>
+        <button type="submit" class="btn btn-warning d-flex m-auto solicitarTurno">Solicitar Turno </button>
+      </div>
+      <div class="hospitales">
+        <img src="../public/images/hospital.jpg" alt="">
+        <h5 class="text-center mt-3 pb-4">Shanghai</h5>
+        <button type="submit"  class="btn btn-warning d-flex m-auto solicitarTurno">Solicitar Turno </button>
+      </div>
+      <div class="hospitales">
+        <img src="../public/images/hospital.jpg" alt="">
+        <h5 class="text-center mt-3 pb-4">Ankara</h5>
+        <button  type="submit" class="btn btn-warning d-flex m-auto solicitarTurno">Solicitar Turno </button>
+           
+      </div>
+     <h3>Tu nivel de Vuelo es</h3>
+
+
+
+    </div>
+  </form>
+
+
+
 </body>
 {{> footer}}

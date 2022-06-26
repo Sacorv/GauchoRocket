@@ -5,18 +5,51 @@
   <!-- The Band Section -->
   <div class='container' style='margin: auto; width: 60%' id='band'>
     <h2 class='w3-wide' style="margin-bottom: 40px">Vuelos Encontrados</h2>
+    {{#error}}
+      <h4 style="color: #ff0015; font-size: 16.5px">{{error}}</h4>
+    {{/error}}
+    {{^esCliente}}
+      {{^esAdmin}}
+      <p>Para reservar un vuelo debe registarse previamente o iniciar sesión</p>
+      <a href="/user">Registarme</a>
+      <span>  |  </span>
+      <a href="/login">Iniciar Sesión</a>
+      {{/esAdmin}}
+    {{/esCliente}}
+    {{#esCliente}}
+    {{^codigo_viajero}}
+    <p>Para reservar un vuelo debe realizarce el cheque médico previamente</p>
+    <a href="/turnos">Realizar chequeo</a>
+    {{/codigo_viajero}}
+    {{/esCliente}}
+
     {{#encontrados}}
-    <div class="card mt-5" style="border-color: #4e82c3">
+    <div class="card mt-3" style="border-color: #4e82c3">
       <div class="card-header" style="background-color: #4e82c3; color: white; font-weight: 700; font-size: 1.3em">
         Vuelo disponible
       </div>
-      <div class="card-body ">
-        <div class="container contenedor-carta d-flex mb-5 ">
+      <div class="card-body" style="border: none">
+        <div class="container d-flex mb-5 ">
           <div class="col-3">
             <p >Fecha de Salida</p>
             <p class="mb-5">{{fecha_partida}}</p>
             <p >Origen</p>
             <p class="mt-3"><strong>{{origen}}</strong></p>
+            {{^esCliente}}
+              {{^esAdmin}}
+               <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+              {{/esAdmin}}
+            {{/esCliente}}
+            {{#esCliente}}
+              {{^codigo_viajero}}
+                <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+              {{/codigo_viajero}}
+            {{/esCliente}}
+            {{#esCliente}}
+              {{#codigo_viajero}}
+                <div class="mt-4"><a href="/reserva?vuelo={{id_vuelo}}&origen={{id_origen}}&destino={{id_destino}}" class="button button-block button-secondary">Reservar</a></div>
+              {{/codigo_viajero}}
+            {{/esCliente}}
           </div>
           <div class="col-2">
           </div>
@@ -34,58 +67,9 @@
             {{/escala}}
           </div>
         </div>
-
-        <!--        <div class="container contenedor-footer d-flex justify-content-between">-->
-        <!--          <div class="col-4">-->
-        <!--            <p>Tipo de viaje</p>-->
-        <!--            <p>{{categoria_viaje}}</p>-->
-        <!--          </div>-->
-        <!--          <div class="col-4">-->
-        <!--            <p>Modelo de equipo</p>-->
-        <!--            <p>{{modelo_equipo}}</p>-->
-        <!--          </div>-->
-        <!--          <div class="col -4">-->
-        <!--            <p>Categoría de Equipo</p>-->
-        <!--            <p>{{categoria_equipo}}</p>-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
-      <!--      <div class="card-footer text-muted">-->
-      <!--        <div class="col-2 ">-->
-      <!--        </div>-->
-      <!--        <div class="col-2">-->
-      <!--          <p>Matrícula del equipo</p>-->
-
-      <!--          <p>{{matricula_equipo}}</p>-->
-      <!--        </div>-->
-      <!--      </div>-->
     </div>
     {{/encontrados}}
-
-
-
-
-
-    <!--<<<<<<< HEAD-->
-    <!--=======-->
-    <!--    <table class='table table-bordered'>-->
-    <!--      <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >-->
-    <!--        <th>Fecha de Salida</th>-->
-    <!--        <th>Origen</th>-->
-    <!--        <th class="row-fluid" colspan="8">Recorrido</th>-->
-    <!--      </tr>-->
-    <!--      {{#encontrados}}-->
-    <!--      <tr style="text-align: center; width:40%">-->
-    <!--        <td>{{fecha_partida}}</td>-->
-    <!--        <td><strong>{{origen}}</strong></td>-->
-    <!--        {{#escala}}-->
-    <!--          <td>{{fecha_llegada}}<br><strong>{{destino}}</strong></td>-->
-    <!--        {{/escala}}-->
-    <!--      </tr>-->
-    <!--      {{/encontrados}}-->
-
-    <!--    </table>-->
-    <!--&gt;>>>>>> master-->
   </div>
 </div>
 {{> footer}}

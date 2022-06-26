@@ -1,0 +1,79 @@
+{{> header}}
+{{> navbar}}
+
+<section class="section">
+
+    <h2 class="fs-6 mt-3 mb-4" style="margin-left: 20px">Detalle de la reserva</h2>
+    <div class="card mb-3" style="max-width: 56%;margin:auto">
+        <div class="row " style="border-color: #ffa900">
+            <div class="col-md-5">
+                <img src="/public/images/nave1.jpg" class="img-fluid rounded-start" alt="..." style="height: 100%">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body" style="border: none">
+                    <form method="post" action="/reserva/reservarViaje">
+                        {{#vuelo}}
+                        <h4 class="card-title" style="letter-spacing: 6.5px">{{origen}}<span class="pe-4"></span>-<span class="ps-4"></span>{{destino}}</h4>
+                        <div>
+                            <p style="font-size: 0.8em">SALIDA</p>
+                            <p><strong>{{fecha_partida}}</strong></p>
+                            <p style="font-size: 0.8em">RECORRIDO</p>
+                            {{#escala}}
+                            <p>{{fecha_llegada}}<span class="ms-5"></span> <strong>{{destino}}</strong></p>
+                            {{/escala}}
+                            <input type="hidden" value="{{id_vuelo}}" name="vuelo">
+                            <input type="hidden" value="{{id_origen}}" name="origen">
+                            <input type="hidden" value="{{id_destino}}" name="destino">
+                            <input type="hidden" value="{{fecha_partida}}" name="fecha_partida">
+                        </div>
+    <!--                    <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como introducción natural a contenido adicional. Este contenido es un poco más largo.</p>-->
+                        {{/vuelo}}
+                        <div style="display: flex; color: #ffa900">
+                            <h5 class="mt-4" style="margin-right: 10px; color: #ffa900">Precio subtotal</h5>
+                            <p class="mt-4"><strong>$ {{precioViaje}}</strong></p>
+                        </div>
+    <!--                    {{#usuario}}-->
+    <!--                    <div class="mt-4">-->
+    <!--                        <h5 class="mb-1">Datos Pasajero</h5>-->
+    <!--                        <p class="mt-0">{{nombre}} {{apellido}}</p>-->
+    <!--                        <p>DNI: {{dni}}</p>-->
+    <!--                        <p>E-mail: {{email}}</p>-->
+    <!--                    </div>-->
+    <!--                    {{/usuario}}-->
+
+                        <div class="row row-20 row-fix">
+                            <div class="col-sm-12">
+                                <label class="form-label-outside">Cabina</label>
+                                <div class="form-wrap form-wrap-inline">
+                                    <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="cabina">
+                                        {{#cabinas}}
+                                        <option value='{{id}}'>{{descripcion}} - ${{precio}}</option>
+                                        {{/cabinas}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="form-label-outside">Servicio a bordo</label>
+                                <div class="form-wrap form-wrap-inline">
+                                    <select class="form-input select-filter" placeholder="All" data-minimum-results-for-search="Infinity" name="servicio">
+                                        {{#servicios}}
+                                        <option value='{{id}}'>{{descripcion}} - ${{precio}}</option>
+                                        {{/servicios}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text fs-4"><small class="text-muted mt-4">Para confirmar la reserva debe realizar el pago</small></p>
+
+                        <div class="d-flex mt-3 pe-3 w-100">
+<!--                            <a href="#" class="button button-secondary d-inline mt-0">Realizar Pago</a>-->
+    <!--                        <a href="#" class="button button-secondary d-inline mt-0 DISABLED">Check-in</a>-->
+                            <button class="button button-block button-secondary" type="submit" id="searchButton">Realizar Pago</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{> footer}}

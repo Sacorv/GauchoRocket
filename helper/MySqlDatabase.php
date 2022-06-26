@@ -71,6 +71,15 @@ class MySqlDatabase {
         $query->execute();
         return $query;
     }
+
+    public function createReserva ($idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino,$id_cabina, $id_servicio, $status_reserva, $precio_tramo, $precioCabina, $precioServicio){
+
+        $sql = "insert into reserva (id_viaje, fecha_partida, id_origen, id_destino, id_usuario,id_cabina,id_servicio,id_status_reserva,subtotal_tramos,precio_cabina,precio_servicio) values(?,?,?,?,?,?,?,?,?,?,?)";
+        $query = $this->conn->prepare($sql);
+        $query->bind_param("isiiiiiiiii", $id_vuelo, $fecha_partida,$id_origen, $id_destino, $idUsuario, $id_cabina, $id_servicio, $status_reserva, $precio_tramo, $precioCabina, $precioServicio);
+        $query->execute();
+        return $query;
+    }
  
 
     private function disconnect() {

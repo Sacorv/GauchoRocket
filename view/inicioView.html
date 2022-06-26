@@ -112,96 +112,100 @@
         </div>
       </div>
     </div>
-    <div class="container container-bigger form-request-wrap form-request-wrap-modern">
-      <div class="row row-fix justify-content-sm-center justify-content-lg-end">
-        <div class="col-lg-6 col-xxl-5">
-          <div class="form-request form-request-modern bg-gray-lighter novi-background">
-            <h4>Encontra Tu Viaje</h4>
-            <!-- RD Mailform-->
-            <form method="post" action="/busqueda">
-              <div class="row row-20 row-fix">
-                <div class="col-sm-12">
-                  <label class="form-label-outside">Desde</label>
+    <div class="container container-bigger">
+      <div class="form-request-wrap form-request-wrap-modern">
+        <div class="row row-fix justify-content-sm-center justify-content-lg-end">
+          <div class="col-lg-6 col-xxl-5">
+            <div class="form-request form-request-modern bg-gray-lighter novi-background">
+              <h4>Encontra Tu Viaje</h4>
+              <!-- RD Mailform-->
+              <form method="post" action="/busqueda">
+                <div class="row row-20 row-fix">
+                  <div class="col-sm-12">
+                    <label class="form-label-outside">Desde</label>
 
-                  <div class="form-wrap form-wrap-inline">
+                    <div class="form-wrap form-wrap-inline">
 
-                    <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="origen">
-                      {{#origenes}}
-                      <option value='{{id}}'>{{nombre}}</option>
-                      {{/origenes}}
-                    </select>
+                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="origen">
+                        {{#origenes}}
+                        <option value='{{id}}'>{{nombre}}</option>
+                        {{/origenes}}
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-12">
-                  <label class="form-label-outside">Hasta</label>
-                  <div class="form-wrap form-wrap-inline">
+                  <div class="col-sm-12">
+                    <label class="form-label-outside">Hasta</label>
+                    <div class="form-wrap form-wrap-inline">
 
-                    <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="destino">
-                      {{#destinos}}
-                      <option value='{{id}}'>{{nombre}}</option>
+                      <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="destino">
+                        {{#destinos}}
+                        <option value='{{id}}'>{{nombre}}</option>
 
-                      {{/destinos}}
-                    </select>
+                        {{/destinos}}
+                      </select>
 
-                  </div>
-                </div>
-
-              </div>
-              <div class="form-wrap form-button">
-                <button class="button button-block button-secondary" type="submit" id="searchButton">Buscar</button>
-              </div>
-              <div class="mt-2" style="display:none;" id="contenedor-horarios">
-
-                <div class="col-lg-6">
-                  <label class="form-label-outside">Horarios De Salida</label>
-                  <div class="row-fluid ">
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
                     </div>
                   </div>
 
                 </div>
+                <div class="form-wrap form-button">
+                  <button class="button button-block button-secondary" type="submit" id="searchButton">Buscar</button>
+                </div>
+                <div class="mt-2" style="display:none;" id="contenedor-horarios">
 
-                <div class="col-lg-6">
-                  <label class="form-label-outside">Horarios De Llegada</label>
-                  <div class="row-fluid ">
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
-                    </div>
-                    <div class="form-wrap form-wrap-modern ">
-                      <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                  <div class="col-lg-6">
+                    <label class="form-label-outside">Horarios De Salida</label>
+                    <div class="row-fluid ">
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
                     </div>
 
                   </div>
 
+                  <div class="col-lg-6">
+                    <label class="form-label-outside">Horarios De Llegada</label>
+                    <div class="row-fluid ">
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+                      <div class="form-wrap form-wrap-modern ">
+                        <div class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2"></div>
+                      </div>
+
+                    </div>
+
+                  </div>
                 </div>
-              </div>
-            </form>
--         </div>
+              </form>
+              -         </div>
+          </div>
         </div>
-      </div>
 
+      </div>
+      <div  style="display: flex; flex-direction: row; justify-content: start; width: 100%; text-align: center; margin-top: 20px; font-weight: 600">
+        <a class="button-secondary" style="margin-right: 6px;width: 270px; padding-top: 15px; padding-bottom: 10px; border-radius: 25px; border:none" href="/busqueda/suborbitales">Viajes Suborbitales</a>
+        <a class="button-secondary" style="margin-left: 12px;width: 270px; padding-top: 15px; padding-bottom: 10px; border-radius: 25px; border:none" href="/busqueda/tours">Tours Espaciales</a>
+      </div>
     </div>
-    <div class="col-xl-3 text-xl-right">
-      <a class="button button-block button-secondary" href="/busqueda/suborbitales">Viajes Suborbitales</a>
-      <a class="button button-block button-secondary" href="/busqueda/tours">Tours Espaciales</a>
-    </div>
+
+
   </div>
 
   </section>

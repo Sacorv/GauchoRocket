@@ -12,6 +12,8 @@ include_once('controller/InicioController.php');
 include_once('model/VueloModel.php');
 include_once('controller/BusquedaController.php');
 include_once('model/BusquedaModel.php');
+include_once('controller/ReservaController.php');
+include_once('model/ReservaModel.php');
 
 class Configuration {
 
@@ -86,5 +88,12 @@ class Configuration {
             return new LoginHelper();
        }
 
+    public function getReservaController(){
+        return new ReservaController($this->getReservaModel(), $this->getPrinter(), $this->getBusquedaModel());
+    }
+
+    public function getReservaModel(){
+        return new ReservaModel ($this->getDatabase());
+    }
 }
 

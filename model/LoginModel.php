@@ -34,8 +34,6 @@ class LoginModel
 
     public function getUsuarioPorEmailYPassword($email, $password)
     {
-        return $this->database->query("SELECT * FROM usuario WHERE email='$email' AND password=md5('$password')");
-
-
+        return $this->database->query("SELECT * FROM usuario WHERE email='$email' AND password=md5('$password') AND Verificado=1");
     }
 }

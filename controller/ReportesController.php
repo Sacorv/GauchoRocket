@@ -15,10 +15,12 @@ class ReportesController
         $cabinaMasVendida=$this->reporteModel->getCabinaMasVendida();
         $facturacionMensual=$this->reporteModel->getFacturacionMensual();
         $facturaCliente=$this->reporteModel->getFacturaCliente();
-        $data['id_cabina']=$cabinaMasVendida['id_cabina'];
+        $tasaOcupacion=$this->reporteModel->getTasaOcupacion();
+        $data['descripcion']=$cabinaMasVendida['descripcion'];
         $data['cantidadDeCabinas']=$cabinaMasVendida['Cantidad'];
         $data['facturacion']=$facturacionMensual;
         $data['facturaCliente']=$facturaCliente;
+        $data['tasaOcupacion']=$tasaOcupacion;
         
        
           if(isset($_SESSION["esCliente"]) && isset($_SESSION["logueado"]) && isset($_SESSION["logueado"])==1 ){

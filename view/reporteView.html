@@ -14,16 +14,24 @@
         <div class="card card-body">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col">Viaje Y Equipo</th>
-                        <th scope="col">Tasa de ocupacion</th>
-
-                    </tr>
+              
+                        <th scope="col">Viaje</th>
+                        <th scope="col">Asientos Ocupados</th>
+                        <th scope="col">Asientos Totales</th>
+                        <th scope="col">Tasa</th>
+                        
+                  
                 </thead>
                 <tbody class="table-group-divider">
-                   
-                    
-                   
+                {{#tasaOcupacion}}
+                <tr>
+                    <td>{{id_viaje}}</td>
+                    <td>{{Asientos Ocupados}}</td>
+                    <td>{{Asientos Totales}}</td> 
+                    <td>{{Tasa}}%</td> 
+                </tr> 
+                
+                {{/tasaOcupacion}}
                 </tbody>
             </table>
 
@@ -82,7 +90,8 @@
 
     <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
         <div class="card card-body">
-            <p class="text-center">La Cabina mas vendida es la N° {{id_cabina}} con una cantidad de
+            <p class="text-center">La Cabina mas vendida es : <span class="font-weight-bold">{{descripcion}}</span>
+                con una cantidad de
                 {{cantidadDeCabinas}} reservas</p>
         </div>
     </div>
@@ -98,7 +107,7 @@
         <div class="card card-body">
             <div class="container">
                 <table class="table bordered">
-                    
+
                     <thead>
                         <th>Id_Usuario</th>
                         <th>Facturacion Cliente</th>
@@ -106,7 +115,7 @@
                         <th>Apellido</th>
                         <th>DNI</th>
                     </thead>
-                    
+
                     <tbody>
                         {{#facturaCliente}}
                         <td>{{id_usuario}}</td>
@@ -118,7 +127,7 @@
                     </tbody>
 
                 </table>
-               
+
 
             </div>
 

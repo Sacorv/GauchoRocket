@@ -14,6 +14,8 @@ include_once('controller/BusquedaController.php');
 include_once('controller/ReportesController.php');
 include_once('model/BusquedaModel.php');
 include_once('model/ReporteModel.php');
+include_once('controller/ReservaController.php');
+include_once('model/ReservaModel.php');
 require_once('helper/EmailHelper.php');
 require_once('helper/PHPMailer/PHPMailer.php');
 
@@ -78,10 +80,12 @@ class Configuration
     }
 
 
+
     private function getDatabase()
     {
         return new MySqlDatabase('localhost', 'root', 'root', 'gaucho_rocket');
 }
+
 
 
     public function getLoginModel()
@@ -121,10 +125,21 @@ class Configuration
        }
      
 
+    public function getReservaController(){
+        return new ReservaController($this->getReservaModel(), $this->getPrinter(), $this->getBusquedaModel());
+    }
+
+    public function getReservaModel()
+    {
+        return new ReservaModel ($this->getDatabase());
+    }
+
+
     public function getValidatorHelper()
     {
         include_once('helper/Validator.php');
         return new Validator();
+
     }
 }
 

@@ -11,7 +11,7 @@
                 <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!--  RD Navbar Brand-->
                 
-                <div class="rd-navbar-brand"><h4>GAUCHO ROCKET <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:50px;"></h4></div>
+                <div class="rd-navbar-brand"><h6>GAUCHO ROCKET <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:45px;"></h6></div>
                 
               </div>
                 {{^esAdmin}}
@@ -20,11 +20,11 @@
                 <div class="rd-navbar-nav-wrap">
                 <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
-                    <li class="active"><a href="/inicio">Inicio</a>
+                    <li class="active"><a href="/inicio"style="font-size: 16px">Inicio</a>
                     </li>
-                    <li><a href="#">Acerca de Nosotros</a>
+                    <li><a href="#"style="font-size: 16px">Acerca de Nosotros</a>
                     </li>
-                    <li><a href="#">Contacto</a>
+                    <li><a href="#"style="font-size: 16px">Contacto</a>
                     </li>
                   </ul>
                 </div>
@@ -39,14 +39,13 @@
                 {{#esCliente}}
                     <div class="rd-navbar-aside-center">
                         <div class="rd-navbar-nav-wrap">
-                            <ul class="rd-navbar-nav">
-                                <li><h6 class='w3-wide mb-2'> Bienvenido/a {{nombre}}</h6></li>
-                                <li><a href='/inicio'>Inicio</a></li>
-                                <li><a href='/#'>Viajes</a></li>
-                                <li><a href='/#'>Reservas</a></li>
-                                <li><a href='/turnos'>Turnos</a></li>
-                                <li><a href='/#'>Perfil</a></li>
-                                <li><a href='/logout'>Cerrar sesión</a></li>
+                            <ul class="rd-navbar-nav" style="font-size: 16px">
+                                <li><h6 class='w3-wide mb-2'style="font-size: 16px"> Bienvenido/a {{nombre}}</h6></li>
+                                <li><a href='/inicio' style="font-size: 16px">Inicio</a></li>
+                                <li><a href='/#'style="font-size: 16px">Viajes</a></li>
+                                <li><a href='/reserva/misReservas'style="font-size: 16px">Mis Reservas</a></li>
+                                <li><a href='/turnos'style="font-size: 16px">Chequeo Médico</a></li>
+                                <li><a href='/logout?logout=true'style="font-size: 16px">Cerrar sesión</a></li>
                             </ul>
                         </div>
                     </div>

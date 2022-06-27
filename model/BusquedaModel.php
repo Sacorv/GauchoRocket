@@ -8,6 +8,10 @@ class BusquedaModel{
         $this->database = $database;
     }
 
+    public function buscarCodigoViajero($idUsuario){
+        return $this->database->query("SELECT codigo_viajero FROM usuario WHERE id='$idUsuario'");
+    }
+
     public function buscarDestinos($idDeOrigen, $idDestino){
 
         $resultQuery = null;
@@ -22,7 +26,8 @@ class BusquedaModel{
                                                 JOIN tipo_equipo te ON te.id=m.tipo_equipo
                                                 JOIN lugar l ON l.id=d.id_lugar
                                                 JOIN lugar l2 ON l2.id=v.id_lugar_origen
-                                                WHERE d.id_lugar='$idDestino' AND v.id_lugar_origen='$idDeOrigen' AND d.id_tipo_equipo=te.id");
+                                                WHERE d.id_lugar='$idDestino' AND v.id_lugar_origen='$idDeOrigen' AND d.id_tipo_equipo=te.id
+                                                ORDER BY v.fecha_partida");
         }
         else{
             $tipo_viaje = $this->database->query("SELECT id_tipo_viaje FROM duracion WHERE id_lugar = '$idDeOrigen'
@@ -85,7 +90,7 @@ class BusquedaModel{
                 if ($i==0){
                     $hours= $query[$i]["horas"];
                     $date = $query[$i]["fecha_partida"];
-                    $llegada = date('Y-m-d H:i:s', strtotime($date . ' + '.$hours. 'hours'));
+                    $llegada = date('Y-m-d H:i', strtotime($date . ' + '.$hours. 'hours'));
 
                     $escala = ["id_destino"=>$query[$i]["id_destino"],"destino" => $query[$i]["escala"], "fecha_llegada" => $llegada];
                     $escalas[] = $escala;
@@ -93,7 +98,7 @@ class BusquedaModel{
                 else{
                     $hours= $query[$i]["horas"];
                     $date = $escalas[($i-1)]["fecha_llegada"];
-                    $llegada = date('Y-m-d H:i:s', strtotime($date . ' + '.$hours. 'hours'));
+                    $llegada = date('Y-m-d H:i', strtotime($date . ' + '.$hours. 'hours'));
 
                     $escala = ["id_destino"=>$query[$i]["id_destino"],"destino" => $query[$i]["escala"], "fecha_llegada" => $llegada];
                     $escalas[] = $escala;

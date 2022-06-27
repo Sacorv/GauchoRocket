@@ -1,31 +1,65 @@
 {{> header}}
 {{> navbar}}
-<div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center'>
+<div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center; width: 90%; margin: auto'>
 
     <!-- The Band Section -->
-    <div class='container' style='margin: auto' id='band'>
+    <th class='container' style='margin: auto' id='band'>
         {{#idSuborbital}}
-            <h2 class='w3-wide' style="margin-bottom: 40px">Viajes Suborbitales Disponibles</h2>
+        <h2 class='w3-wide' style="margin-bottom: 40px">Viajes Suborbitales Disponibles</h2>
         {{/idSuborbital}}
         {{#idTour}}
         <h2 class='w3-wide' style="margin-bottom: 40px">Tours Espaciales Disponibles</h2>
         {{/idTour}}
-        <table class='table table-bordered'>
-            <tr class="row-fluid" style="text-align: center; background-color: #F5B06CFF; width:40%" >
+
+        {{^esCliente}}
+            {{^esAdmin}}
+            <p>Para reservar un vuelo debe registrarse previamente o iniciar sesión</p>
+            <a href="/user">Registrarme</a>
+            <span>  |  </span>
+            <a href="/login">Iniciar Sesión</a>
+            {{/esAdmin}}
+        {{/esCliente}}
+
+        {{#esCliente}}
+            {{^codigo_viajero}}
+                <p>Para reservar un vuelo debe realizarce el cheque médico previamente</p>
+                <a href="/turnos" style="margin-bottom: 18px">Realizar chequeo</a>
+            {{/codigo_viajero}}
+        {{/esCliente}}
+
+        <table class='table table-bordered' style="border-color: #4e82c3">
+            <tr class="row-fluid" style="text-align: center; background-color: #4e82c3; border-color: #4e82c3; width:40%; color: aliceblue" >
                 <th>Fecha de Salida</th>
                 <th>Origen</th>
                 <th>Fecha de llegada</th>
+                <th>Acciones</th>
             </tr>
             {{#viajes}}
-            <tr style="text-align: center; width:40%">
+            <tr style="text-align: center; width:40%; border-color: #4e82c3">
                 <td>{{fecha_partida}}</td>
                 <td><strong>{{origen}}</strong></td>
                 <td>{{fecha_llegada}}</td>
+                {{^esCliente}}
+                    {{^esAdmin}}
+                        <th><div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" >Reservar</a></div></th>
+                    {{/esAdmin}}
+                {{/esCliente}}
+
+                    {{#esCliente}}
+                        {{^codigo_viajero}}
+                            <th><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></th>
+                        {{/codigo_viajero}}
+                    {{/esCliente}}
+
+                    {{#esCliente}}
+                        {{#codigo_viajero}}
+                            <th><a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
+                        {{/codigo_viajero}}
+                    {{/esCliente}}
+
             </tr>
             {{/viajes}}
-
         </table>
     </div>
-
 </div>
 {{> footer}}

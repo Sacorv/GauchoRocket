@@ -21,18 +21,9 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                   
+                    
+                   
                 </tbody>
             </table>
 
@@ -51,15 +42,30 @@
 
     <div class="collapse multi-collapse mt-2" id="multiCollapseExample2">
         <div class="card card-body">
-            <p>Filtrar Factura Mensual</p>
-            <input type="date">
+            <p class="text-center mb-3">Factura Mensual</p>
 
             <div class="container">
-                <p>{{Mes}}</p>
-                <li>Factura1</li>
-                <li>Factura2</li>
-                <li>Factura3</li>
-                <li>Factura4</li>
+
+                <table class="table bordered">
+                    <thead>
+                        <th>Mes</th>
+                        <th>Facturacion Total</th>
+
+                    </thead>
+
+                    <tbody>
+                        {{#facturacion}}
+                        <tr>
+                            <td>{{Mes}}</td>
+                            <td>${{Facturacion Total }}</td>
+                        </tr>
+
+
+
+                        {{/facturacion}}
+                    </tbody>
+
+                </table>
 
 
             </div>
@@ -76,7 +82,8 @@
 
     <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
         <div class="card card-body">
-            <p class="text-center">La Cabina mas vendida es la N° {{id_cabina}} con una cantidad de {{cantidadDeCabinas}} reservas</p>
+            <p class="text-center">La Cabina mas vendida es la N° {{id_cabina}} con una cantidad de
+                {{cantidadDeCabinas}} reservas</p>
         </div>
     </div>
 
@@ -89,9 +96,29 @@
 
     <div class="collapse multi-collapse mt-2" id="multiCollapseExample4">
         <div class="card card-body">
-            <p class="text-center">Cliente N°{{numeroDeCliente}}</p>
             <div class="container">
-                <p>Facturacion de cliente X</p>
+                <table class="table bordered">
+                    
+                    <thead>
+                        <th>Id_Usuario</th>
+                        <th>Facturacion Cliente</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                    </thead>
+                    
+                    <tbody>
+                        {{#facturaCliente}}
+                        <td>{{id_usuario}}</td>
+                        <td>{{Facturacion Cliente}}</td>
+                        <td>{{nombre}}</td>
+                        <td>{{apellido}}</td>
+                        <td>{{dni}}</td>
+                        {{/facturaCliente}}
+                    </tbody>
+
+                </table>
+               
 
             </div>
 

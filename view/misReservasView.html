@@ -1,0 +1,59 @@
+{{> header}}
+{{> navbar}}
+
+<section class="section">
+
+  <div class="card text-center" style="width: 90%;margin-left: 30px; border: none">
+    <form></form>
+    {{#reservas}}
+    <div class="card-header mt-3" style="background-color: #ffb553">
+      <ul class="nav nav-pills card-header-pills">
+        <h6 style="font-size: 15.5px">{{origen}} - {{destino}}</h6>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div style="display: flex; flex-direction: row; justify-content: space-around; font-size: 14.8px">
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text" style="text-align: left;"><strong>Fecha Partida</strong></p>
+          <p>{{fecha_partida}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Cabina</strong></p>
+          <p>{{cabina}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Servicio</strong></p>
+          <p>{{servicio}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Subtotal</strong></p>
+          <p>{{subtotal_tramos}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Valor Cabina</strong></p>
+          <p>{{precio_cabina}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Valor Servicio</strong></p>
+          <p>{{precio_servicio}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>TOTAL</strong></p>
+          <p>{{total}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p class="card-text"><strong>Estado de reserva</strong></p>
+          <p style="text-transform: uppercase; font-weight: 600">{{Estado de reserva}}</p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Check-In</a>
+        </div>
+      </div>
+      <!--      <p class="card-text">Con texto de apoyo a continuación como introducción natural a contenido adicional.</p>-->
+      <!--      <a href="#" class="btn btn-primary">Ir a algún lugar</a>-->
+    </div>
+    {{/reservas}}
+  </div>
+
+</section>
+{{> footer}}

@@ -13,8 +13,12 @@ class ReportesController
     public function execute() {
         $data=array();
         $cabinaMasVendida=$this->reporteModel->getCabinaMasVendida();
+        $facturacionMensual=$this->reporteModel->getFacturacionMensual();
+        $facturaCliente=$this->reporteModel->getFacturaCliente();
         $data['id_cabina']=$cabinaMasVendida['id_cabina'];
         $data['cantidadDeCabinas']=$cabinaMasVendida['Cantidad'];
+        $data['facturacion']=$facturacionMensual;
+        $data['facturaCliente']=$facturaCliente;
         
        
           if(isset($_SESSION["esCliente"]) && isset($_SESSION["logueado"]) && isset($_SESSION["logueado"])==1 ){

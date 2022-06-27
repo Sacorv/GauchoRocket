@@ -1,0 +1,144 @@
+{{> header}}
+{{> navbar}}
+
+
+<h3 class="text-center mt-5">Reportes De Funcionamiento</h3>
+<div class="container mt-5 mb-5 pb-5">
+
+    <p>
+        <a class="btn btn-primary  " data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample1">Tasa de ocupacion por viaje</a>
+    </p>
+
+    <div class="collapse multi-collapse mb-1 mt-2" id="multiCollapseExample1">
+        <div class="card card-body">
+            <table class="table">
+                <thead>
+              
+                        <th scope="col">Viaje</th>
+                        <th scope="col">Asientos Ocupados</th>
+                        <th scope="col">Asientos Totales</th>
+                        <th scope="col">Tasa</th>
+                        
+                  
+                </thead>
+                <tbody class="table-group-divider">
+                {{#tasaOcupacion}}
+                <tr>
+                    <td>{{id_viaje}}</td>
+                    <td>{{Asientos Ocupados}}</td>
+                    <td>{{Asientos Totales}}</td> 
+                    <td>{{Tasa}}%</td> 
+                </tr> 
+                
+                {{/tasaOcupacion}}
+                </tbody>
+            </table>
+
+        </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+        </div>
+
+    </div>
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample2">Facturacion Mensual</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample2">
+        <div class="card card-body">
+            <p class="text-center mb-3">Factura Mensual</p>
+
+            <div class="container">
+
+                <table class="table bordered">
+                    <thead>
+                        <th>Mes</th>
+                        <th>Facturacion Total</th>
+
+                    </thead>
+
+                    <tbody>
+                        {{#facturacion}}
+                        <tr>
+                            <td>{{Mes}}</td>
+                            <td>${{Facturacion Total }}</td>
+                        </tr>
+
+
+
+                        {{/facturacion}}
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample3" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample3">Cabina mas vendida</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
+        <div class="card card-body">
+            <p class="text-center">La Cabina mas vendida es : <span class="font-weight-bold">{{descripcion}}</span>
+                con una cantidad de
+                {{cantidadDeCabinas}} reservas</p>
+        </div>
+    </div>
+
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample4" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample4">Facturacion por cliente</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample4">
+        <div class="card card-body">
+            <div class="container">
+                <table class="table bordered">
+
+                    <thead>
+                        <th>Id_Usuario</th>
+                        <th>Facturacion Cliente</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                    </thead>
+
+                    <tbody>
+                        {{#facturaCliente}}
+                        <td>{{id_usuario}}</td>
+                        <td>{{Facturacion Cliente}}</td>
+                        <td>{{nombre}}</td>
+                        <td>{{apellido}}</td>
+                        <td>{{dni}}</td>
+                        {{/facturaCliente}}
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+        </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+        </div>
+    </div>
+
+    </p>
+
+</div>
+
+{{> footer}}

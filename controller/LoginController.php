@@ -102,10 +102,12 @@ class LoginController
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                     $_SESSION["esAdmin"] = true;
                 }
+
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
                     $_SESSION["esCliente"] = true;
-                }
 
+                }
+                    
                 header("location: /");
                 exit();
 

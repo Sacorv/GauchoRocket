@@ -13,12 +13,6 @@ class UserController
         $this->mailer = $mailer;
     }
 
-    public function getUsers() {
-        $users = $this->userModel->allUsers();
-        $data = ["usuarios" => $users];
-        $this->printer->generateView('userView.html', $data);
-    }
-
     public function execute() {
         $this->printer->generateView('registerView.html');
     }

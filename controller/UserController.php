@@ -4,11 +4,13 @@ class UserController
 {
     private $userModel;
     private $printer;
+    private $mailer;
 
-    public function __construct($userModel, $printer)
+    public function __construct($userModel, $printer, $mailer)
     {
         $this->userModel = $userModel;
         $this->printer = $printer;
+        $this->mailer = $mailer;
     }
 
     public function getUsers() {
@@ -21,6 +23,24 @@ class UserController
         $this->printer->generateView('registerView.html');
     }
 
+    public function register() {
+        $ID = $_GET['id'];
+        $data = ['id' => $ID];
+        $this->printer->generateView('registerConfirmation.html' , $data);
+    }
+
+    public function confirmarCuenta(){
+        $id = $_GET['id'];
+        $data= [];
+        if($this->userModel->verificarUser($id)){
+            $data = ['seVerificoLaCuenta' => true];
+            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+        }else{
+            $data = ['seVerificoLaCuenta' => false];
+            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+        }
+
+    }
 
     public function saveUser() {
         $firstName = $_POST["nombre"];
@@ -29,9 +49,21 @@ class UserController
         $email = $_POST["email"];
         $pass = $_POST["pass"];
         $repeatPass = $_POST["repeat-pass"];
+        $idVerificacion = random_int(0 , 999);
 
-        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass);
-        $this->printer->generateView($resultCreate);
+        $data = ['email' => $email];
+        $data = ['id' => $idVerificacion];
+
+        $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass, $idVerificacion);
+
+        if($resultCreate == []){
+            if($this->mailer->enviarMail($email , $idVerificacion)){
+                return $this->printer->generateView('registerSuccesView.html');
+            }
+        }else{
+            return $this->printer->generateView('registerView.html' , $resultCreate);
+        }
+
     }
 
 }

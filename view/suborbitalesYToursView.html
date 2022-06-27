@@ -21,10 +21,10 @@
         {{/esCliente}}
 
         {{#esCliente}}
-        {{^codigo_viajero}}
-        <p>Para reservar un vuelo debe realizarce el cheque médico previamente</p>
-        <a href="/turnos" style="margin-bottom: 18px">Realizar chequeo</a>
-        {{/codigo_viajero}}
+            {{^codigo_viajero}}
+                <p>Para reservar un vuelo debe realizarce el cheque médico previamente</p>
+                <a href="/turnos" style="margin-bottom: 18px">Realizar chequeo</a>
+            {{/codigo_viajero}}
         {{/esCliente}}
 
         <table class='table table-bordered' style="border-color: #4e82c3">
@@ -41,19 +41,22 @@
                 <td>{{fecha_llegada}}</td>
                 {{^esCliente}}
                     {{^esAdmin}}
-                    <div class="mt-4"><a href="#" class="button-secondary disabled" tabindex="-1" role="button" aria-disabled="true" style="width: 130px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></div>
+                        <th><div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" >Reservar</a></div></th>
                     {{/esAdmin}}
                 {{/esCliente}}
-                {{#esCliente}}
-                    {{^codigo_viajero}}
-                        <th><a href="#" class="button-secondary disabled" tabindex="-1" role="button" aria-disabled="true" class="button-secondary disabled" tabindex="-1" role="button" aria-disabled="true" style="width: 130px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
-                    {{/codigo_viajero}}
-                {{/esCliente}}
-                {{#esCliente}}
-                    {{#codigo_viajero}}
-                        <th><a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
-                    {{/codigo_viajero}}
-                {{/esCliente}}
+
+                    {{#esCliente}}
+                        {{^codigo_viajero}}
+                            <th><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></th>
+                        {{/codigo_viajero}}
+                    {{/esCliente}}
+
+                    {{#esCliente}}
+                        {{#codigo_viajero}}
+                            <th><a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
+                        {{/codigo_viajero}}
+                    {{/esCliente}}
+
             </tr>
             {{/viajes}}
         </table>

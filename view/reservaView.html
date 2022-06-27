@@ -26,21 +26,11 @@
                             <input type="hidden" value="{{id_destino}}" name="destino">
                             <input type="hidden" value="{{fecha_partida}}" name="fecha_partida">
                         </div>
-    <!--                    <p class="card-text">Esta es una tarjeta más amplia con texto de apoyo a continuación como introducción natural a contenido adicional. Este contenido es un poco más largo.</p>-->
                         {{/vuelo}}
                         <div style="display: flex; color: #ffa900">
                             <h5 class="mt-4" style="margin-right: 10px; color: #ffa900">Precio subtotal</h5>
                             <p class="mt-4"><strong>$ {{precioViaje}}</strong></p>
                         </div>
-    <!--                    {{#usuario}}-->
-    <!--                    <div class="mt-4">-->
-    <!--                        <h5 class="mb-1">Datos Pasajero</h5>-->
-    <!--                        <p class="mt-0">{{nombre}} {{apellido}}</p>-->
-    <!--                        <p>DNI: {{dni}}</p>-->
-    <!--                        <p>E-mail: {{email}}</p>-->
-    <!--                    </div>-->
-    <!--                    {{/usuario}}-->
-
                         <div class="row row-20 row-fix">
                             <div class="col-sm-12">
                                 <label class="form-label-outside">Cabina</label>
@@ -66,8 +56,6 @@
                         <p class="card-text fs-4"><small class="text-muted mt-4">Para confirmar la reserva debe realizar el pago</small></p>
 
                         <div class="d-flex mt-3 pe-3 w-100">
-<!--                            <a href="#" class="button button-secondary d-inline mt-0">Realizar Pago</a>-->
-    <!--                        <a href="#" class="button button-secondary d-inline mt-0 DISABLED">Check-in</a>-->
                             <button class="button button-block button-secondary" type="submit" id="searchButton">Realizar Pago</button>
                         </div>
                     </form>

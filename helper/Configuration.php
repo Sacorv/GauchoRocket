@@ -14,45 +14,58 @@ include_once('controller/BusquedaController.php');
 include_once('model/BusquedaModel.php');
 include_once('controller/ReservaController.php');
 include_once('model/ReservaModel.php');
+require_once('helper/EmailHelper.php');
+require_once('helper/PHPMailer/PHPMailer.php');
 
-class Configuration {
-
-
-        public function getUserController() {
-            return new UserController($this->getUserModel(), $this->getPrinter());
-        }
+class Configuration
+{
 
 
-        public function getLoginController() {
-            return new LoginController($this->getLoginModel(), $this->getPrinter());
-        }
+    public function getUserController()
+    {
+        return new UserController($this->getUserModel(), $this->getPrinter(), $this->getMailer());
+    }
+
+
+    public function getLoginController()
+    {
+        return new LoginController($this->getLoginModel(), $this->getPrinter());
+    }
+
 
 
     public function getInicioController() {
+
         return new InicioController($this->getPrinter(),$this->getVueloModel());
+
     }
 
 
     public function getDestinosController() {
+
         return new DestinosController($this->getPrinter());
     }
 
-    public function getBusquedaController(){
+    public function getBusquedaController()
+    {
         return new BusquedaController($this->getBusquedaModel(), $this->getPrinter());
     }
 
 
-    private function getUserModel() {
-        return new UserModel($this->getDatabase());
+    private function getUserModel()
+    {
+        return new UserModel($this->getDatabase() , $this->getValidatorHelper());
     }
 
 
-    public function getVueloModel(){
+    public function getVueloModel()
+    {
         return new VueloModel($this->getDatabase());
     }
 
 
-    private function getBusquedaModel(){
+    private function getBusquedaModel()
+    {
         return new BusquedaModel($this->getDatabase());
     }
 
@@ -63,22 +76,33 @@ class Configuration {
     }
 
 
-
     public function getLoginModel()
     {
         return new LoginModel($this->getDatabase());
     }
 
-
         private function getPrinter(){
-            return new MustachePrinter("view", $this->getLoginHelper());
+            return new MustachePrinter("view");
         }
 
 
-    public function getRouter(){
+
+    public function getRouter()
+    {
         return new Router($this, "getInicioController", "execute");
     }
 
+
+    private function getMailer()
+    {
+        return new EmailHelper();
+    }
+
+
+       public function getLogoutController(){
+            include_once('controller/LogoutController.php');
+            return new LogoutController();
+}
        public function getTurnosController(){
         include_once ('controller/TurnosController.php');
         return new TurnosController($this->getUserModel(),$this->getPrinter());
@@ -88,12 +112,22 @@ class Configuration {
             return new LoginHelper();
        }
 
+
     public function getReservaController(){
         return new ReservaController($this->getReservaModel(), $this->getPrinter(), $this->getBusquedaModel());
     }
 
-    public function getReservaModel(){
+    public function getReservaModel()
+    {
         return new ReservaModel ($this->getDatabase());
+    }
+
+
+    public function getValidatorHelper()
+    {
+        include_once('helper/Validator.php');
+        return new Validator();
+
     }
 }
 

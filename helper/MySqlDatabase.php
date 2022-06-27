@@ -36,11 +36,11 @@ class MySqlDatabase {
         return mysqli_fetch_all($result , MYSQLI_ASSOC);
     }
 
-    public function create($firstName, $lastName, $dni, $email, $password) {
-        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password) values(?,?,?,?,?,?)";
+    public function create($firstName, $lastName, $dni, $email, $password, $idVerificacion) {
+        $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password , idVerificacion) values(?,?,?,?,?,?, ?)";
         $query = $this->conn->prepare($sql);
         $tipo = 2;
-        $query->bind_param("ssisis", $firstName, $lastName, $dni, $email, $tipo, $password);
+        $query->bind_param("ssisisi", $firstName, $lastName, $dni, $email, $tipo, $password, $idVerificacion);
         $query->execute();
         return $query;
     }
@@ -64,6 +64,15 @@ class MySqlDatabase {
 
 
     }
+
+    public function verificarCuenta($id){
+        $query = "UPDATE Usuario set Verificado = 1 where idVerificacion =$id";
+
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+
     
     public function updateCodigoViajero($id,$codigo_viajero){
         $query = $this->conn->prepare("update usuario set codigo_viajero = ? where id = ?");
@@ -71,6 +80,7 @@ class MySqlDatabase {
         $query->execute();
         return $query;
     }
+
 
     public function createReserva ($idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino,$id_cabina, $id_servicio, $status_reserva, $precio_tramo, $precioCabina, $precioServicio){
 
@@ -81,6 +91,7 @@ class MySqlDatabase {
         return $query;
     }
  
+
 
     private function disconnect() {
         mysqli_close($this->conn);

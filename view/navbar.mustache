@@ -14,8 +14,8 @@
                 <div class="rd-navbar-brand"><h6>GAUCHO ROCKET <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:45px;"></h6></div>
                 
               </div>
+                {{^esAdmin}}
                 {{^esCliente}}
-                    {{^esAdmin}}
               <div class="rd-navbar-aside-center">
                 <div class="rd-navbar-nav-wrap">
                 <!-- RD Navbar Nav-->
@@ -34,9 +34,8 @@
                             <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href='/user'>Registrarse</a></div>
                             <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina"  href='/login'>Iniciar Sesion</a></div>
                      </div>
-                    {{/esAdmin}}
                 {{/esCliente}}
-
+                {{/esAdmin}}
                 {{#esCliente}}
                     <div class="rd-navbar-aside-center">
                         <div class="rd-navbar-nav-wrap">
@@ -60,7 +59,7 @@
                                 <li><a href='/#'>Administracion</a></li>
                                 <li><a href='/#'>Reservas</a></li>
                                 <li><a href='/#'>Reportes</a></li>
-                                <li><a href=/logout?logout=true'>Cerrar sesión</a></li>
+                                <li><a href='/logout'>Cerrar sesión</a></li>
                             </ul>
                         </div>
                     </div>

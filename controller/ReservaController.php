@@ -17,6 +17,7 @@ class ReservaController
         $nombreUsuario = $_SESSION["nombre"];
         $idUsuario = $_SESSION["id"];
         $datosUsuario = $this->reservaModel->buscarUsuario($idUsuario);
+        $esCliente = $_SESSION["esCliente"];
 
 
         $idVuelo = $_GET["vuelo"];
@@ -30,7 +31,7 @@ class ReservaController
         $precioViaje = $this->reservaModel->calcularPrecioViaje($idVuelo, $origen, $destino);
 
 
-        $data = ["vuelo"=>$result, "usuario"=>$datosUsuario, "nombre"=>$nombreUsuario, "cabinas"=>$cabinas, "servicios"=>$servicios, "precioViaje"=>$precioViaje];
+        $data = ["vuelo"=>$result, "usuario"=>$datosUsuario, "nombre"=>$nombreUsuario, "cabinas"=>$cabinas, "servicios"=>$servicios, "precioViaje"=>$precioViaje,"esCliente"=>$esCliente];
 
         $this->printer->generateView('reservaView.html', $data);
     }
@@ -39,6 +40,7 @@ class ReservaController
     {
         $nombreUsuario = $_SESSION["nombre"];
         $idUsuario = $_SESSION["id"];
+        $esCliente = $_SESSION["esCliente"];
 
         $id_vuelo = $_POST["vuelo"];
         $id_origen = $_POST["origen"];
@@ -64,7 +66,7 @@ class ReservaController
             $result = $this->busquedaModel->buscarDestinos($id_origen, $id_destino);
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
 
-            $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$idUsuario, "error"=>$error];
+            $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$idUsuario, "error"=>$error,"esCliente"=>$esCliente];
             $this->printer->generateView('destinosEncontradosView.html',$data);
         }
     }
@@ -72,10 +74,11 @@ class ReservaController
     public function misReservas(){
         $id_usuario = $_SESSION["id"];
         $nombreUsuario = $_SESSION["nombre"];
+        $esCliente = $_SESSION["esCliente"];
 
         $result = $this->reservaModel->reservasDelUsuario($id_usuario);
 
-        $data = ["reservas"=>$result, "nombre"=>$nombreUsuario];
+        $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
         $this->printer->generateView('misReservasView.html', $data);
     }
 }

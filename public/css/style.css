@@ -2439,19 +2439,22 @@ section {
 .contenedor-carta p{
 
 font-weight: bolder;
-color:#ffa900  ;
+color:black  ;
 
 }
 .contenedor-footer p{
 	font-weight: bolder;
-color:#ffa900  ;
+color:black  ;
 
 
+}
+.solicitarTurno{
+cursor: pointer;
 }
 .card-footer p{
 
 	font-weight: bolder;
-color:#ffa900  ;
+color:black  ;
 }
 
 .bg-gray-darker .isotope-filters-list-buttons a, .bg-gray-darker .isotope-filters-list-buttons a:focus, .bg-gray-700 .isotope-filters-list-buttons a, .bg-gray-700 .isotope-filters-list-buttons a:focus {

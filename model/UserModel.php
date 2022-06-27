@@ -3,46 +3,43 @@
 class UserModel {
 
     private $database;
+    private $validator;
 
-    public function __construct($database) {
+    public function __construct($database , $validator) {
         $this->database = $database;
+        $this->validator = $validator;
     }
 
     public function allUsers () {
         return $this->database->query('SELECT * FROM usuario');
     }
 
-    public function createUser ($firstName, $lastName, $dni, $email, $pass, $repeatPass) {
-        //Validacion de la password
-        if($this->isValidPass($pass, $repeatPass)){
-            $password = md5($pass);
-        }else{
-            echo "<div><h3>Las contraseñas ingresadas no coinciden</h3></div>";
-            return "registerView.html";
+    private function validacionesDeDatos ($email, $pass, $repeatPass) {
+        //Validaciones
+        $data = [];
+        $validacionClaveSegura = $this->validator->validarClaveSegura($pass);
+        if(count($validacionClaveSegura) > 0){
+            $data['errores']=$validacionClaveSegura;
         }
-        if($this->existsUser($email)){
-            echo "<div><h3>El email ya se encuentra registrado</h3></div>";
-            return "registerView.html";
-        }else {
-            $resultCreate = $this->database->create($firstName, $lastName, $dni, $email, $password);
-            if ($resultCreate) {
-                return "registerSuccessView.html";
-            }
-            return "registerView.html";
+        if(!$this->validator->isValidPass($pass, $repeatPass)){
+            $data = ['contraseñasNoCoincidenBool' =>true ];
+            $data['errores'] = 'Las contraseñas no coinciden';
+            //return "registerView.html";
         }
+        if($this->validator->existsUser($email, $this->database)){
+            $data = ['emailYaRegistrado' =>true ];
+            $data['errores'] = 'El email ya se encuentra registrado';
+            //return "registerView.html";
+        }
+        return $data;
     }
 
-    public function existsUser ($email) {
 
-       if( $this->database->validarMail($email) == 1){
-           return true;
-       }else{
-           return false;
-       }
+    public function editUser () {
 
     }
 
-    public function updateCodigoViajero($codigo){
+     public function updateCodigoViajero($codigo){
         $id=$_SESSION["id"];
         if(isset($id)){
             return $this->database->updateCodigoViajero($id,$codigo);
@@ -51,25 +48,30 @@ class UserModel {
 
             return "Error al actualizar el codigo de Viajero";
         }
-    
 
 
-    }
-    public function editUser () {
 
     }
 
-    public function deleteUser () {
 
+    public function verificarUser( $id){
+            $result = $this->database->verificarCuenta($id);
+            return $result;
     }
 
-    private function isValidPass($pass, $repeatPass)
-    {
-        if($pass == $repeatPass){
-            return true;
+    public function createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass , $idVerificacion){
+        $data = $this->validacionesDeDatos ($email, $pass, $repeatPass);
+        if(count($data) == 0){
+            $password = md5($pass);
+            $resultCreate = $this->database->create($firstName, $lastName, $dni, $email, $password , $idVerificacion);
+        }else{
+            return $data;
         }
-        else{
-            return false;
+        if ($resultCreate) {
+            return $data=[];
+        }else{
+            $data['errores']= "Ha ocurrido un error inesperado. Intente registrarse nuevamente.";
+            return $data;
         }
     }
 

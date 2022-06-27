@@ -15,6 +15,7 @@ class BusquedaController
     public function execute(){
         $origen = $_POST['origen'];
         $destino = $_POST['destino'];
+
         $result = $this->busquedaModel->buscarDestinos($origen, $destino);
 
         if($destino<=$origen){
@@ -27,13 +28,13 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-
+            $esCliente = $_SESSION["esCliente"];
 
             if($codigoViajero[0]["codigo_viajero"]!=0){
-                $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$_SESSION["id"], "nombre"=>$nombreUsuario];
+                $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$_SESSION["id"], "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
             }
             else{
-                $data = ["encontrados" => $result,"nombre"=>$nombreUsuario];
+                $data = ["encontrados" => $result,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
             }
         }
         else{
@@ -51,13 +52,13 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-
+            $esCliente = $_SESSION["esCliente"];
 
             if ($codigoViajero[0]["codigo_viajero"] != 0) {
-                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital, "codigo_viajero"=>$codigoViajero, "nombre"=>$nombreUsuario];
+                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital, "codigo_viajero"=>$codigoViajero, "nombre"=>$nombreUsuario, "esCliente"=>$esCliente];
             }
             else{
-                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital,"nombre"=>$nombreUsuario];
+                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
             }
         }
         else{
@@ -74,13 +75,13 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-
+            $esCliente = $_SESSION["esCliente"];
 
             if ($codigoViajero[0]["codigo_viajero"] != 0) {
-                $data = ["viajes" => $result, "idTour"=>$idTour, "codigo_viajero"=>$codigoViajero,"nombre"=>$nombreUsuario];
+                $data = ["viajes" => $result, "idTour"=>$idTour, "codigo_viajero"=>$codigoViajero,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
             }
             else{
-                $data = ["viajes" => $result, "idTour"=>$idTour,"nombre"=>$nombreUsuario];
+                $data = ["viajes" => $result, "idTour"=>$idTour,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
             }
         }
         else{

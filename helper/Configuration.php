@@ -11,7 +11,9 @@ include_once('model/UserModel.php');
 include_once('controller/InicioController.php');
 include_once('model/VueloModel.php');
 include_once('controller/BusquedaController.php');
+include_once('controller/ReportesController.php');
 include_once('model/BusquedaModel.php');
+include_once('model/ReporteModel.php');
 require_once('helper/EmailHelper.php');
 require_once('helper/PHPMailer/PHPMailer.php');
 
@@ -37,7 +39,11 @@ class Configuration
         return new InicioController($this->getPrinter(),$this->getVueloModel());
 
     }
+    public function getReportesController(){
 
+        return new ReportesController($this->getPrinter(),$this->getReporteModel());
+
+       }
 
     public function getDestinosController() {
 
@@ -54,7 +60,11 @@ class Configuration
     {
         return new UserModel($this->getDatabase() , $this->getValidatorHelper());
     }
-
+   
+    private function getReporteModel()
+    {
+        return new ReporteModel($this->getDatabase());
+    }
 
     public function getVueloModel()
     {
@@ -70,7 +80,7 @@ class Configuration
 
     private function getDatabase()
     {
-        return new MySqlDatabase('localhost', 'root', '40460303', 'gaucho_rocket');
+        return new MySqlDatabase('localhost', 'root', 'root', 'gaucho_rocket');
 }
 
 
@@ -109,7 +119,7 @@ class Configuration
             include_once('helper/LoginHelper.php');
             return new LoginHelper();
        }
-
+     
 
     public function getValidatorHelper()
     {

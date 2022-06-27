@@ -1,0 +1,108 @@
+{{> header}}
+{{> navbar}}
+
+
+<h3 class="text-center mt-5">Reportes De Funcionamiento</h3>
+<div class="container mt-5 mb-5 pb-5">
+
+    <p>
+        <a class="btn btn-primary  " data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample1">Tasa de ocupacion por viaje</a>
+    </p>
+
+    <div class="collapse multi-collapse mb-1 mt-2" id="multiCollapseExample1">
+        <div class="card card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Viaje Y Equipo</th>
+                        <th scope="col">Tasa de ocupacion</th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+        </div>
+
+    </div>
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample2">Facturacion Mensual</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample2">
+        <div class="card card-body">
+            <p>Filtrar Factura Mensual</p>
+            <input type="date">
+
+            <div class="container">
+                <p>{{Mes}}</p>
+                <li>Factura1</li>
+                <li>Factura2</li>
+                <li>Factura3</li>
+                <li>Factura4</li>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample3" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample3">Cabina mas vendida</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample3">
+        <div class="card card-body">
+            <p class="text-center">La Cabina mas vendida es la N° {{id_cabina}} con una cantidad de {{cantidadDeCabinas}} reservas</p>
+        </div>
+    </div>
+
+
+
+    <p>
+        <a class="btn btn-primary mt-2" data-bs-toggle="collapse" href="#multiCollapseExample4" role="button"
+            aria-expanded="false" aria-controls="multiCollapseExample4">Facturacion por cliente</a>
+    </p>
+
+    <div class="collapse multi-collapse mt-2" id="multiCollapseExample4">
+        <div class="card card-body">
+            <p class="text-center">Cliente N°{{numeroDeCliente}}</p>
+            <div class="container">
+                <p>Facturacion de cliente X</p>
+
+            </div>
+
+        </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+        </div>
+    </div>
+
+    </p>
+
+</div>
+
+{{> footer}}

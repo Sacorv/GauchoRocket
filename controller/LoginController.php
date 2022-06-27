@@ -101,13 +101,13 @@ class LoginController
                 $_SESSION["codigo_viajero"]=$usuarioValido[0]["codigo_viajero"];
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                     $_SESSION["esAdmin"] = true;
-                    $_SESSION["esCliente"] = false;
+              
                     
                 }
 
                 if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
                     $_SESSION["esCliente"] = true;
-                    $_SESSION["esAdmin"] = false;
+                
 
                 }
                     

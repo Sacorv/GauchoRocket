@@ -36,6 +36,7 @@ class MySqlDatabase {
         return mysqli_fetch_all($result , MYSQLI_ASSOC);
     }
 
+
     public function create($firstName, $lastName, $dni, $email, $password, $idVerificacion) {
         $sql = "insert into usuario (nombre, apellido, dni, email, tipo, password , idVerificacion) values(?,?,?,?,?,?, ?)";
         $query = $this->conn->prepare($sql);
@@ -90,6 +91,22 @@ class MySqlDatabase {
         $query->execute();
         return $query;
     }
+
+    public function confirmarReserva($idReserva){
+        $query = "UPDATE reserva SET checkin = 1 WHERE id = $idReserva";
+        $query2 = "UPDATE reserva SET id_status_reserva = 3 WHERE id =$idReserva";
+
+        $result1 = mysqli_query($this->conn, $query);
+        $result2 = mysqli_query($this->conn, $query2);
+
+        if($result1 && $result2){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
  
 
 

@@ -72,7 +72,7 @@ class Configuration
 
     private function getDatabase() {
 
-       return new MySqlDatabase('localhost','root','','gaucho_rocket');
+       return new MySqlDatabase('localhost','root','40460303','gaucho_rocket');
     }
 
 
@@ -114,7 +114,11 @@ class Configuration
 
 
     public function getReservaController(){
-        return new ReservaController($this->getReservaModel(), $this->getPrinter(), $this->getBusquedaModel());
+        return new ReservaController($this->getReservaModel(),
+                                        $this->getPrinter(),
+                                        $this->getBusquedaModel(),
+                                            $this->getQRHelper(),
+                                            $this->getPDFHelper());
     }
 
     public function getReservaModel()
@@ -127,6 +131,19 @@ class Configuration
     {
         include_once('helper/Validator.php');
         return new Validator();
+
+    }
+
+    public function getQRHelper()
+    {
+        include_once('helper/QRHelper.php');
+        return new QRHelper();
+
+    }
+    public function getPDFHelper()
+    {
+        include_once('helper/PDFHelper.php');
+        return new PDFHelper();
 
     }
 }

@@ -5,11 +5,15 @@ class ReservaController
     private $reservaModel;
     private $printer;
     private $busquedaModel;
+    private $qrhelper;
+    private $pdfhelper;
 
-    public function __construct($reservaModel, $printer, $busquedaModel){
+    public function __construct($reservaModel, $printer, $busquedaModel, $qrhelper, $pdfhelper ) {
         $this->reservaModel= $reservaModel;
         $this->printer=$printer;
         $this->busquedaModel=$busquedaModel;
+        $this->qrhelper = $qrhelper;
+        $this->pdfhelper = $pdfhelper;
     }
 
 
@@ -57,6 +61,7 @@ class ReservaController
             $result = $this->reservaModel->registrarReserva($idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio, $status_reserva);
 
             if($result){
+
                 header("Location: /reserva/misReservas");
             }
         }
@@ -78,7 +83,23 @@ class ReservaController
 
         $result = $this->reservaModel->reservasDelUsuario($id_usuario);
 
+
         $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
         $this->printer->generateView('misReservasView.html', $data);
+    }
+
+    public function checkin (){
+        $idReserva = $_GET["id"];
+
+        $reserva = $this->reservaModel->buscarReserva($idReserva);
+
+        $datosReserva = $this->reservaModel->buscarDatosDeReserva($reserva);
+
+        $result = $this->reservaModel->confirmarReserva($idReserva);
+
+        $this->qrhelper->generarCodigo($idReserva );
+        $this->pdfhelper->generarPDF($idReserva , $datosReserva);
+
+
     }
 }

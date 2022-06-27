@@ -45,15 +45,49 @@
           <p class="card-text"><strong>Estado de reserva</strong></p>
           <p style="text-transform: uppercase; font-weight: 600">{{Estado de reserva}}</p>
         </div>
+
         <div style="display: flex; flex-direction: column;">
-          <a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Check-In</a>
+          <button type="button" class="btn btn-primary" id="searchButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Check-in
+          </button>
         </div>
+
       </div>
       <!--      <p class="card-text">Con texto de apoyo a continuación como introducción natural a contenido adicional.</p>-->
       <!--      <a href="#" class="btn btn-primary">Ir a algún lugar</a>-->
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Check-in</h5>
+            <button type="button" class="btn-close" id="buttonCheckin" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Desea realizar el check-in de su reserva?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><a href="/reserva/checkin?id={{id}}">Confirmar</a></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
     {{/reservas}}
   </div>
 
+
 </section>
 {{> footer}}
+<script>
+  const myModal = document.getElementById('myModal')
+  const myInput = document.getElementById('myInput')
+
+
+
+  myModal.addEventListener('shown.bs.modal', () => {
+    myInput.focus()
+  })
+</script>

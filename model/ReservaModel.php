@@ -152,7 +152,7 @@ class ReservaModel
     }
 
     public function reservasDelUsuario($id_usuario){
-        $query = $this->database->query("SELECT r.id_viaje, r.fecha_partida, l.nombre AS origen, l2.nombre AS destino, c.descripcion AS cabina, s.descripcion AS servicio, sr.descripcion AS 'Estado de reserva', r.subtotal_tramos, r.precio_cabina, r.precio_servicio, r.checkin, r.id_usuario, u.nombre, u.apellido, u.dni, v.id_equipo, e.matricula, m.nombre
+        $query = $this->database->query("SELECT r.id, r.id_viaje, r.fecha_partida, l.nombre AS origen, l2.nombre AS destino, c.descripcion AS cabina, s.descripcion AS servicio, sr.descripcion AS 'Estado de reserva', r.subtotal_tramos, r.precio_cabina, r.precio_servicio, r.checkin, r.id_usuario, u.nombre, u.apellido, u.dni, v.id_equipo, e.matricula, m.nombre
                                 FROM reserva r
                                 JOIN usuario u ON u.id=r.id_usuario
                                 JOIN viaje v ON v.id=r.id_viaje
@@ -175,6 +175,74 @@ class ReservaModel
             $reservas[] = $reserva;
         }
         return $reservas;
+    }
+
+    public function confirmarReserva ( $idReserva ){
+        $result = $this->database->confirmarReserva($idReserva);
+        return $result;
+    }
+    public function buscarReserva ($id_reserva){
+        $query = $this->database->query( 'select * from reserva WHERE id = '.$id_reserva);
+
+        $result = [];
+
+        foreach ($query as $resultado){
+            $total = $resultado["subtotal_tramos"]+ $resultado["precio_cabina"] + $resultado["precio_servicio"];
+
+            $result['id'] = $resultado["id"];
+            $result['id_viaje'] = $resultado["id_viaje"];
+            $result['fecha_partida'] = $resultado["fecha_partida"];
+            $result['id_origen'] = $resultado["id_origen"];
+            $result['id_destino'] = $resultado["id_destino"];
+            $result['id_usuario'] = $resultado["id_usuario"];
+            $result['id_cabina'] = $resultado["id_cabina"];
+            $result['id_servicio'] = $resultado["id_servicio"];
+            $result['total'] = $total;
+        }
+        return $result;
+
+    }
+    public function buscarDatosDeReserva ($reserva){
+        $idReserva = $reserva["id"];
+        $idViaje = $reserva["id_viaje"];
+        $fechaPartida = $reserva["fecha_partida"];
+        $idOrigen = $reserva["id_origen"];
+        $idDestino = $reserva["id_destino"];
+        $idUsuario = $reserva["id_usuario"];
+        $idCabina = $reserva["id_cabina"];
+        $idServicio = $reserva["id_servicio"];
+        $total= $reserva['total'];
+
+        $query = $this->database->query('select us.nombre, us.apellido, us.dni , orig.nombre as "Origen" , 
+                                            dest.nombre as "Destino" , t_viaje.descripcion as "Tipo de viaje",
+                                             cab.descripcion as "Cabina", serv.descripcion as "Servicio" 
+                                                    from Reserva res 
+                                                    JOIN usuario us on us.id ='. $idUsuario.'   
+                                                    JOIN viaje v on v.id  = '. $idViaje .'  
+                                                    JOIN tipo_viaje t_viaje on v.id_tipo_viaje = t_viaje.id 
+                                                    JOIN origen orig on   orig.id = '. $idOrigen .'  
+                                                    JOIN destino dest on  dest.id  = '. $idDestino .' 
+                                                    JOIN Cabina cab on cab.id  = '. $idCabina .'   
+                                                    JOIN Servicio serv on serv.id = '. $idServicio .'   
+                                                    WHERE res.id ='. $idReserva);
+
+        $datosCompletos =[];
+        foreach ($query as $resultado) {
+
+            $datosCompletos['nombre'] = $resultado['nombre'];
+            $datosCompletos['apellido'] = $resultado['apellido'];
+            $datosCompletos['dni'] = $resultado['dni'];
+            $datosCompletos['origen'] = $resultado['Origen'];
+            $datosCompletos['destino'] = $resultado['Destino'];
+            $datosCompletos['tipo_viaje'] = $resultado['Tipo de viaje'];
+            $datosCompletos['cabina'] = $resultado['Cabina'];
+            $datosCompletos['servicio'] = $resultado['Servicio'];
+            $datosCompletos['fecha_partida'] = $fechaPartida;
+            $datosCompletos['total'] = $total;
+
+        }
+
+            return $datosCompletos;
     }
 
 }

@@ -8,7 +8,8 @@
     {{#reservas}}
     <div class="card-header mt-3" style="background-color: #ffb553">
       <ul class="nav nav-pills card-header-pills">
-        <h6 style="font-size: 15.5px">{{origen}} - {{destino}}</h6>
+        <h6 style="font-size: 15.5px">{{origen}} - {{destino}} ({{tipo_viaje}})</h6>
+<!--        <p style="font-size: 12px">{{tipo_viaje}}</p>-->
       </ul>
     </div>
     <div class="card-body">
@@ -27,19 +28,19 @@
         </div>
         <div style="display: flex; flex-direction: column;">
           <p class="card-text"><strong>Subtotal</strong></p>
-          <p>{{subtotal_tramos}}</p>
+          <p>$ {{subtotal_tramos}}</p>
         </div>
         <div style="display: flex; flex-direction: column;">
           <p class="card-text"><strong>Valor Cabina</strong></p>
-          <p>{{precio_cabina}}</p>
+          <p>$ {{precio_cabina}}</p>
         </div>
         <div style="display: flex; flex-direction: column;">
           <p class="card-text"><strong>Valor Servicio</strong></p>
-          <p>{{precio_servicio}}</p>
+          <p>$ {{precio_servicio}}</p>
         </div>
         <div style="display: flex; flex-direction: column;">
           <p class="card-text"><strong>TOTAL</strong></p>
-          <p>{{total}}</p>
+          <p>$ {{total}}</p>
         </div>
         <div style="display: flex; flex-direction: column;">
           <p class="card-text"><strong>Estado de reserva</strong></p>

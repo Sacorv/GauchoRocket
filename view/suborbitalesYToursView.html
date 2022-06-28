@@ -10,6 +10,9 @@
         {{#idTour}}
         <h2 class='w3-wide' style="margin-bottom: 40px">Tours Espaciales Disponibles</h2>
         {{/idTour}}
+        {{#error}}
+        <h4 style="color: #ff0015; font-size: 16.5px">{{error}}</h4>
+        {{/error}}
 
         {{^esCliente}}
             {{^esAdmin}}
@@ -53,7 +56,7 @@
 
                     {{#esCliente}}
                         {{#codigo_viajero}}
-                            <th><a href="#" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
+                            <th><a href="/reserva?vuelo={{id_vuelo}}&origen={{id_origen}}&destino={{id_destino}}" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
                         {{/codigo_viajero}}
                     {{/esCliente}}
 

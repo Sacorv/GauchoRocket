@@ -40,25 +40,33 @@ class LoginController
             $_SESSION["user"] = $usuarioValido[0];
             $_SESSION["nombre"] = $usuarioValido[0]["nombre"];
             $_SESSION["tipo"] = $usuarioValido[0]["tipo"];
-            $_SESSION["verificado"] = $usuarioValido[0]["verificado"];
+            $_SESSION["verificado"] = $usuarioValido[0]["Verificado"];
             $_SESSION["id"] = $usuarioValido[0]["id"];
             $_SESSION["codigo_viajero"] = $usuarioValido[0]["codigo_viajero"];
             if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                 $_SESSION["esAdmin"] = true;
 
-            }
-
-            if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
-                $_SESSION["esCliente"] = true;
-
                 header("location: /");
                 exit();
-
-            } else {
-                $_SESSION["error"] = true;
-                header("location: /login");
-                exit();
             }
+            else{
+                if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 2) {
+                    $_SESSION["esCliente"] = true;
+
+                    header("location: /");
+                    exit();
+
+                } else {
+                    $_SESSION["error"] = true;
+
+                    header("location: /login");
+                    exit();
+                }
+
+            }
+
+
+
         }
 
     }

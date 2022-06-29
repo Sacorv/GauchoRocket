@@ -58,7 +58,9 @@ class TurnosController
             header("location: /");
             exit();
         }
-
+        if(isset($_SESSION["esCliente"]) && $_SESSION["esCliente"]){
+            $data["esCliente"]=true;
+        }
         if(isset($_SESSION["nombre"])){
             $data["nombre"] = $_SESSION["nombre"];
         }

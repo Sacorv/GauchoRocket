@@ -13,14 +13,23 @@
                 <div class="card-body" style="border: none">
                     <form method="post" action="/reserva/reservarViaje">
                         {{#vuelo}}
-                        <h4 class="card-title" style="letter-spacing: 6.5px">{{origen}}<span class="pe-4"></span>-<span class="ps-4"></span>{{destino}}</h4>
+                            {{#destino}}
+                                <h4 class="card-title" style="letter-spacing: 6.5px">{{origen}}<span class="pe-4"></span>-<span class="ps-4"></span>{{destino}}</h4>
+                            {{/destino}}
+                            {{^destino}}
+                                <h4 class="card-title" style="letter-spacing: 6.5px">{{tipo_viaje}}</h4>
+                            {{/destino}}
                         <div>
                             <p style="font-size: 0.8em">SALIDA</p>
                             <p><strong>{{fecha_partida}}</strong></p>
                             <p style="font-size: 0.8em">RECORRIDO</p>
+                            {{^escala}}
+                                <p>Su viaje es de tipo <strong>{{tipo_viaje}}</strong> y el mismo inicia en <strong>{{origen}}</strong> y finaliza en el mismo lugar de origen.</p>
+                            {{/escala}}
                             {{#escala}}
                             <p>{{fecha_llegada}}<span class="ms-5"></span> <strong>{{destino}}</strong></p>
                             {{/escala}}
+                            <input type="hidden" value="{{id_tipo_viaje}}" name="id_tipo_viaje">
                             <input type="hidden" value="{{id_vuelo}}" name="vuelo">
                             <input type="hidden" value="{{id_origen}}" name="origen">
                             <input type="hidden" value="{{id_destino}}" name="destino">

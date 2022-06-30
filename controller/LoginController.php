@@ -34,7 +34,8 @@ class LoginController
 
         $usuarioValido = $this->loginModel->getUsuarioPorEmailYPassword($email, $password);
 
-        if (!empty($usuarioValido)) {
+
+        if ($usuarioValido!="") {
 
             $_SESSION["logueado"] = 1;
             $_SESSION["user"] = $usuarioValido[0];
@@ -64,8 +65,6 @@ class LoginController
                 }
 
             }
-
-
 
         }
 

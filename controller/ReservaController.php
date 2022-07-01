@@ -18,6 +18,11 @@ class ReservaController
 
 
     public function execute(){
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
+            header("location: /");
+            exit();
+        }
+
         $nombreUsuario = $_SESSION["nombre"];
         $idUsuario = $_SESSION["id"];
         $datosUsuario = $this->reservaModel->buscarUsuario($idUsuario);
@@ -52,13 +57,18 @@ class ReservaController
 
     public function reservarViaje()
     {
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
+            header("location: /");
+            exit();
+        }
+
         $nombreUsuario = $_SESSION["nombre"];
         $idUsuario = $_SESSION["id"];
         $esCliente = $_SESSION["esCliente"];
 
         $id_tipo_viaje = $_POST["id_tipo_viaje"];
 
-        var_dump($id_tipo_viaje);
+
         $id_vuelo = $_POST["vuelo"];
         $id_origen = $_POST["origen"];
         $id_destino = $_POST["destino"];
@@ -110,6 +120,11 @@ class ReservaController
     }
 
     public function misReservas(){
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
+            header("location: /");
+            exit();
+        }
+
         $id_usuario = $_SESSION["id"];
         $nombreUsuario = $_SESSION["nombre"];
         $esCliente = $_SESSION["esCliente"];

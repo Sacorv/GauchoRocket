@@ -28,13 +28,14 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-            $esCliente = $_SESSION["esCliente"];
+            $esCliente = isset($_SESSION["esCliente"]) ?? $_SESSION["esCliente"];
+            $esAdmin = isset($_SESSION["esAdmin"]) ?? $_SESSION["esAdmin"];
 
             if($codigoViajero[0]["codigo_viajero"]!=0){
-                $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$_SESSION["id"], "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+                $data = ["encontrados" => $result, "codigo_viajero"=>$codigoViajero, "id_usuario"=>$_SESSION["id"], "nombre"=>$nombreUsuario,"esCliente"=>$esCliente, "esAdmin"=>$esAdmin];
             }
             else{
-                $data = ["encontrados" => $result,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+                $data = ["encontrados" => $result,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente,"esAdmin"=>$esAdmin];
             }
         }
         else{
@@ -52,13 +53,14 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-            $esCliente = $_SESSION["esCliente"];
+            $esCliente = isset($_SESSION["esCliente"]) ?? $_SESSION["esCliente"];
+            $esAdmin = isset($_SESSION["esAdmin"]) ?? $_SESSION["esAdmin"];
 
             if ($codigoViajero[0]["codigo_viajero"] != 0) {
-                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital, "codigo_viajero"=>$codigoViajero, "nombre"=>$nombreUsuario, "esCliente"=>$esCliente];
+                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital, "codigo_viajero"=>$codigoViajero, "nombre"=>$nombreUsuario, "esCliente"=>$esCliente,"esAdmin"=>$esAdmin];
             }
             else{
-                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+                $data = ["viajes" => $result, "idSuborbital" => $idSuborbital,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente,"esAdmin"=>$esAdmin];
             }
         }
         else{
@@ -75,13 +77,14 @@ class BusquedaController
             $nombreUsuario = $_SESSION["nombre"];
             $idUsuario = $_SESSION["id"];
             $codigoViajero = $this->busquedaModel->buscarCodigoViajero($idUsuario);
-            $esCliente = $_SESSION["esCliente"];
+            $esCliente = isset($_SESSION["esCliente"]) ?? $_SESSION["esCliente"];
+            $esAdmin = isset($_SESSION["esAdmin"]) ?? $_SESSION["esAdmin"];
 
             if ($codigoViajero[0]["codigo_viajero"] != 0) {
-                $data = ["viajes" => $result, "idTour"=>$idTour, "codigo_viajero"=>$codigoViajero,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+                $data = ["viajes" => $result, "idTour"=>$idTour, "codigo_viajero"=>$codigoViajero,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente,"esAdmin"=>$esAdmin];
             }
             else{
-                $data = ["viajes" => $result, "idTour"=>$idTour,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+                $data = ["viajes" => $result, "idTour"=>$idTour,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente,"esAdmin"=>$esAdmin];
             }
         }
         else{

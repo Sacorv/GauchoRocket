@@ -1,6 +1,6 @@
 {{> header}}
 {{> navbar}}
-<div class='w3-content' style='max-width:2000px;margin-top:46px; text-align: center'>
+<div class='w3-content' style='max-width:2000px;margin-top:10px; text-align: center'>
 
   <!-- The Band Section -->
   <div class='container' style='margin: auto; width: 60%' id='band'>
@@ -18,10 +18,14 @@
     {{/esCliente}}
     {{#esCliente}}
     {{^codigo_viajero}}
-    <p>Para reservar un vuelo debe realizarce el cheque médico previamente</p>
-    <a href="/turnos">Realizar chequeo</a>
+    <p>Para reservar un vuelo debe realizarce el chequeo médico previamente</p>
+    <a href="/turnos" style="margin-bottom: 20px;font-weight: 600">Realizar chequeo</a>
     {{/codigo_viajero}}
     {{/esCliente}}
+    {{#esAdmin}}
+    <p>Lista de vuelos registrados en el sistema</p>
+    <a href="#" style="margin-bottom: 20px;font-weight: 600">Cargar vuelo</a>
+    {{/esAdmin}}
 
     {{#encontrados}}
     <div class="card mt-3" style="border-color: #4e82c3">
@@ -35,7 +39,7 @@
             <p >Fecha de Salida</p>
             <p class="mb-5">{{fecha_partida}}</p>
             <p >Origen</p>
-            <p class="mt-3"><strong>{{origen}}</strong></p>
+            <p class="mt-3 fs-5"><strong>{{origen}}</strong></p>
             {{^esCliente}}
               {{^esAdmin}}
                <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>

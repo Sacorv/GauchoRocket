@@ -84,7 +84,8 @@ class Configuration
 
     private function getDatabase()
     {
-        return new MySqlDatabase('localhost', 'root', '', 'gaucho_rocket');
+
+        return new MySqlDatabase('localhost', 'root', '2203yba', 'gaucho_rocket');
 }
 
 

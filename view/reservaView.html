@@ -3,7 +3,7 @@
 
 <section class="section">
 
-    <h2 class="fs-6 mt-3 mb-4" style="margin-left: 20px">Detalle de la reserva</h2>
+    <h2 class="fs-2 mt-3 mb-4" style="margin-left: 20px">Detalle de la reserva</h2>
     <div class="card mb-3" style="max-width: 56%;margin:auto">
         <div class="row " style="border-color: #ffa900">
             <div class="col-md-5">
@@ -14,10 +14,10 @@
                     <form method="post" action="/reserva/reservarViaje">
                         {{#vuelo}}
                             {{#destino}}
-                                <h4 class="card-title" style="letter-spacing: 6.5px">{{origen}}<span class="pe-4"></span>-<span class="ps-4"></span>{{destino}}</h4>
+                                <h6 class="card-title" style="letter-spacing: 3px;font-size: 16.8px;margin-top: 8px">{{origen}}<span class="pe-4"></span>-<span class="ps-4"></span>{{destino}}</h6>
                             {{/destino}}
                             {{^destino}}
-                                <h4 class="card-title" style="letter-spacing: 6.5px">{{tipo_viaje}}</h4>
+                                <h4 class="card-title" style="letter-spacing: 6.5px;font-size: 18.8px">{{tipo_viaje}}</h4>
                             {{/destino}}
                         <div>
                             <p style="font-size: 0.8em">SALIDA</p>

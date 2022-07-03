@@ -72,24 +72,38 @@ class PDFHelper
 
         $pdf->Output('D', 'Pase-de-abordaje.pdf');
     }
+
+
+    
     public function generarPDFParaTasaDeOcupacionPorViaje($tasaDeOcupacion){
         $pdf = new FPDF();
-    
+       
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',15);
         $pdf->Image('public/images/Cohete.png',80,8,33);
-        $pdf->Ln(10);
+        $pdf->Ln(40);
         // Arial bold 15
- 
-        $pdf->Cell(80,20,'Tasa de Ocupacion Por Viaje',0,'C');
-        $pdf->Ln(20);
-        foreach ($tasaDeOcupacion as $tasa) {
-            $pdf->Cell(80,20,$tasa['id_viaje'],0,'C');
-            $pdf->Cell(80,20,$tasa['Asientos Ocupados'],0,'C');
-            $pdf->Cell(80,20,$tasa['Asientos Totales'],0,'C');
-            $pdf->Cell(80,20,$tasa['Tasa'],0,'C');
-        }
+        $pdf->Cell(0,20,'Tasa De Ocupacion',0,0,'C');
+        $header=['Viaje','Asientos Ocupados','Asientos Totales','Tasa'];
        
+    
+        $pdf->Ln();
+        $w = array(25, 55, 50, 30);
+      
+        for($i=0;$i<count($header);$i++){
+            $pdf->Cell($w[$i],7,$header[$i],1);
+        }
+        $pdf->Ln();
+      
+    // Datos
+    foreach($tasaDeOcupacion as $row)
+    {
+        $pdf->Cell($w[0],7,$row["id_viaje"],1);
+        $pdf->Cell($w[1],7,$row["Asientos Ocupados"],1);
+        $pdf->Cell($w[2],7,$row["Asientos Totales"],1);
+        $pdf->Cell($w[3],7,$row["Tasa"],1);
+        $pdf->Ln();
+       }
         $pdf->Output('D', 'Tasa-De-Ocupacion-Por-Viaje.pdf');
     }
 
@@ -102,14 +116,24 @@ class PDFHelper
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',15);
         $pdf->Image('public/images/Cohete.png',80,8,33);
-        $pdf->Ln(10);
+        $pdf->Ln(40);
         // Arial bold 15
- 
-        $pdf->Cell(80,20,'Facturacion Mensual',0,'C');
-        $pdf->Ln(20);
+        $pdf->Cell(0,20,'Facturacion Mensual',0,0,'C');
+        $header=['Mes','Facturacion Total'];
+        
+        $pdf->Ln();
+        $w = array(25, 55, 50, 30);
+
+        for($i=0;$i<count($header);$i++){
+            $pdf->Cell($w[$i],7,$header[$i],1);
+        }
+        $pdf->Ln();
+
         foreach ($facturacionMensual as $facturaMes) {
-            $pdf->Cell(80,20,$facturaMes['Mes'],0,'C');
-            $pdf->Cell(80,20,$facturaMes['Facturacion Total'],0,'C');
+            
+            $pdf->Cell($w[0],7,$facturaMes["Mes"],1);
+            $pdf->Cell($w[1],7,$facturaMes["Facturacion Total"],1);
+            $pdf->Ln();
         }
        
         $pdf->Output('D', 'Facturacion-Mensual.pdf');
@@ -121,21 +145,32 @@ class PDFHelper
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',15);
         $pdf->Image('public/images/Cohete.png',80,8,33);
-        $pdf->Ln(10);
+        $pdf->Ln(40);
         // Arial bold 15
  
-        $pdf->Cell(80,20,'Facturacion Mensual',0,'C');
+        $pdf->Cell(0,20,'Facturacion Por Cliente',0,0,'C');
         $pdf->Ln(20);
-        foreach ($facturacionCliente as $facturaCliente) {
-
-
-            $pdf->Cell(80,20,$facturaCliente['id_usuario'],0,'C');
-            $pdf->Cell(80,20,$facturaCliente['Facturacion Cliente'],0,'C');
-            $pdf->Cell(80,20,$facturaCliente['nombre'],0,'C');
-            $pdf->Cell(80,20,$facturaCliente['apellido'],0,'C');
-            $pdf->Cell(80,20,$facturaCliente['dni'],0,'C');
+        $w = array(30, 55, 30, 40,25);
+        
+         
+        $header=['Id_Usuario','Facturacion Cliente','Nombre','Apellido','DNI'];
+        for($i=0;$i<count($header);$i++){
+            $pdf->Cell($w[$i],7,$header[$i],1);
         }
-       
+        $pdf->Ln();
+    // Datos
+    
+    foreach($facturacionCliente as $row)
+    {
+        $pdf->Cell($w[0],7,$row["id_usuario"],1);
+
+        $pdf->Cell($w[1],7,$row["Facturacion Cliente"],1);
+        $pdf->Cell($w[2],7,$row["nombre"],1);
+        $pdf->Cell($w[3],7,$row["apellido"],1);
+        $pdf->Cell($w[4],7,$row["dni"],1);
+        $pdf->Ln();
+    }
+      
         $pdf->Output('D', 'Facturacion-Cliente.pdf');
     }
 
@@ -147,13 +182,13 @@ class PDFHelper
         $pdf->AddPage();
         $pdf->SetFont('Arial','B',15);
         $pdf->Image('public/images/Cohete.png',80,8,33);
-        $pdf->Ln(10);
+        $pdf->Ln(40);
         // Arial bold 15
  
-        $pdf->Cell(80,20,'Cabina Mas Vendida',0,'C');
+        $pdf->Cell(0,20,'Cabina Mas Vendida:',0,0,'C');
         $pdf->Ln(20);
-        $pdf->Cell(80,20,$datosCabinaMasVendida['descripcion'],0,'C');
-        $pdf->Cell(80,20,$datosCabinaMasVendida['Cantidad'],0,'C');
+        $pdf->Cell(80,20,$datosCabinaMasVendida['descripcion'].' con '.$datosCabinaMasVendida['Cantidad'].
+         ' reservas',0,'C');
         $pdf->Output('D', 'Cabinas-Mas-Vendida.pdf');
     }
    

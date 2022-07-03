@@ -24,12 +24,14 @@ class UserController
     }
 
     public function register() {
+
         $ID = $_GET['id'];
         $data = ['id' => $ID];
         $this->printer->generateView('registerConfirmation.html' , $data);
     }
 
     public function confirmarCuenta(){
+
         $id = $_GET['id'];
         $data= [];
         if($this->userModel->verificarUser($id)){
@@ -51,14 +53,16 @@ class UserController
         $repeatPass = $_POST["repeat-pass"];
         $idVerificacion = random_int(0 , 999);
 
-        $data = ['email' => $email];
-        $data = ['id' => $idVerificacion];
+
+        $data["email"] = $email;
+        $data["id"]=$idVerificacion;
+
 
         $resultCreate = $this->userModel->createUser($firstName, $lastName, $dni, $email, $pass, $repeatPass, $idVerificacion);
 
         if($resultCreate == []){
             if($this->mailer->enviarMail($email , $idVerificacion)){
-                return $this->printer->generateView('registerSuccesView.html');
+                return $this->printer->generateView('registerSuccesView.html', $data);
             }
         }else{
             return $this->printer->generateView('registerView.html' , $resultCreate);

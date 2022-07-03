@@ -1,9 +1,20 @@
 {{> header}}
 {{> navbar}}
-<div class='w3-content' style='max-width:2000px;margin-top:46px'>
-      <h2 class='w3-wide'>Revise su bandeja del correo electronico</h2>
-        <h2 class='w3-wide'>Le hemos enviado un mail a {{email}} para confirmar su cuenta!</h2>
 
-        <a href="/inicio">Volver al home para iniciar sesion</a>
+<div class="card mb-3">
+    <div class="card-img-overlay">
+        <div class="card text-center mx-auto p-5" style="width: 25rem; height: 35rem; position: relative; top: 70px;">
+            <div class="card-body bg-white" >
+                <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:45px;">
+                <h5 class="card-title mb-3">¡Bienvenido a Gaucho Rocket!</h5>
+                <p class="card-text mb-3">Gracias por elegirnos. Le enviamos un mail a su correo electronico: {{email}} para verificar su cuenta.</p>
+                <a class="button-secondary"style="width: 270px; padding-top: 15px; padding-bottom: 10px; border-radius: 25px; border:none" href="/inicio">Volver a Inicio</a>
+            </div>
+        </div>
+    </div>
+    <img src="/public/images/space-1.jpg" style="height: 45rem"  class="card-img" alt="" >
 </div>
-{{> foooter}}
+
+</div>
+
+{{> footer}}

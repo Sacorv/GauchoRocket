@@ -42,10 +42,9 @@ class EmailHelper
 
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
-            $this->mail->Subject = 'Confirmación de registro en Gaucho Rocket';
+            $this->mail->Subject = 'Confirmacion de registro en Gaucho Rocket';
             $this->mail->Body    = "Usted debe confirmar su registro en el siguiente link : http://localhost/user/register/?id=".$idVerificacion." 
                                        para poder loguearse correctamente";
-
 
             $this->mail->send();
 

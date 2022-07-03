@@ -1,19 +1,23 @@
 {{> header}}
 {{> navbar}}
-<div class='w3-content' style='max-width:2000px;margin-top:46px'>
 
-    <!-- The Band Section -->
-    {{#seVerificoLaCuenta}}
-    <div class='w3-container w3-content w3-center w3-padding-64' style='max-width:800px' id='band'>
 
-        <h2 class='w3-wide'>Su cuenta ha sido verificada con exito!!!!</h2>
-        <h2 class='w3-wide'>Inicie sesión para comenzar la aventura</h2>
-
-        <a href="/inicio">Volver al home para iniciar sesion</a>
-
+{{#seVerificoLaCuenta}}
+<div class="card mb-3">
+    <div class="card-img-overlay">
+        <div class="card text-center mx-auto p-5" style="width: 25rem; height: 35rem; position: relative; top: 70px;">
+        <div class="card-body bg-white" >
+            <img class="cohete" src="/public/images/Cohete.png" alt="" style="height:45px;">
+            <h5 class="card-title mb-3">¡Su cuenta ha sido verificada con &eacute;xito!</h5>
+            <p class="card-text mb-5">Inicie sesi&oacute;n para comenzar la aventura.</p>
+            <a class="button-secondary"style="width: 270px; padding-top: 15px; padding-bottom: 10px; border-radius: 25px; border:none" href="/login">Iniciar Sesi&oacute;n</a>
+        </div>
+        </div>
     </div>
-    {{/seVerificoLaCuenta}}
-
+    <img src="/public/images/space-1.jpg" style="height: 45rem"  class="card-img" alt="" >
+</div>
 
 </div>
-{{> foooter}}
+{{/seVerificoLaCuenta}}
+
+{{> footer}}

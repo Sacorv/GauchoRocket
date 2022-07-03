@@ -37,8 +37,38 @@
 
         </div>
         <div class="container d-flex justify-content-end mt-2">
-            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+            <a class="btn btn-primary mb-2 text-light " target="_blank" href="reportes/exportarPDF?tipoReporte=tasaDeOcupacion">Exportar PDF</a>
         </div>
+        <canvas id="graficoTasaOcupacion"></canvas>
+
+        <script type="text/javascript">
+            window.onload = function()
+            {
+                let ctx = document.getElementById("graficoTasaOcupacion").getContext("2d");
+                let data="{{TasaOcupacionData}}";
+                let label="{{TasaOcupacionLabel}}";
+            
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels:label.split(','),
+                        datasets: [{
+                            data:data.split(','),
+                            backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(75,192,192,0.2)',
+                            
+                            ],
+                          
+                        }],
+                        
+                    }
+                });
+
+            
+            }
+          
+        </script>
 
     </div>
 
@@ -78,6 +108,67 @@
 
             </div>
         </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light " target="_blank" href="reportes/exportarPDF?tipoReporte=facturacionMensual">Exportar PDF</a>
+        </div>
+
+        <canvas id="graficoFacturacionMensual"></canvas>
+
+        <script type="text/javascript">
+            window.onload = function()
+            {
+                let ctx = document.getElementById("graficoFacturacionMensual").getContext("2d");
+                let data="{{FacturacionData}}";
+                let label="{{FacturacionLabel}}";
+            
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels:label.split(','),
+                        datasets: [{
+                            label: 'Facturacion Mensual',
+                            data:data.split(','),
+                            backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(75,192,192,0.2)',
+
+                            ],
+                          
+                        }],
+                        
+                    }
+                });
+                let ctx2 = document.getElementById("graficoTasaOcupacion").getContext("2d");
+                let data2="{{TasaOcupacionData}}";
+                let label2="{{TasaOcupacionLabel}}";
+            
+                new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels:label2.split(','),
+                        datasets: [{
+                            label: 'Numero de Asientos Ocupados',
+                            data:data2.split(','),
+                            backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(75,192,192,0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            ],
+                          
+                        }],
+                        
+                    }
+                });
+                
+            }
+          
+        </script>
+
+
+    
     </div>
 
 
@@ -93,6 +184,9 @@
             <p class="text-center">La Cabina mas vendida es : <span class="font-weight-bold">{{descripcion}}</span>
                 con una cantidad de
                 {{cantidadDeCabinas}} reservas</p>
+        </div>
+        <div class="container d-flex justify-content-end mt-2">
+            <a class="btn btn-primary mb-2 text-light " target="_blank" href="reportes/exportarPDF?tipoReporte=cabinaMasVendida">Exportar PDF</a>
         </div>
     </div>
 
@@ -132,7 +226,7 @@
 
         </div>
         <div class="container d-flex justify-content-end mt-2">
-            <a class="btn btn-primary mb-2 text-light ">Exportar PDF</a>
+            <a class="btn btn-primary mb-2 text-light " target="_blank" href="reportes/exportarPDF?tipoReporte=facturaCliente">Exportar PDF</a>
         </div>
     </div>
 

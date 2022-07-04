@@ -10,21 +10,21 @@
     {{/error}}
     {{^esCliente}}
       {{^esAdmin}}
-      <p>Para reservar un vuelo debe registarse previamente o iniciar sesión</p>
-      <a href="/user">Registarme</a>
+      <p style="color:#ff0015">Para reservar un vuelo debe registarse previamente o iniciar sesión</p>
+      <a href="/user" style="font-weight: 600">Registarme</a>
       <span>  |  </span>
-      <a href="/login">Iniciar Sesión</a>
+      <a href="/login" style="font-weight: 600">Iniciar Sesión</a>
       {{/esAdmin}}
     {{/esCliente}}
     {{#esCliente}}
     {{^codigo_viajero}}
-    <p>Para reservar un vuelo debe realizarce el chequeo médico previamente</p>
-    <a href="/turnos" style="margin-bottom: 20px;font-weight: 600">Realizar chequeo</a>
+    <p style="color:#ff0015">Para reservar un vuelo debe realizarce el chequeo médico previamente</p>
+    <a href="/turnos" style="margin-bottom: 20px;font-weight: 600;font-size: 18px">Realizar chequeo</a>
     {{/codigo_viajero}}
     {{/esCliente}}
     {{#esAdmin}}
     <p>Lista de vuelos registrados en el sistema</p>
-    <a href="#" style="margin-bottom: 20px;font-weight: 600">Cargar vuelo</a>
+    <a href="#" style="margin-bottom: 20px;font-weight: 600;font-size: 18px">Cargar vuelo</a>
     {{/esAdmin}}
 
     {{#encontrados}}
@@ -42,19 +42,49 @@
             <p class="mt-3 fs-5"><strong>{{origen}}</strong></p>
             {{^esCliente}}
               {{^esAdmin}}
-               <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+               <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled w-100 fs-6" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
               {{/esAdmin}}
             {{/esCliente}}
+
             {{#esCliente}}
               {{^codigo_viajero}}
-                <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+                <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled w-100 fs-6" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
               {{/codigo_viajero}}
             {{/esCliente}}
+
             {{#esCliente}}
               {{#codigo_viajero}}
-                <div class="mt-4"><a href="/reserva?vuelo={{id_vuelo}}&origen={{id_origen}}&destino={{id_destino}}" class="button button-block button-secondary">Reservar</a></div>
+                {{^disponible}}
+                {{^fecha_invalida}}
+                  <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled w-100 fs-6" style="border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+                  <p style="color: #ff0015;font-weight: 600">Sin lugares disponibles</p>
+                {{/fecha_invalida}}
+                {{/disponible}}
+
+                {{^disponible}}
+                {{#fecha_invalida}}
+                <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled w-100 fs-6" style="border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+                <p style="color: #ff0015;font-weight: 600">Vuelo no disponible en este origen</p>
+                {{/fecha_invalida}}
+                {{/disponible}}
               {{/codigo_viajero}}
             {{/esCliente}}
+
+            {{#esCliente}}
+            {{#codigo_viajero}}
+            {{#disponible}}
+            {{#fecha_invalida}}
+            <div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled w-100 fs-6" style="border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div>
+            <p style="color: #ff0015;font-weight: 600">Vuelo no disponible en este origen</p>
+            {{/fecha_invalida}}
+
+            {{^fecha_invalida}}
+            <div class="mt-4"><a href="/reserva?vuelo={{id_vuelo}}&origen={{id_origen}}&destino={{id_destino}}" class="button button-block button-secondary">Reservar</a></div>
+            {{/fecha_invalida}}
+            {{/disponible}}
+            {{/codigo_viajero}}
+            {{/esCliente}}
+
           </div>
           <div class="col-2">
           </div>

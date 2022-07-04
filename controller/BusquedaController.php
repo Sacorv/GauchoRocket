@@ -41,6 +41,8 @@ class BusquedaController
         else{
             $data = ["encontrados" => $result];
         }
+
+
         $this->printer->generateView('destinosEncontradosView.html',$data);
     }
 

@@ -5,6 +5,14 @@
 
   <div class="card text-center" style="width: 90%;margin-left: 30px; border: none">
     <form></form>
+    {{#error_mis_reservas}}
+      <h6 class="fs-5 mt-5 mb-5">{{error_mis_reservas}}</h6>
+    <div class="w-50 m-auto pb-3">
+      <img src="/public/images/error-404.png" class="w-25">
+    </div>
+      <a href="/inicio" style="font-weight: 600;font-size: 20.5px">Ir a Buscar Vuelos</a>
+    {{/error_mis_reservas}}
+
     {{#reservas}}
     <div class="card-header mt-3" style="background-color: #ffb553">
       <ul class="nav nav-pills card-header-pills">

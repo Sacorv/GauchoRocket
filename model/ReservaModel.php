@@ -179,12 +179,14 @@ class ReservaModel
 
         $reservas = [];
 
-        foreach ($query as $reserva){
-            $total = $reserva["subtotal_tramos"]+ $reserva["precio_cabina"] + $reserva["precio_servicio"];
+        foreach ($query as $reserva) {
+            $total = $reserva["subtotal_tramos"] + $reserva["precio_cabina"] + $reserva["precio_servicio"];
 
             $reserva["total"] = $total;
             $reservas[] = $reserva;
+
         }
+
         return $reservas;
     }
 
@@ -225,18 +227,18 @@ class ReservaModel
         $idServicio = $reserva["id_servicio"];
         $total = $reserva['total'];
 
-        $query = $this->database->query('select us.nombre, us.apellido, us.dni , orig.nombre as "Origen" , 
-                                            dest.nombre as "Destino" , t_viaje.descripcion as "Tipo de viaje",
-                                             cab.descripcion as "Cabina", serv.descripcion as "Servicio" 
-                                                    from Reserva res 
-                                                    JOIN usuario us on us.id =' . $idUsuario . '   
-                                                    JOIN viaje v on v.id  = ' . $idViaje . '  
-                                                    JOIN tipo_viaje t_viaje on v.id_tipo_viaje = t_viaje.id 
-                                                    JOIN origen orig on   orig.id = ' . $idOrigen . '  
-                                                    JOIN destino dest on  dest.id  = ' . $idDestino . ' 
-                                                    JOIN Cabina cab on cab.id  = ' . $idCabina . '   
-                                                    JOIN Servicio serv on serv.id = ' . $idServicio . '   
-                                                    WHERE res.id =' . $idReserva);
+
+         $query = $this->database->query(' select us.nombre, us.apellido, us.dni , us.email, lug.nombre as "Origen" , l.nombre as "Destino" , t_viaje.descripcion 
+    as "Tipo de viaje", cab.descripcion as "Cabina", serv.descripcion as "Servicio"  from Reserva res 
+    JOIN usuario us on us.id = res.id_usuario
+    JOIN viaje v on v.id = res.id_viaje
+    JOIN tipo_viaje t_viaje on v.id_tipo_viaje = t_viaje.id 
+    JOIN Lugar lug on lug.id = res.id_origen 
+    JOIN Lugar l on l.id  = res.id_destino 
+    JOIN Cabina cab on cab.id = res.id_cabina
+    JOIN Servicio serv on serv.id = res.id_servicio
+    WHERE res.id ='.$idReserva);
+
 
         $datosCompletos = [];
         foreach ($query as $resultado) {
@@ -244,6 +246,7 @@ class ReservaModel
             $datosCompletos['nombre'] = $resultado['nombre'];
             $datosCompletos['apellido'] = $resultado['apellido'];
             $datosCompletos['dni'] = $resultado['dni'];
+            $datosCompletos['email'] = $resultado['email'];
             $datosCompletos['origen'] = $resultado['Origen'];
             $datosCompletos['destino'] = $resultado['Destino'];
             $datosCompletos['tipo_viaje'] = $resultado['Tipo de viaje'];

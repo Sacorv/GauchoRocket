@@ -53,6 +53,15 @@ class MySqlDatabase {
 
 
     }
+
+    public function validarVerificacionDelUsuario($id){
+        $sqlquery = "select Verificado from Usuario
+            where idVerificacion=".$id;
+        $result = mysqli_query($this->conn, $sqlquery);
+       return mysqli_fetch_all($result , MYSQLI_ASSOC);
+
+
+    }
     public function login($mail , $password){
 
         $password = md5($password);

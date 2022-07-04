@@ -132,7 +132,8 @@ class Configuration
                                         $this->getPrinter(),
                                         $this->getBusquedaModel(),
                                             $this->getQRHelper(),
-                                            $this->getPDFHelper());
+                                            $this->getPDFHelper(),
+                                            $this->getMailer());
     }
 
     public function getReservaModel()

@@ -56,6 +56,48 @@ class EmailHelper
 
     }
 
+    function enviarEmailDeCheckin ( $datos ){
+        try {
+            //Server settings
+            $this->mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $this->mail->isSMTP();                                            //Send using SMTP
+            $this->mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $this->mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $this->mail->Username   = 'gauchorocket2022@gmail.com';                     //SMTP username
+            $this->mail->Password   = 'bijywqoafqzwphzs';                               //SMTP password
+            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $this->mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $this->mail->setFrom('gauchorocket2022@gmail.com', 'Gaucho Rocket');
+            $this->mail->addAddress($datos['email']);     //Add a recipient
+
+
+            //Attachments
+            $this->mail->addAttachment('Pase-de-abordaje.pdf');         //Add attachments
+            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+            //Content
+            $this->mail->isHTML(true);                                  //Set email format to HTML
+            $this->mail->Subject = 'Confirmacion de Check-in';
+            $this->mail->Body    = "<p> Señor/a pasajero/a ".$datos['nombre'].": Le agradecemos 
+                                                                    por elegirnos para su gran aventura. Junto a este
+                                                                    mail se encuentra adjunto su pase de abordaje con destino a  ".$datos['destino']." que deberá presentar
+                                                                    para abordar.<br>
+                                                                 
+                                                                     Que lo disfrute!</p> <br>
+                                                                      <h2>Gaucho Rocket S.A</h2>";
+
+
+            $this->mail->send();
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+
+    }
+
 
 
 }

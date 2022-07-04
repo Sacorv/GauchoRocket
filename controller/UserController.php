@@ -32,12 +32,21 @@ class UserController
     public function confirmarCuenta(){
         $id = $_GET['id'];
         $data= [];
-        if($this->userModel->verificarUser($id)){
-            $data = ['seVerificoLaCuenta' => true];
-            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+
+        $result = $this->userModel->validarVerificacionDelUsuario($id);
+
+        if($result == null) {
+
+            if ($this->userModel->verificarUser($id)) {
+                $data = ['seVerificoLaCuenta' => true];
+                return $this->printer->generateView('registerConfirmValidation.html', $data);
+            } else {
+                $data = ['seVerificoLaCuenta' => false];
+                return $this->printer->generateView('registerConfirmValidation.html', $data);
+            }
         }else{
-            $data = ['seVerificoLaCuenta' => false];
-            return $this->printer->generateView('registerConfirmValidation.html' , $data);
+            return $this->printer->generateView('errorVerificacion.html', $data);
+
         }
 
     }

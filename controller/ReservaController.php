@@ -7,13 +7,15 @@ class ReservaController
     private $busquedaModel;
     private $qrhelper;
     private $pdfhelper;
+    private $mailerHelper;
 
-    public function __construct($reservaModel, $printer, $busquedaModel, $qrhelper, $pdfhelper ) {
+    public function __construct($reservaModel, $printer, $busquedaModel, $qrhelper, $pdfhelper, $mailerHelper ) {
         $this->reservaModel= $reservaModel;
         $this->printer=$printer;
         $this->busquedaModel=$busquedaModel;
         $this->qrhelper = $qrhelper;
         $this->pdfhelper = $pdfhelper;
+        $this->mailerHelper = $mailerHelper;
     }
 
 
@@ -58,7 +60,6 @@ class ReservaController
 
         $id_tipo_viaje = $_POST["id_tipo_viaje"];
 
-        var_dump($id_tipo_viaje);
         $id_vuelo = $_POST["vuelo"];
         $id_origen = $_POST["origen"];
         $id_destino = $_POST["destino"];
@@ -110,28 +111,46 @@ class ReservaController
     }
 
     public function misReservas(){
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
+            header("location: /");
+            exit();
+        }
+
         $id_usuario = $_SESSION["id"];
         $nombreUsuario = $_SESSION["nombre"];
         $esCliente = $_SESSION["esCliente"];
+        $data=[];
 
         $result = $this->reservaModel->reservasDelUsuario($id_usuario);
 
 
+
+
         $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+
+
+
         $this->printer->generateView('misReservasView.html', $data);
     }
 
     public function checkin (){
         $idReserva = $_GET["id"];
 
+
+
         $reserva = $this->reservaModel->buscarReserva($idReserva);
+
+
 
         $datosReserva = $this->reservaModel->buscarDatosDeReserva($reserva);
 
-        $result = $this->reservaModel->confirmarReserva($idReserva);
+
+        $this->reservaModel->confirmarReserva($idReserva);
 
         $this->qrhelper->generarCodigo($idReserva );
         $this->pdfhelper->generarPDF($idReserva , $datosReserva);
+        $this->mailerHelper->enviarEmailDeCheckin($datosReserva);
+        header("location: /reserva/misReservas");
 
 
     }

@@ -76,4 +76,14 @@ class UserModel {
     }
 
 
+    public function validarVerificacionDelUsuario($id)
+    {
+       $result = $this->database->validarVerificacionDelUsuario($id);
+
+        return $result[0]['Verificado'];
+
+
+    }
+
+
 }

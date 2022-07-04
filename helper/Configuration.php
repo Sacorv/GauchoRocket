@@ -43,7 +43,7 @@ class Configuration
     }
     public function getReportesController(){
 
-        return new ReportesController($this->getPrinter(),$this->getReporteModel());
+        return new ReportesController($this->getPrinter(),$this->getReporteModel(),$this->getPDFHelper());
 
        }
 

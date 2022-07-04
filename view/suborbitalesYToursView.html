@@ -16,31 +16,34 @@
 
         {{^esCliente}}
             {{^esAdmin}}
-            <p>Para reservar un vuelo debe registrarse previamente o iniciar sesión</p>
-            <a href="/user">Registrarme</a>
+            <p style="color:#ff0015">Para reservar un vuelo debe registrarse previamente o iniciar sesión</p>
+            <a href="/user" style="font-weight: 600">Registrarme</a>
             <span>  |  </span>
-            <a href="/login">Iniciar Sesión</a>
+            <a href="/login" style="font-weight: 600">Iniciar Sesión</a>
             {{/esAdmin}}
         {{/esCliente}}
 
         {{#esCliente}}
             {{^codigo_viajero}}
-                <p>Para reservar un vuelo debe realizarce el chequeo médico previamente</p>
-                <a href="/turnos" style="margin-bottom: 10px;font-weight: 600">Realizar chequeo</a>
+                <p style="color:#ff0015">Para reservar un vuelo debe realizarce el chequeo médico previamente</p>
+                <a href="/turnos" style="margin-bottom: 10px;font-weight: 600; font-size: 18px">Realizar chequeo</a>
             {{/codigo_viajero}}
         {{/esCliente}}
 
         {{#esAdmin}}
         <p>Lista de vuelos registrados en el sistema</p>
-        <a href="#" style="margin-bottom: 20px;font-weight: 600">Cargar vuelo</a>
+        <a href="#" style="margin-bottom: 20px;font-weight: 600;font-size: 18px">Cargar vuelo</a>
         {{/esAdmin}}
 
-        <table class='table table-bordered' style="border-color: #4e82c3">
+        <table class='table table-bordered' style="border-color: #4e82c3;margin-top: 20px">
             <tr class="row-fluid" style="text-align: center; background-color: #4e82c3; border-color: #4e82c3; width:40%; color: aliceblue" >
                 <th>Fecha de Salida</th>
                 <th>Origen</th>
                 <th>Fecha de llegada</th>
                 {{#esCliente}}
+                <th>Acciones</th>
+                {{/esCliente}}
+                {{^esCliente}}
                 <th>Acciones</th>
                 {{/esCliente}}
             </tr>
@@ -51,21 +54,52 @@
                 <td>{{fecha_llegada}}</td>
                 {{^esCliente}}
                     {{^esAdmin}}
-                        <th><div class="mt-4"><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true" >Reservar</a></div></th>
+                        <th><div class="mt-4"><a href="#" class="btn button-secondary  disabled  " style="text-transform: capitalize;font-size: 15px;width: 30%;border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a></div></th>
                     {{/esAdmin}}
                 {{/esCliente}}
 
-                    {{#esCliente}}
-                        {{^codigo_viajero}}
-                            <th><a href="#" class="btn button-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Reservar</a></th>
-                        {{/codigo_viajero}}
-                    {{/esCliente}}
+                {{#esCliente}}
+                    {{^codigo_viajero}}
+                        <th><a href="#" class="btn button-secondary  disabled  " style="text-transform: capitalize;font-size: 15px;width: 30%;border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a></th>
+                    {{/codigo_viajero}}
+                {{/esCliente}}
 
-                    {{#esCliente}}
-                        {{#codigo_viajero}}
+
+                {{#esCliente}}
+                    {{#codigo_viajero}}
+                        {{^disponible}}
+                        {{^fecha_invalida}}
+                            <th><a href="#" class="btn button-secondary  disabled  " style="text-transform: capitalize;font-size: 15px;width: 30%;border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a>
+                            <p style="color: #ff0015;font-weight: 600">Sin lugares disponibles</p></th>
+                        {{/fecha_invalida}}
+                        {{/disponible}}
+
+                        {{^disponible}}
+                        {{#fecha_invalida}}
+                        <th><a href="#" class="btn button-secondary  disabled  " style="text-transform: capitalize;border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a>
+                        <p style="color: #ff0015;font-weight: 600">Vuelo no disponible</p></th>
+
+                        {{/fecha_invalida}}
+                        {{/disponible}}
+
+                    {{/codigo_viajero}}
+                {{/esCliente}}
+
+
+                {{#esCliente}}
+                    {{#codigo_viajero}}
+                    {{#disponible}}
+                        {{#fecha_invalida}}
+                            <th><a href="#" class="btn button-secondary disabled  " style="text-transform: capitalize;font-size: 15px;border: #343a40; text-decoration: line-through" tabindex="-1" role="button" aria-disabled="true">Reservar</a>
+                            <p style="color: #ff0015;font-weight: 600">Vuelo no disponible</p></th>
+                        {{/fecha_invalida}}
+
+                        {{^fecha_invalida}}
                             <th><a href="/reserva?vuelo={{id_vuelo}}&origen={{id_origen}}&destino={{id_destino}}" class="button-secondary" type="submit" id="searchButton" style="width: 115px; padding-top: 10px; padding-bottom: 10px; border-radius: 25px; border:none">Reservar</a></th>
-                        {{/codigo_viajero}}
-                    {{/esCliente}}
+                        {{/fecha_invalida}}
+                    {{/disponible}}
+                    {{/codigo_viajero}}
+                {{/esCliente}}
 
             </tr>
             {{/viajes}}

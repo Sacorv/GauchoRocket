@@ -23,6 +23,7 @@ class ReservaController
             exit();
         }
 
+
         $nombreUsuario = $_SESSION["nombre"];
         $idUsuario = $_SESSION["id"];
         $datosUsuario = $this->reservaModel->buscarUsuario($idUsuario);
@@ -55,6 +56,39 @@ class ReservaController
         $this->printer->generateView('reservaView.html', $data);
     }
 
+    public function mediosDePago(){
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
+            header("location: /");
+            exit();
+        }
+
+        $nombreUsuario = $_SESSION["nombre"];
+        $idUsuario = $_SESSION["id"];
+        $esCliente = $_SESSION["esCliente"];
+
+        $id_tipo_viaje = $_POST["id_tipo_viaje"];
+
+        $id_vuelo = $_POST["vuelo"];
+        $id_origen = $_POST["id_origen"];
+        $id_destino = $_POST["id_destino"];
+        $origen = $_POST["origen"];
+        $destino = $_POST["destino"];
+        $fecha_partida = $_POST["fecha_partida"];
+        $id_cabina = $_POST["cabina"];
+        $id_servicio = $_POST["servicio"];
+        $subtotal = $_POST["precio_subtotal"];
+
+        $precioCabina = $this->reservaModel->precioCabinaPorId($id_cabina);
+        $precioServicio = $this->reservaModel->precioServicioPorId($id_servicio);
+
+        $total = $subtotal+$precioServicio[0]["precio"]+$precioCabina[0]["precio"];
+
+        $data = ["subtotal"=>$subtotal, "precio_cabina"=>$precioCabina[0]["precio"], "precio_servicio"=>$precioServicio[0]["precio"],"total"=>$total,"id_tipo_viaje"=>$id_tipo_viaje, "id_vuelo"=>$id_vuelo, "id_origen"=>$id_origen, "origen"=>$origen, "destino"=>$destino ,"id_destino"=>$id_destino, "fecha_partida"=>$fecha_partida, "id_cabina"=>$id_cabina, "id_servicio"=>$id_servicio,"nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+
+        $this->printer->generateView('mediosDePagoView.html', $data);
+
+    }
+
     public function reservarViaje()
     {
         if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || isset($_SESSION["tipo"])!=2) {
@@ -75,17 +109,17 @@ class ReservaController
         $fecha_partida = $_POST["fecha_partida"];
         $id_cabina = $_POST["cabina"];
         $id_servicio = $_POST["servicio"];
-        $status_reserva = 1;
+
 
         $existReserva = $this->reservaModel->existeReserva($idUsuario, $id_vuelo);
 
         if($existReserva==null){
             $result = null;
             if($id_tipo_viaje!=""){
-                $result = $this->reservaModel->registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_origen, $id_cabina, $id_servicio, $status_reserva);
+                $result = $this->reservaModel->registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_origen, $id_cabina, $id_servicio);
             }
             else{
-                $result = $this->reservaModel->registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio, $status_reserva);
+                $result = $this->reservaModel->registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio);
             }
 
             if($result){
@@ -131,8 +165,16 @@ class ReservaController
 
         $result = $this->reservaModel->reservasDelUsuario($id_usuario);
 
+        $data = null;
 
-        $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+        if(count($result)!=0){
+            $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente];
+        }
+        else{
+            $error = 'No se encuentran reservas registradas actualmente';
+            $data = ["reservas"=>$result, "nombre"=>$nombreUsuario,"esCliente"=>$esCliente, "error_mis_reservas"=>$error];
+        }
+
         $this->printer->generateView('misReservasView.html', $data);
     }
 

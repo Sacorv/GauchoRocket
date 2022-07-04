@@ -54,7 +54,25 @@ class ReservaModel
 
         if ($idDeOrigen == 1 or $idDeOrigen == 2) {
 
-            $vuelo = ["id_vuelo" => $idVuelo, "fecha_partida" => $query[0]["fecha_partida"], "id_origen" => $idDeOrigen, "origen" => $query[0]["origen"], "escala" => $escalas, "id_destino" => $idDestino, "destino" => $destino[0]["nombre"], "cabina_turista"=>$query[0]["cabina_turista"], "cabina_ejecutivo"=>$query[0]["cabina_ejecutivo"], "cabina_primera"=>$query[0]["cabina_primera"]];
+            // Calcular disponibilidad por tipo de cabina
+            $lugaresDisponiblesCabinas = $this->buscarLugaresDisponiblesCabinaPorOrigenYDestino($idDeOrigen, $idDestino, $idVuelo);
+
+            $disponibleEjecutivo = false;
+            $disponiblePrimera = false;
+            $disponibleTurista = false;
+
+            if($lugaresDisponiblesCabinas["ejecutivo"]<=0){
+                $disponibleEjecutivo = 'Agotado';
+            }
+            if($lugaresDisponiblesCabinas["primera"]<=0){
+                $disponiblePrimera = 'Agotado';
+            }
+            if($lugaresDisponiblesCabinas["turista"]<=0){
+                $disponibleTurista = 'Agotado';
+            }
+
+            $vuelo = ["id_vuelo" => $idVuelo, "fecha_partida" => $query[0]["fecha_partida"], "id_origen" => $idDeOrigen, "origen" => $query[0]["origen"], "escala" => $escalas, "id_destino" => $idDestino, "destino" => $destino[0]["nombre"], "cabina_turista"=>$query[0]["cabina_turista"], "cabina_ejecutivo"=>$query[0]["cabina_ejecutivo"], "cabina_primera"=>$query[0]["cabina_primera"], "disponible_turista"=>$disponibleTurista, "disponible_ejecutivo"=>$disponibleEjecutivo, "disponible_primera"=>$disponiblePrimera];
+
 
         } else {
             $escalaDiferenteOrigen = [];
@@ -74,7 +92,25 @@ class ReservaModel
                 }
             }
 
-            $vuelo = ["id_vuelo" => $idVuelo, "fecha_partida" => $fechaSalida, "id_origen" => $id_origen, "origen" => $origen, "escala" => $escalaDiferenteOrigen, "id_destino" => $idDestino, "destino" => $destino[0]["nombre"], "cabina_turista"=>$query[0]["cabina_turista"], "cabina_ejecutivo"=>$query[0]["cabina_ejecutivo"], "cabina_primera"=>$query[0]["cabina_primera"]];
+            // Calcular disponibilidad por tipo de cabina
+            $lugaresDisponiblesCabinas = $this->buscarLugaresDisponiblesCabinaPorOrigenYDestino($id_origen, $idDestino, $idVuelo);
+
+            $disponibleEjecutivo = false;
+            $disponiblePrimera = false;
+            $disponibleTurista = false;
+
+            if($lugaresDisponiblesCabinas["ejecutivo"]<=0){
+                $disponibleEjecutivo = 'Agotado';
+            }
+            if($lugaresDisponiblesCabinas["primera"]<=0){
+                $disponiblePrimera = 'Agotado';
+            }
+            if($lugaresDisponiblesCabinas["turista"]<=0){
+                $disponibleTurista = 'Agotado';
+            }
+
+            $vuelo = ["id_vuelo" => $idVuelo, "fecha_partida" => $fechaSalida, "id_origen" => $id_origen, "origen" => $origen, "escala" => $escalaDiferenteOrigen, "id_destino" => $idDestino, "destino" => $destino[0]["nombre"], "cabina_turista"=>$query[0]["cabina_turista"], "cabina_ejecutivo"=>$query[0]["cabina_ejecutivo"], "cabina_primera"=>$query[0]["cabina_primera"], "disponible_turista"=>$disponibleTurista, "disponible_ejecutivo"=>$disponibleEjecutivo, "disponible_primera"=>$disponiblePrimera];
+
 
         }
         return $vuelo;
@@ -90,15 +126,15 @@ class ReservaModel
         foreach ($cabinas as $cabina){
             if($datosVuelo["cabina_turista"]>0){
                 if($cabina["descripcion"] == "Turista")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"], "disponible"=>$datosVuelo["disponible_turista"]];
             }
             if($datosVuelo["cabina_ejecutivo"]>0){
                 if($cabina["descripcion"] == "Ejecutivo")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"], "disponible"=>$datosVuelo["disponible_ejecutivo"]];
             }
             if($datosVuelo["cabina_primera"]>0){
                 if($cabina["descripcion"] == "Primera")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"], "disponible"=>$datosVuelo["disponible_primera"]];
             }
         }
         return $result;
@@ -118,9 +154,61 @@ class ReservaModel
         return $precioPorTramo*$cantidadTramos;
     }
 
-    public function registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio, $status_reserva){
+    public function buscarLugaresDisponiblesCabinaPorOrigenYDestino($idDeOrigen, $idDestino, $idVuelo){
+        $capacidadCabinas = $this->database->query("SELECT m.cabina_t AS Turista, m.cabina_e AS Ejecutivo, m.cabina_p AS Primera
+                                                    FROM viaje v
+                                                    JOIN tipo_viaje tv ON tv.id=v.id_tipo_viaje
+                                                    JOIN duracion d ON d.id_tipo_viaje=tv.id
+                                                    JOIN equipo e ON e.id=v.id_equipo
+                                                    JOIN modelo m ON m.id=e.tipo_modelo
+                                                    JOIN tipo_equipo te ON te.id=m.tipo_equipo
+                                                    JOIN lugar l ON l.id=d.id_lugar
+                                                    JOIN lugar l2 ON l2.id=v.id_lugar_origen
+                                                    WHERE d.id_tipo_equipo=te.id AND v.id='$idVuelo'
+                                                    GROUP BY m.cabina_t");
+
+
+        $reservasCabinas = $this->database->query("SELECT c.id, c.descripcion, r.id_origen, r.id_destino 
+                                                    FROM reserva r
+                                                    JOIN cabina c ON c.id=r.id_cabina
+                                                    WHERE id_viaje = '$idVuelo'");
+
+        $cantidadOcupadasEjecutivo = 0;
+        $cantidadOcupadasPrimera = 0;
+        $cantidadOcupadasTurista = 0;
+
+        for($i=0; $i<sizeof($reservasCabinas); $i++){
+            if($reservasCabinas[$i]["descripcion"] == 'Ejecutivo'){
+                if($reservasCabinas[$i]["id_destino"]>$idDeOrigen and $reservasCabinas[$i]["id_origen"]<$idDestino) {
+                    $cantidadOcupadasEjecutivo++;
+                }
+            }
+            if($reservasCabinas[$i]["descripcion"] == 'Primera'){
+                if($reservasCabinas[$i]["id_destino"]>$idDeOrigen and $reservasCabinas[$i]["id_origen"]<$idDestino) {
+                    $cantidadOcupadasPrimera++;
+                }
+            }
+            if($reservasCabinas[$i]["descripcion"] == 'Turista'){
+                if($reservasCabinas[$i]["id_destino"]>$idDeOrigen and $reservasCabinas[$i]["id_origen"]<$idDestino) {
+                    $cantidadOcupadasTurista++;
+                }
+            }
+        }
+
+        $disponiblesEjecutivo = $capacidadCabinas[0]["Ejecutivo"] - $cantidadOcupadasEjecutivo;
+        $disponiblesPrimera = $capacidadCabinas[0]["Primera"] - $cantidadOcupadasPrimera;
+        $disponiblesTurista = $capacidadCabinas[0]["Turista"] - $cantidadOcupadasTurista;
+
+        $lugaresDisponiblesCabinas = ["ejecutivo"=>$disponiblesEjecutivo, "primera"=>$disponiblesPrimera, "turista"=>$disponiblesTurista];
+
+        return $lugaresDisponiblesCabinas;
+    }
+
+
+    public function registrarReserva($id_tipo_viaje, $idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio){
         $precio_tramo = null;
 
+        //suborbital o tour
         if($id_tipo_viaje!=""){
             $precio_tramo = $this->calcularPrecioViajePorIdVuelo($id_vuelo);
         }
@@ -132,6 +220,9 @@ class ReservaModel
 
         $precioCabina = $queryCabina[0]["precio"];
         $precioServicio = $queryServicio[0]["precio"];
+
+        //Validación de fecha reserva vs fecha de salida viaje
+        $status_reserva = $this->determinarEstadoReservaSegunFecha($fecha_partida);
 
         return $this->database->createReserva($idUsuario, $id_vuelo, $id_origen, $fecha_partida, $id_destino, $id_cabina, $id_servicio, $status_reserva, $precio_tramo, $precioCabina, $precioServicio);
     }
@@ -159,23 +250,23 @@ class ReservaModel
     public function reservasDelUsuario($id_usuario){
 
         $query = $this->database->query("SELECT r.id , v.id_tipo_viaje,
-       tv.descripcion AS tipo_viaje, r.id_viaje, r.fecha_partida, l.nombre AS origen, l2.nombre AS destino, 
-       c.descripcion AS cabina, s.descripcion AS servicio, sr.descripcion AS 'Estado de reserva', 
-       r.subtotal_tramos, r.precio_cabina, r.precio_servicio, r.checkin, r.id_usuario, u.nombre, u.apellido, 
-       u.dni, v.id_equipo, e.matricula, m.nombre
-                                FROM reserva r
-                                JOIN usuario u ON u.id=r.id_usuario
-                                JOIN viaje v ON v.id=r.id_viaje
-                                JOIN tipo_viaje tv ON tv.id=v.id_tipo_viaje
-                                JOIN lugar l ON l.id=r.id_origen
-                                JOIN lugar l2 ON l2.id=r.id_destino
-                                JOIN equipo e ON e.id=v.id_equipo
-                                JOIN cabina c ON c.id=r.id_cabina
-                                JOIN servicio s ON s.id=r.id_servicio
-                                JOIN status_reserva sr ON sr.id=r.id_status_reserva
-                                JOIN modelo m ON m.id=e.tipo_modelo
-                                WHERE r.id_usuario='$id_usuario'
-                                ORDER BY fecha_partida");
+                                               tv.descripcion AS tipo_viaje, r.id_viaje, r.fecha_partida, l.nombre AS origen, l2.nombre AS destino, 
+                                               c.descripcion AS cabina, s.descripcion AS servicio, sr.descripcion AS 'Estado de reserva', 
+                                               r.subtotal_tramos, r.precio_cabina, r.precio_servicio, r.checkin, r.id_usuario, u.nombre, u.apellido, 
+                                               u.dni, v.id_equipo, e.matricula, m.nombre
+                                        FROM reserva r
+                                        JOIN usuario u ON u.id=r.id_usuario
+                                        JOIN viaje v ON v.id=r.id_viaje
+                                        JOIN tipo_viaje tv ON tv.id=v.id_tipo_viaje
+                                        JOIN lugar l ON l.id=r.id_origen
+                                        JOIN lugar l2 ON l2.id=r.id_destino
+                                        JOIN equipo e ON e.id=v.id_equipo
+                                        JOIN cabina c ON c.id=r.id_cabina
+                                        JOIN servicio s ON s.id=r.id_servicio
+                                        JOIN status_reserva sr ON sr.id=r.id_status_reserva
+                                        JOIN modelo m ON m.id=e.tipo_modelo
+                                        WHERE r.id_usuario='$id_usuario'
+                                        ORDER BY fecha_partida");
 
         $reservas = [];
 
@@ -258,7 +349,7 @@ class ReservaModel
     }
 
     public function buscarVueloPorId($idVuelo){
-        return $this->database->query("SELECT v.id AS id_vuelo, v.fecha_partida, v.id_lugar_origen as id_origen, l.nombre AS origen, m.capacidad, m.cabina_t AS cabina_turista, m.cabina_e AS cabina_ejecutivo, m.cabina_p AS cabina_primera, v.duracion_total AS total_horas, tv.id AS id_tipo_viaje, tv.descripcion AS tipo_viaje,  e.matricula, m.nombre AS modelo, m.tipo_equipo, te.nombre AS categoria_equipo
+        $vuelo = $this->database->query("SELECT v.id AS id_vuelo, v.fecha_partida, v.id_lugar_origen as id_origen, l.nombre AS origen, m.capacidad, m.cabina_t AS cabina_turista, m.cabina_e AS cabina_ejecutivo, m.cabina_p AS cabina_primera, v.duracion_total AS total_horas, tv.id AS id_tipo_viaje, tv.descripcion AS tipo_viaje,  e.matricula, m.nombre AS modelo, m.tipo_equipo, te.nombre AS categoria_equipo
                                         FROM viaje v
                                         JOIN lugar l ON l.id=v.id_lugar_origen
                                         JOIN tipo_viaje tv ON tv.id=v.id_tipo_viaje
@@ -267,7 +358,27 @@ class ReservaModel
                                         JOIN tipo_equipo te ON te.id=m.tipo_equipo
                                         WHERE v.id='$idVuelo'");
 
+        $lugaresDisponiblesPorCabina = $this->buscarLugaresDisponiblesPorId($idVuelo);
 
+        $disponibleEjecutivo = false;
+        $disponiblePrimera = false;
+        $disponibleTurista = false;
+
+        if($lugaresDisponiblesPorCabina["disponible_ejecutivo"]<=0){
+            $disponibleEjecutivo = 'Agotado';
+        }
+        if($lugaresDisponiblesPorCabina["disponible_primera"]<=0){
+            $disponiblePrimera = 'Agotado';
+        }
+        if($lugaresDisponiblesPorCabina["disponible_turista"]<=0){
+            $disponibleTurista = 'Agotado';
+        }
+
+        $vuelo [0]["disponible_ejecutivo"] = $disponibleEjecutivo;
+        $vuelo [0]["disponible_primera"] = $disponiblePrimera;
+        $vuelo [0]["disponible_turista"] = $disponibleTurista;
+
+        return $vuelo;
     }
 
     public function buscarCabinasPorIdVuelo($idVuelo){
@@ -281,19 +392,58 @@ class ReservaModel
         foreach ($cabinas as $cabina){
             if($datosVuelo[0]["cabina_turista"]>0){
                 if($cabina["descripcion"] == "Turista")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"], "disponible"=>$datosVuelo[0]["disponible_turista"]];
             }
             if($datosVuelo[0]["cabina_ejecutivo"]>0){
                 if($cabina["descripcion"] == "Ejecutivo")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"], "disponible"=>$datosVuelo[0]["disponible_ejecutivo"]];
             }
             if($datosVuelo[0]["cabina_primera"]>0){
                 if($cabina["descripcion"] == "Primera")
-                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"]];
+                    $result[]= ["id"=>$cabina["id"], "descripcion"=>$cabina["descripcion"], "precio"=>$cabina["precio"],"disponible"=>$datosVuelo[0]["disponible_primera"]];
             }
         }
         return $result;
     }
+
+    public function buscarLugaresDisponiblesPorId($idVuelo){
+        $capacidadPorCabina = $this->database->query("SELECT m.cabina_t AS Turista, m.cabina_e AS Ejecutivo, m.cabina_p AS Primera
+                                                    FROM viaje v
+                                                    JOIN equipo e ON e.id=v.id_equipo
+                                                    JOIN modelo m ON m.id=e.tipo_modelo
+                                                    WHERE v.id='$idVuelo'");
+
+
+        $reservasActualesPorCabina = $this->database->query("SELECT c.id, c.descripcion
+                                                    FROM reserva r
+                                                    JOIN cabina c ON c.id=r.id_cabina
+                                                    WHERE id_viaje = '$idVuelo'");
+
+        $ocupadasPrimera = 0;
+        $ocupadasEjecutivo = 0;
+        $ocupadasTurista = 0;
+
+        for($i=0; $i<sizeof($reservasActualesPorCabina); $i++){
+            if($reservasActualesPorCabina[$i]["descripcion"] == 'Primera'){
+                $ocupadasPrimera++;
+            }
+            if($reservasActualesPorCabina[$i]["descripcion"] == 'Ejecutivo'){
+                $ocupadasEjecutivo++;
+            }
+            if($reservasActualesPorCabina[$i]["descripcion"] == 'Turista'){
+                $ocupadasTurista++;
+            }
+        }
+
+        $disponiblesPrimera = $capacidadPorCabina[0]["Primera"] - $ocupadasPrimera;
+        $disponiblesTurista = $capacidadPorCabina[0]["Turista"] - $ocupadasTurista;
+        $disponiblesEjecutivo = $capacidadPorCabina[0]["Ejecutivo"] - $ocupadasEjecutivo;
+
+        $disponiblesPorCabina = ["disponible_primera"=>$disponiblesPrimera, "disponible_turista"=>$disponiblesTurista, "disponible_ejecutivo"=>$disponiblesEjecutivo];
+
+        return $disponiblesPorCabina;
+    }
+
 
     public function calcularPrecioViajePorIdVuelo($idVuelo){
         $precioViaje = null;
@@ -312,6 +462,33 @@ class ReservaModel
         }
 
         return $precioViaje;
+    }
+
+    public function precioCabinaPorId($id_cabina){
+        return $this->database->query("SELECT precio FROM cabina WHERE id= '$id_cabina'");
+    }
+
+    public function precioServicioPorId($id_servicio){
+        return $this->database->query("SELECT precio FROM servicio WHERE id= '$id_servicio'");
+    }
+
+    public function determinarEstadoReservaSegunFecha($fecha_partida){
+        $estadoReserva = 1;
+
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $hoy = date('Y-m-d H:i');
+
+        $firstDate  =$hoy;
+        $secondDate = $fecha_partida;
+        $dateDifference = abs(strtotime($secondDate) - strtotime($firstDate));
+
+        $unDíaEnSegundos = 86400;
+
+        if($dateDifference<$unDíaEnSegundos){
+            $estadoReserva = 2;
+        }
+
+        return $estadoReserva;
     }
 
 }

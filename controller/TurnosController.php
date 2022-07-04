@@ -39,8 +39,8 @@ class TurnosController
             $_SESSION["codigo_viajero"]=$resultado;
 
             $this->turnoSolicitado=true;
-            header("location:/turnos");
-          
+           header("location: /turnos/resultadoChequeo");
+      //      $this->printer->generateView("resultadoChequeo.html",$data);
             exit();
 
         }else{
@@ -67,6 +67,24 @@ class TurnosController
         $this->printer->generateView("errorAlSolicitarTurno.html",$data);
     }
 
+  public function resultadoChequeo(){
+        $data=array();
+        if(!isset($_SESSION["logueado"]) && $_SESSION["logueado"]!=1 || $_SESSION["tipo"]!=2) {
+            header("location: /");
+            exit();
+        }
+        if(isset($_SESSION["esCliente"]) && $_SESSION["esCliente"]){
+            $data["esCliente"]=true;
+        }
+        if(isset($_SESSION["nombre"])){
+            $data["nombre"] = $_SESSION["nombre"];
+        }
+        if(isset($_SESSION["codigo_viajero"])){
+          $data["codigo_viajero"]= $_SESSION["codigo_viajero"];
+        }
+
+        $this->printer->generateView("resultadoChequeo.html",$data);
+    }
 
 
 }

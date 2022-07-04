@@ -37,6 +37,7 @@ class LoginController
 
         if ($usuarioValido!="") {
 
+
             $_SESSION["logueado"] = 1;
             $_SESSION["user"] = $usuarioValido[0];
             $_SESSION["nombre"] = $usuarioValido[0]["nombre"];
@@ -44,6 +45,7 @@ class LoginController
             $_SESSION["verificado"] = $usuarioValido[0]["Verificado"];
             $_SESSION["id"] = $usuarioValido[0]["id"];
             $_SESSION["codigo_viajero"] = $usuarioValido[0]["codigo_viajero"];
+
             if (isset($_SESSION["tipo"]) && $_SESSION["tipo"] == 1) {
                 $_SESSION["esAdmin"] = true;
 
@@ -57,6 +59,7 @@ class LoginController
                     header("location: /");
                     exit();
 
+
                 } else {
                     $_SESSION["error"] = true;
 
@@ -69,4 +72,3 @@ class LoginController
         }
 
     }
-}

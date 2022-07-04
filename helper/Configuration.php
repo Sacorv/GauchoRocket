@@ -84,7 +84,8 @@ class Configuration
 
     private function getDatabase()
     {
-        return new MySqlDatabase('localhost', 'root', 'root', 'gaucho_rocket');
+
+        return new MySqlDatabase('localhost', 'root', '2203yba', 'gaucho_rocket');
 }
 
 
@@ -116,16 +117,11 @@ class Configuration
        public function getLogoutController(){
             include_once('controller/LogoutController.php');
             return new LogoutController();
-}
+     }
        public function getTurnosController(){
         include_once ('controller/TurnosController.php');
         return new TurnosController($this->getUserModel(),$this->getPrinter());
        }
-       public function getLoginHelper(){
-            include_once('helper/LoginHelper.php');
-            return new LoginHelper();
-       }
-     
 
     public function getReservaController(){
         return new ReservaController($this->getReservaModel(),
